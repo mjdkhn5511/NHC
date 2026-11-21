@@ -1774,7 +1774,7 @@ export function prerenderSSGPlugin(): Plugin {
               'name': 'Nadwa Healthcare',
               'logo': {
                 '@type': 'ImageObject',
-                'url': 'https://www.nadwahealthcare.com/favicon.svg'
+                'url': 'https://www.nadwahealthcare.com/images/brand-logo-square.png'
               }
             },
             'datePublished': '2026-10-28',

@@ -278,7 +278,7 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
           "name": "Nadwa Healthcare",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.nadwahealthcare.com/images/brand-logo.webp"
+            "url": "https://www.nadwahealthcare.com/images/brand-logo-square.png"
           }
         },
         "datePublished": "2026-10-21",
