@@ -5,7 +5,10 @@ import { doctorsData } from '../data/doctorsData.ts';
 import { hospitalsData } from '../data/hospitalsData.ts';
 import { treatmentsData } from '../data/treatmentsData.ts';
 import { blogsData } from '../data/blogsData.ts';
-import { getLocalizedTreatment, getLocalizedDoctor, getLocalizedHospital, getLocalizedHospitalName, getLocalizedBlog } from '../utils/localizedData.ts';
+import { servicesJourneyData } from '../data/servicesData.ts';
+import { patientStoriesData } from '../data/patientStoriesData.ts';
+import { HOME_SEO_OVERVIEW, TREATMENTS_SEO_OVERVIEW } from '../data/seoContentData.ts';
+import { getLocalizedTreatment, getLocalizedDoctor, getLocalizedHospital, getLocalizedHospitalName, getLocalizedBlog, getLocalizedServiceStep, getLocalizedPatientStory } from '../utils/localizedData.ts';
 
 interface PageMetadata {
   route: string; // e.g. "/doctors/dr-anant-kumar" or "/ar/hospitals"
@@ -61,8 +64,32 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   const badgeVil = isAr ? '⚡ خطاب دعوة المستشفى (VIL) في 24–48 ساعة' : isFr ? '⚡ Lettre officielle d\'invitation (VIL) en 24–48h' : isRu ? '⚡ Официальное приглашение клиники (VIL) за 24–48 ч' : '⚡ Fast 24–48h Hospital Invitation Letter (VIL)';
   const badgeZero = isAr ? '🛡️ بدون رسوم خدمة' : isFr ? '🛡️ Zéro frais de service' : isRu ? '🛡️ Без скрытых комиссий' : '🛡️ Zero Service Fee';
 
+  const featSpecialtiesTitle = isAr ? 'التخصصات الطبية المميزة' : isFr ? 'Spécialités médicales de pointe' : isRu ? 'Ведущие медицинские направления' : 'Advanced Clinical Specialties';
+  const featSpecialtiesSubtitle = isAr ? 'نخبة من أكثر التدخلات الجراحية والعلاجية طلباً في مستشفيات دلهي إن سي آر' : isFr ? 'Les interventions et chirurgies les plus demandées à Delhi NCR' : isRu ? 'Наиболее востребованные хирургические и терапевтические направления' : 'High-success tertiary procedures across our partner quaternary hospital network';
+
+  const featHospitalsTitle = isAr ? 'أشهر المستشفيات الشريكة في دلهي إن سي آر' : isFr ? 'Hôpitaux partenaires d\'excellence à Delhi NCR' : isRu ? 'Ведущие аккредитованные клиники Дели NCR' : 'Premier Quaternary Hospitals in Delhi NCR';
+  const featHospitalsSubtitle = isAr ? 'مستشفيات عالمية معتمدة من JCI وNABH مجهزة بأحدث تقنيات الروبوت دافنشي' : isFr ? 'Centres accrédités JCI & NABH dotés des technologies chirurgicales les plus modernes' : isRu ? 'Клиники с международной аккредитацией JCI и передовыми роботизированными системами' : 'JCI & NABH accredited quaternary medical centers with cutting-edge surgical infrastructure';
+
+  const featDoctorsTitle = isAr ? 'كبار الجراحين ورؤساء الأقسام الطبية' : isFr ? 'Chirurgiens et chefs de département de renommée mondiale' : isRu ? 'Ведущие профессора и главные хирурги' : 'Distinguished Department Chairs & Chief Surgeons';
+  const featDoctorsSubtitle = isAr ? 'أطباء معتمدون دولياً يتمتعون بخبرات تتجاوز 25 إلى 40 عاماً من النجاح السريري' : isFr ? 'Spécialistes de renommée internationale cumulant plus de 25 à 40 ans d\'expérience' : isRu ? 'Специалисты мирового уровня с клиническим стажем от 25 до 40 лет' : 'Internationally trained clinicians with 25 to 40+ years of verified quaternary surgical outcomes';
+
+  const journeyTitle = isAr ? 'رحلتك العلاجية خطوة بخطوة' : isFr ? 'Votre parcours de soins étape par étape' : isRu ? 'Этапы организации вашего лечения' : 'Your 4-Step Medical Travel Pathway';
+  const journeySubtitle = isAr ? 'تنسيق مباشر وسلس من اللحظة الأولى وحتى تمام التعافي والعودة سالماً' : isFr ? 'Une prise en charge transparente dès l\'envoi de vos dossiers jusqu\'au retour chez vous' : isRu ? 'Полное сопровождение от первой консультации до реабилитации и возвращения домой' : 'Clear, structured patient navigation from first diagnostic review to discharge follow-up';
+
+  const storiesTitle = isAr ? 'قصص وتجارب المرضى الدوليين' : isFr ? 'Témoignages de nos patients internationaux' : isRu ? 'Отзывы и истории наших пациентов' : 'Verified International Patient Journeys';
+  const storiesSubtitle = isAr ? 'تجارب واقعية لمرضى استعادوا صحتهم بعد تلقي الرعاية في كبرى مستشفيات الهند' : isFr ? 'Des histoires réelles de patients ayant retrouvé la santé dans nos hôpitaux partenaires' : isRu ? 'Реальные истории пациентов, успешно прошедших лечение в ведущих клиниках Индии' : 'Documented case studies of patients successfully treated across premier Delhi NCR hospital centers';
+
+  const homeSeo = HOME_SEO_OVERVIEW[lang] || HOME_SEO_OVERVIEW.en;
+
+  const featuredTreatments = treatmentsData.slice(0, 6);
+  const featuredHospitals = hospitalsData.filter(h => h.featured).slice(0, 3);
+  const featuredDoctors = doctorsData.filter(d => d.featured).slice(0, 3);
+  const journeySteps = servicesJourneyData.slice(0, 4);
+  const patientStories = patientStoriesData.slice(0, 2);
+
   return `
   <div class="min-h-screen flex flex-col bg-white">
+    <!-- Top Micro Bar -->
     <div class="relative z-50 bg-[#051714] text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-3 sm:px-4 border-b border-teal-950/80">
       <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-1">
         <div class="flex items-center gap-3 shrink-0">
@@ -75,6 +102,8 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
         </div>
       </div>
     </div>
+
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-40 bg-[#08221E] border-b border-teal-900/60 shadow-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 sm:h-20">
@@ -82,15 +111,24 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
             <span class="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30 font-black text-xs">NHC</span>
             <span class="text-base sm:text-xl font-black text-white tracking-tight">Nadwa <span class="text-teal-400">Healthcare</span></span>
           </a>
+          <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm text-slate-200">
+            <a href="${prefix}/treatments" class="hover:text-teal-300 transition-colors">${isAr ? 'العلاجات' : isFr ? 'Soins' : isRu ? 'Лечение' : 'Treatments'}</a>
+            <a href="${prefix}/hospitals" class="hover:text-teal-300 transition-colors">${isAr ? 'المستشفيات' : isFr ? 'Hôpitaux' : isRu ? 'Клиники' : 'Hospitals'}</a>
+            <a href="${prefix}/doctors" class="hover:text-teal-300 transition-colors">${isAr ? 'الأطباء' : isFr ? 'Médecins' : isRu ? 'Врачи' : 'Doctors'}</a>
+            <a href="${prefix}/services" class="hover:text-teal-300 transition-colors">${isAr ? 'الخدمات' : isFr ? 'Services' : isRu ? 'Услуги' : 'Services'}</a>
+            <a href="${prefix}/blog" class="hover:text-teal-300 transition-colors">${isAr ? 'المدونة' : isFr ? 'Blog' : isRu ? 'Блог' : 'Blog'}</a>
+          </nav>
           <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <a href="${prefix}/treatments" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm hover:bg-teal-400 transition-colors">
+            <a href="${prefix}/treatments" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-colors">
               ${ctaConsult}
             </a>
           </div>
         </div>
       </div>
     </header>
+
     <main class="flex-grow">
+      <!-- 1. Hero Section -->
       <section class="relative overflow-hidden bg-white pt-8 pb-16 lg:pt-14 lg:pb-24 bg-medical-dots">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-4xl mx-auto">
@@ -125,9 +163,479 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
           </div>
         </div>
       </section>
+
+      <!-- 2. Featured Treatments Showcase Grid -->
+      <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 mb-3">
+              ${isAr ? 'التخصصات الجراحية' : isFr ? 'Chirurgies Spécialisées' : isRu ? 'Специализированная хирургия' : 'Advanced Clinical Care'}
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+              ${featSpecialtiesTitle}
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-slate-600">
+              ${featSpecialtiesSubtitle}
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            ${featuredTreatments.map((treat) => {
+              const loc = getLocalizedTreatment(treat, lang);
+              return `
+                <article class="group bg-white rounded-3xl border border-slate-200/90 shadow-sm flex flex-col overflow-hidden hover:border-teal-400/60 transition-all">
+                  <div class="relative h-48 w-full overflow-hidden bg-slate-100 aspect-[16/10]">
+                    <img
+                      src="${treat.image}"
+                      alt="${loc.title}"
+                      width="400"
+                      height="250"
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/10]"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold bg-[#08221E]/90 text-teal-300 border border-teal-500/30">
+                      ${loc.badge}
+                    </span>
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="text-lg font-bold text-slate-900 mb-2">
+                        <a href="${prefix}/treatments/${treat.slug}" class="hover:text-teal-600 transition-colors">${loc.title}</a>
+                      </h3>
+                      <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                        ${loc.shortDesc}
+                      </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                      <span class="text-slate-500 font-medium">${isAr ? 'الإقامة المقترحة:' : isFr ? 'Séjour :' : isRu ? 'Пребывание:' : 'Stay:'} ${treat.recommendedStay}</span>
+                      <a href="${prefix}/treatments/${treat.slug}" class="font-bold text-teal-600 hover:text-teal-700">
+                        ${isAr ? 'التفاصيل ←' : isFr ? 'Détails →' : isRu ? 'Подробнее →' : 'View Details →'}
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Partner Hospitals Showcase -->
+      <section class="py-16 lg:py-24 bg-slate-50/60 border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 mb-3">
+              ${isAr ? 'المستشفيات المعتمدة' : isFr ? 'Centres Agréés' : isRu ? 'Клиники JCI' : 'Accredited Healthcare Centers'}
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+              ${featHospitalsTitle}
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-slate-600">
+              ${featHospitalsSubtitle}
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            ${featuredHospitals.map((hosp) => {
+              const localizedHosp = getLocalizedHospital(hosp, lang);
+              return `
+                <article class="group bg-white rounded-3xl border border-slate-200/90 shadow-sm flex flex-col overflow-hidden hover:border-teal-400/60 transition-all">
+                  <div class="relative h-52 w-full overflow-hidden bg-slate-100 aspect-[16/9]">
+                    <img
+                      src="${hosp.image}"
+                      alt="${hosp.name}"
+                      width="600"
+                      height="338"
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/9]"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold bg-[#08221E]/90 text-teal-300 border border-teal-500/30">
+                      ${localizedHosp.city}
+                    </span>
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="text-lg font-bold text-slate-900 mb-1">
+                        <a href="${prefix}/hospitals/${hosp.slug}" class="hover:text-teal-600 transition-colors">${hosp.name}</a>
+                      </h3>
+                      <p class="text-xs font-semibold text-teal-700 mb-3">${hosp.bedCapacity} ${isAr ? 'سرير سريري' : isFr ? 'lits' : isRu ? 'коек' : 'Beds'} • ${hosp.accreditation.join(', ')}</p>
+                      <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                        ${hosp.fullOverview}
+                      </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100">
+                      <a href="${prefix}/hospitals/${hosp.slug}" class="font-bold text-teal-600 hover:text-teal-700 text-xs">
+                        ${isAr ? 'عرض ملف المستشفى ←' : isFr ? 'Profil de l\'hôpital →' : isRu ? 'Профиль клиники →' : 'View Hospital Profile →'}
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Leading Specialist Doctors -->
+      <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 mb-3">
+              ${isAr ? 'نخبة الجراحين' : isFr ? 'Chirurgiens Experts' : isRu ? 'Ведущие хирурги' : 'Verified Medical Leadership'}
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+              ${featDoctorsTitle}
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-slate-600">
+              ${featDoctorsSubtitle}
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            ${featuredDoctors.map((doc) => {
+              const locDoc = getLocalizedDoctor(doc, lang);
+              return `
+                <article class="group bg-white rounded-3xl border border-slate-200/90 shadow-sm flex flex-col overflow-hidden hover:border-teal-400/60 transition-all">
+                  <div class="relative h-60 w-full overflow-hidden bg-slate-100 aspect-[5/6]">
+                    <img
+                      src="${doc.image}"
+                      alt="${doc.name}"
+                      width="400"
+                      height="480"
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 aspect-[5/6]"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold bg-[#08221E]/90 text-teal-300 border border-teal-500/30">
+                      ${locDoc.city}
+                    </span>
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 class="text-lg font-bold text-slate-900 mb-1">
+                        <a href="${prefix}/doctors/${doc.slug}" class="hover:text-teal-600 transition-colors">${doc.name}</a>
+                      </h3>
+                      <p class="text-xs font-semibold text-teal-700 mb-1">${locDoc.designation}</p>
+                      <p class="text-xs text-slate-500 mb-3">${doc.hospitalName} • ${doc.experienceYears}+ ${isAr ? 'سنوات خبرة' : isFr ? 'ans d\'expérience' : isRu ? 'лет опыта' : 'Years Experience'}</p>
+                      <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                        ${doc.bio}
+                      </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100">
+                      <a href="${prefix}/doctors/${doc.slug}" class="font-bold text-teal-600 hover:text-teal-700 text-xs">
+                        ${isAr ? 'عرض الملف الطبي ←' : isFr ? 'Consulter le profil →' : isRu ? 'Профиль врача →' : 'View Doctor Profile →'}
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. 4-Step Patient Journey -->
+      <section class="py-16 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              ${journeyTitle}
+            </h2>
+            <p class="mt-3 text-sm text-slate-600">
+              ${journeySubtitle}
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            ${journeySteps.map((s) => {
+              const locStep = getLocalizedServiceStep(s, lang);
+              return `
+                <article class="p-6 rounded-3xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <span class="w-8 h-8 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center text-xs mb-4">
+                      ${s.step}
+                    </span>
+                    <h3 class="text-base font-bold text-slate-900 mb-2">${locStep.title}</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">${locStep.shortDesc}</p>
+                  </div>
+                  <ul class="text-[11px] text-slate-500 space-y-1 list-disc list-inside">
+                    ${locStep.detailedProcess.slice(0, 2).map(p => `<li>${p}</li>`).join('')}
+                  </ul>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Patient Stories -->
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              ${storiesTitle}
+            </h2>
+            <p class="mt-3 text-sm text-slate-600">
+              ${storiesSubtitle}
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            ${patientStories.map((story) => {
+              const locStory = getLocalizedPatientStory(story, lang);
+              return `
+                <article class="p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-3">
+                      <span class="text-xl">${story.countryFlag}</span>
+                      <span class="text-xs font-bold text-slate-700">${story.country}</span>
+                      <span class="text-slate-300">•</span>
+                      <span class="text-xs font-semibold text-teal-700">${story.treatmentCategory}</span>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3">${locStory.summaryTitle}</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">${locStory.patientNarrative}</p>
+                  </div>
+                  <div class="pt-4 border-t border-slate-200/80 text-xs text-slate-500 flex items-center justify-between">
+                    <span>${story.hospitalName}</span>
+                    <span class="font-bold text-teal-700">${story.lengthOfStay}</span>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Comprehensive Clinical SEO Overview & Knowledge Base -->
+      <section class="py-16 lg:py-20 bg-slate-50/70 border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 mb-3">
+              ${homeSeo.badge}
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              ${homeSeo.h2Title}
+            </h2>
+          </div>
+          <div class="space-y-6 text-sm sm:text-base text-slate-700 leading-relaxed mb-16">
+            ${homeSeo.paragraphs.map(p => `<p class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-2xs">${p}</p>`).join('')}
+          </div>
+
+          <!-- SEO FAQs Section -->
+          <div class="pt-10 border-t border-slate-200">
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 text-center mb-8">
+              ${homeSeo.faqsTitle}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              ${homeSeo.faqs.map(faq => `
+                <article class="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+                  <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-2">${faq.question}</h4>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${faq.answer}</p>
+                </article>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Semantic Footer -->
+    <footer class="bg-[#051714] text-slate-300 py-12 border-t border-teal-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+        <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
+        <p class="text-slate-400">Delhi NCR: New Delhi, Gurugram, Noida, Faridabad • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-500 text-[11px]">Independent medical tourism facilitation. Hospital opinions, visa invitation letters, and quotation services provided at zero service fees.</p>
+      </div>
+    </footer>
   </div>`;
 }
+
+function getCriticalTreatmentsHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
+  const isAr = lang === 'ar';
+  const isFr = lang === 'fr';
+  const isRu = lang === 'ru';
+  const prefix = isAr ? '/ar' : isFr ? '/fr' : isRu ? '/ru' : '';
+
+  const deskTitle = isAr ? 'مكتب السياحة العلاجية' : isFr ? 'Bureau tourisme médical' : isRu ? 'Международный отдел' : 'Medical Tourism Desk';
+  const emergencyText = isAr ? 'مكتب الطوارئ 24/7: <bdi dir="ltr">+91 96485 78320</bdi>' : isFr ? 'Urgences 24/7 : +91 96485 78320' : isRu ? 'Экстренно 24/7: +91 96485 78320' : 'Emergency 24/7: +91 96485 78320';
+  const ctaConsult = isAr ? 'استشارة مجانية' : isFr ? 'Consultation' : isRu ? 'Консультация' : 'Get Free Consultation';
+
+  const bLabel = isAr ? 'العلاجات' : isFr ? 'Soins' : isRu ? 'Лечение' : 'Treatments';
+  const bBadge = isAr ? 'تخصصات طبية دقيقة' : isFr ? 'Spécialités médicales avancées' : isRu ? 'Передовые медицинские направления' : 'Specialized Medical Treatments';
+  const bTitle = isAr
+    ? `أحدث العلاجات والعمليات الجراحية المتقدمة في <span class="text-teal-400">الهند</span>`
+    : isFr
+    ? `Soins médicaux de pointe et chirurgies en <span class="text-teal-400">Inde</span>`
+    : isRu
+    ? `Передовые методы лечения и операции в <span class="text-teal-400">Индии</span>`
+    : `Advanced Medical Treatments & Surgeries in <span class="text-teal-400">India</span>`;
+  const bDesc = isAr
+    ? 'استكشف التخصصات الدقيقة في الأورام وجراحة القلب والعظام وزراعة الأعضاء والمسالك البولية في مستشفيات دلهي إن سي آر.'
+    : isFr
+    ? 'Explorez les interventions spécialisées en oncologie, cardiologie, orthopédie, neurochirurgie et greffes dans les meilleurs hôpitaux de Delhi NCR.'
+    : isRu
+    ? 'Комплексные программы лечения в онкологии, кардиохирургии, ортопедии, нейрохирургии и трансплантологии в клиниках Дели NCR.'
+    : 'Explore specialized quaternary procedures across oncology, cardiology, orthopedics, neurosurgery, organ transplants, and IVF at JCI-accredited Delhi NCR centers.';
+
+  const treatmentsSeo = TREATMENTS_SEO_OVERVIEW[lang] || TREATMENTS_SEO_OVERVIEW.en;
+
+  return `
+  <div class="min-h-screen flex flex-col bg-white">
+    <!-- Top Micro Bar -->
+    <div class="relative z-50 bg-[#051714] text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-3 sm:px-4 border-b border-teal-950/80">
+      <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-1">
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="inline-flex items-center gap-1.5 text-teal-300 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ${deskTitle}
+          </span>
+          <span class="hidden md:inline text-slate-400">|</span>
+          <a href="tel:+919648578320" class="hover:text-teal-300 transition-colors">${emergencyText}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-[#08221E] border-b border-teal-900/60 shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20">
+          <a href="${prefix || '/'}" class="flex items-center gap-2 sm:gap-2.5">
+            <span class="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30 font-black text-xs">NHC</span>
+            <span class="text-base sm:text-xl font-black text-white tracking-tight">Nadwa <span class="text-teal-400">Healthcare</span></span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm text-slate-200">
+            <a href="${prefix}/treatments" class="text-teal-400 font-semibold">${bLabel}</a>
+            <a href="${prefix}/hospitals" class="hover:text-teal-300 transition-colors">${isAr ? 'المستشفيات' : isFr ? 'Hôpitaux' : isRu ? 'Клиники' : 'Hospitals'}</a>
+            <a href="${prefix}/doctors" class="hover:text-teal-300 transition-colors">${isAr ? 'الأطباء' : isFr ? 'Médecins' : isRu ? 'Врачи' : 'Doctors'}</a>
+            <a href="${prefix}/services" class="hover:text-teal-300 transition-colors">${isAr ? 'الخدمات' : isFr ? 'Services' : isRu ? 'Услуги' : 'Services'}</a>
+            <a href="${prefix}/blog" class="hover:text-teal-300 transition-colors">${isAr ? 'المدونة' : isFr ? 'Blog' : isRu ? 'Блог' : 'Blog'}</a>
+          </nav>
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a href="${prefix}/contact" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-colors">
+              ${ctaConsult}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <!-- Header Banner -->
+      <section class="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-xs text-teal-400/80 mb-3 flex items-center gap-2">
+            <a href="${prefix || '/'}" class="hover:underline">${isAr ? 'الرئيسية' : isFr ? 'Accueil' : isRu ? 'Главная' : 'Home'}</a>
+            <span>/</span>
+            <span class="text-white font-semibold">${bLabel}</span>
+          </div>
+          <div class="max-w-3xl">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30 mb-3">
+              ${bBadge}
+            </span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              ${bTitle}
+            </h1>
+            <p class="mt-3 text-xs sm:text-base text-slate-300 leading-relaxed">
+              ${bDesc}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- All 12 Clinical Treatments Grid -->
+      <section class="py-12 lg:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            ${treatmentsData.map((treat) => {
+              const loc = getLocalizedTreatment(treat, lang);
+              return `
+                <article class="group bg-white rounded-3xl border border-slate-200/90 shadow-sm flex flex-col overflow-hidden hover:border-teal-400/60 transition-all">
+                  <div class="relative h-48 w-full overflow-hidden bg-slate-100 aspect-[16/10]">
+                    <img
+                      src="${treat.image}"
+                      alt="${loc.title}"
+                      width="400"
+                      height="250"
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/10]"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold bg-[#08221E]/90 text-teal-300 border border-teal-500/30">
+                      ${loc.badge}
+                    </span>
+                  </div>
+                  <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h2 class="text-lg font-bold text-slate-900 mb-2">
+                        <a href="${prefix}/treatments/${treat.slug}" class="hover:text-teal-600 transition-colors">${loc.title}</a>
+                      </h2>
+                      <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                        ${loc.shortDesc}
+                      </p>
+                      <div class="text-xs text-slate-500 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <strong class="text-slate-800">${isAr ? 'الإقامة المقترحة:' : isFr ? 'Séjour :' : isRu ? 'Пребывание:' : 'Recommended Stay:'}</strong> ${treat.recommendedStay}
+                      </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                      <span class="text-teal-700 font-semibold">${isAr ? 'مستشفيات JCI معتمدة' : isFr ? 'Hôpitaux JCI' : isRu ? 'Клиники JCI' : 'JCI Accredited'}</span>
+                      <a href="${prefix}/treatments/${treat.slug}" class="font-bold text-teal-600 hover:text-teal-700">
+                        ${isAr ? 'عرض التفاصيل ←' : isFr ? 'Voir les détails →' : isRu ? 'Подробнее →' : 'View Procedure →'}
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- Treatments Clinical SEO Overview Section -->
+      <section class="py-16 lg:py-20 bg-slate-50/70 border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 mb-3">
+              ${treatmentsSeo.badge}
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              ${treatmentsSeo.h2Title}
+            </h2>
+          </div>
+          <div class="space-y-6 text-sm sm:text-base text-slate-700 leading-relaxed mb-16">
+            ${treatmentsSeo.paragraphs.map(p => `<p class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-2xs">${p}</p>`).join('')}
+          </div>
+
+          <!-- Treatments FAQ Section -->
+          <div class="pt-10 border-t border-slate-200">
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 text-center mb-8">
+              ${treatmentsSeo.faqsTitle}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              ${treatmentsSeo.faqs.map(faq => `
+                <article class="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+                  <h4 class="text-sm sm:text-base font-bold text-slate-900 mb-2">${faq.question}</h4>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${faq.answer}</p>
+                </article>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Semantic Footer -->
+    <footer class="bg-[#051714] text-slate-300 py-12 border-t border-teal-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+        <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
+        <p class="text-slate-400">Delhi NCR: New Delhi, Gurugram, Noida, Faridabad • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-500 text-[11px]">Comprehensive clinical procedures across JCI/NABH hospitals with 100% free second opinions and visa assistance.</p>
+      </div>
+    </footer>
+  </div>`;
+}
+
+
 
 function getCriticalAboutHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   const isAr = lang === 'ar';
@@ -506,40 +1014,6 @@ function getHospitalsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>`;
-}
-
-function getTreatmentsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
-  const isAr = lang === 'ar';
-  const isFr = lang === 'fr';
-  const isRu = lang === 'ru';
-
-  const searchPlaceholder = isAr ? 'ابحث عن تخصص طبي أو جراحة...' : isFr ? 'Rechercher une spécialité ou un traitement...' : isRu ? 'Поиск направления или процедуры...' : 'Search specialty, condition, or procedure...';
-  const showingText = isAr ? 'عرض' : isFr ? 'Affichage de' : isRu ? 'Показано' : 'Showing';
-  const countText = isAr ? 'تخصصات طبية وجراحية متقدمة' : isFr ? 'spécialités médicales avancées' : isRu ? 'медицинских направлений' : 'advanced clinical specialties';
-  const accreditedText = isAr ? 'علاج ورعاية دولية متكاملة' : isFr ? 'Soins internationaux complets' : isRu ? 'Международные стандарты' : 'Comprehensive International Care';
-
-  return `
-    <section class="py-8 bg-slate-50 border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative max-w-xl mx-auto">
-          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"></circle><path stroke-width="2" d="m21 21-4.3-4.3"></path></svg>
-          <input type="text" placeholder="${searchPlaceholder}" class="w-full pl-10 pr-4 py-3 rounded-full border border-slate-300 text-xs sm:text-sm bg-white" readonly />
-        </div>
-      </div>
-    </section>
-    <section class="py-8 lg:py-12 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
-          <p class="text-xs sm:text-sm text-slate-600">
-            ${showingText} <strong class="text-slate-900">22</strong> ${countText}
-          </p>
-          <div class="flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path stroke-width="2" d="m9 12 2 2 4-4"></path></svg>
-            <span>${accreditedText}</span>
           </div>
         </div>
       </div>
@@ -1137,24 +1611,7 @@ function renderHtml(templateHtml: string, meta: PageMetadata): string {
     const criticalHospitalsHtml = getCriticalPageHeaderHtml(lang as 'en' | 'ar' | 'fr' | 'ru', bLabel, bBadge, bTitle, bDesc, hospitalsExtra);
     html = html.replace('<div id="root"></div>', `<div id="root">${criticalHospitalsHtml}</div>`);
   } else if (cleanRoutePrefix === '/treatments') {
-    const bLabel = lang === 'ar' ? 'العلاجات' : lang === 'fr' ? 'Soins' : lang === 'ru' ? 'Лечение' : 'Treatments';
-    const bBadge = lang === 'ar' ? 'تخصصات طبية دقيقة' : lang === 'fr' ? 'Spécialités médicales avancées' : lang === 'ru' ? 'Передовые медицинские направления' : 'Specialized Medical Treatments';
-    const bTitle = lang === 'ar'
-      ? `أحدث العلاجات والعمليات الجراحية المتقدمة في <span class="text-teal-400">الهند</span>`
-      : lang === 'fr'
-      ? `Soins médicaux de pointe et chirurgies en <span class="text-teal-400">Inde</span>`
-      : lang === 'ru'
-      ? `Передовые методы лечения и операции в <span class="text-teal-400">Индии</span>`
-      : `Advanced Medical Treatments & Surgeries in <span class="text-teal-400">India</span>`;
-    const bDesc = lang === 'ar'
-      ? 'استكشف التخصصات الدقيقة في الأورام وجراحة القلب والعظام وزراعة الأعضاء والمسالك البولية.'
-      : lang === 'fr'
-      ? 'Explorez les interventions spécialisées en oncologie, cardiologie, orthopédie, neurochirurgie et greffes.'
-      : lang === 'ru'
-      ? 'Комплексные программы лечения в онкологии, кардиохирургии, ортопедии, нейрохирургии и трансплантологии.'
-      : 'Explore specialized procedures across oncology, cardiology, orthopedics, neurosurgery, organ transplants, and fertility.';
-    const treatmentsExtra = getTreatmentsExtraHtml(lang as 'en' | 'ar' | 'fr' | 'ru');
-    const criticalTreatmentsHtml = getCriticalPageHeaderHtml(lang as 'en' | 'ar' | 'fr' | 'ru', bLabel, bBadge, bTitle, bDesc, treatmentsExtra);
+    const criticalTreatmentsHtml = getCriticalTreatmentsHtml(lang as 'en' | 'ar' | 'fr' | 'ru');
     html = html.replace('<div id="root"></div>', `<div id="root">${criticalTreatmentsHtml}</div>`);
   } else if (cleanRoutePrefix.startsWith('/treatments/')) {
     const slug = cleanRoutePrefix.replace('/treatments/', '');
@@ -1221,7 +1678,7 @@ export function prerenderSSGPlugin(): Plugin {
       pages.push(
         {
           route: '/',
-          title: 'Nadwa Healthcare | World-Class Medical Treatment & Specialist Doctors in India',
+          title: 'Nadwa Healthcare | Medical Tourism and Doctors in India',
           description: 'Connect with India\'s premier JCI & NABH accredited hospitals and leading specialist doctors across Delhi NCR with Nadwa Healthcare. 100% free medical visa invitation assistance.',
           canonicalUrl: 'https://www.nadwahealthcare.com/',
           lang: 'en',
@@ -1229,55 +1686,55 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/doctors',
-          title: 'Best Doctors & Leading Surgeons in India | Delhi NCR Medical Specialists | Nadwa Healthcare',
+          title: 'Best Doctors and Top Surgeons in India | Nadwa Healthcare',
           description: 'Consult renowned surgeons, cardiologists, oncologists, and organ transplant specialists across premier JCI & NABH accredited hospitals in Delhi NCR. 100% free medical visa invitation assistance.',
           canonicalUrl: 'https://www.nadwahealthcare.com/doctors'
         },
         {
           route: '/hospitals',
-          title: 'Top JCI & NABH Accredited Hospitals in Delhi NCR, India | Nadwa Healthcare',
+          title: 'Top JCI and NABH Hospitals in Delhi NCR | Nadwa',
           description: 'Discover premier multi-specialty hospitals in Delhi NCR including Medanta, Apollo, Fortis, and Max. Get zero-fee hospital coordination.',
           canonicalUrl: 'https://www.nadwahealthcare.com/hospitals'
         },
         {
           route: '/treatments',
-          title: 'Affordable Medical Treatments & Surgeries in India | Nadwa Healthcare',
+          title: 'World-Class Medical Treatments in India | Nadwa Healthcare',
           description: 'Explore advanced treatments in India across cardiology, oncology, orthopedics, neurosurgery, and IVF at JCI-accredited hospitals.',
           canonicalUrl: 'https://www.nadwahealthcare.com/treatments'
         },
         {
           route: '/blog',
-          title: 'Medical Travel Guides & Treatment Costs Blog | Nadwa Healthcare',
+          title: 'Medical Tourism and Surgery Cost Guides | Nadwa',
           description: 'Authoritative guides on medical tourism in India, surgery cost comparisons, medical visa application steps, and patient recovery journeys for international medical travelers.',
           canonicalUrl: 'https://www.nadwahealthcare.com/blog'
         },
         {
           route: '/services',
-          title: 'Patient Journey & International Services | Nadwa Healthcare',
+          title: 'International Patient Services | Nadwa Healthcare',
           description: 'End-to-end medical tourism support: free hospital opinions, doctor video consults, official hospital visa invitation letters (VIL) in 24-48 hrs, airport transfers, and translation.',
           canonicalUrl: 'https://www.nadwahealthcare.com/services'
         },
         {
           route: '/patient-stories',
-          title: 'International Patient Stories & Testimonials | Nadwa Healthcare',
+          title: 'International Patient Success Stories | Nadwa Healthcare',
           description: 'Read real medical journey stories and reviews from patients worldwide who received successful treatment across top Delhi NCR hospitals with Nadwa Healthcare.',
           canonicalUrl: 'https://www.nadwahealthcare.com/patient-stories'
         },
         {
           route: '/about',
-          title: 'About Nadwa Healthcare | Ethical Medical Tourism Assistance in India',
+          title: 'About Nadwa Healthcare | Medical Tourism Partner in India',
           description: 'Nadwa Healthcare empowers patients from the Middle East, CIS, Africa, and Western nations to access world-class quaternary hospitals in Delhi NCR with zero coordination fees.',
           canonicalUrl: 'https://www.nadwahealthcare.com/about'
         },
         {
           route: '/contact',
-          title: 'Contact International Patient Desk | 24/7 Medical Assistance | Nadwa Healthcare',
+          title: 'Contact 24/7 International Patient Desk | Nadwa Healthcare',
           description: 'Reach Nadwa Healthcare 24/7 International Desk via WhatsApp (+91 96485 78320) or email info@nadwahealthcare.com for immediate medical opinion, cost estimate, and visa letter.',
           canonicalUrl: 'https://www.nadwahealthcare.com/contact'
         },
         {
           route: '/faqs',
-          title: 'Frequently Asked Questions (FAQs) | Medical Visa & Treatment in India | Nadwa Healthcare',
+          title: 'Medical Tourism in India FAQs | Nadwa Healthcare Answers',
           description: 'Clear answers to common questions about Indian medical visas, hospital admissions, treatment costs, and post-surgery travel clearances for foreign patients.',
           canonicalUrl: 'https://www.nadwahealthcare.com/faqs'
         },
@@ -1305,7 +1762,7 @@ export function prerenderSSGPlugin(): Plugin {
       pages.push(
         {
           route: '/ar',
-          title: 'العلاج الطبي في الهند للمرضى الدوليين | ندوة للرعاية الصحية',
+          title: 'العلاج الطبي في الهند للمرضى الدوليين | ندوة للرعاية',
           description: 'أفضل المستشفيات المعتمدة دولياً في الهند وكبار الأطباء الجراحين. مساعدة مجانية 100% في استخراج التأشيرة الطبية وخطاب الدعوة الرسمي (VIL) واستقبال المطار.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar',
           lang: 'ar',
@@ -1313,7 +1770,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/hospitals',
-          title: 'أفضل المستشفيات المعتمدة في الهند (JCI & NABH) | ندوة للرعاية الصحية',
+          title: 'أفضل مستشفيات الهند المعتمدة JCI | ندوة للرعاية الصحية',
           description: 'تعرف على أفضل المستشفيات في دلهي وجوروجرام مثل ميدانتا، أبولو، ماكس، وفورتيس. تنسيق طبي مجاني ومباشر.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/hospitals',
           lang: 'ar',
@@ -1321,7 +1778,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/doctors',
-          title: 'كبار الأطباء والجراحين الاستشاريين في الهند | ندوة للرعاية الصحية',
+          title: 'كبار الأطباء والجراحين في الهند | ندوة للرعاية الصحية',
           description: 'استشارات مع أشهر جراحي القلب، زراعة الكبد، جراحة العظام، وجراحة المخ والأعصاب في الهند. رأي طبي مجاني خلال 24 ساعة.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/doctors',
           lang: 'ar',
@@ -1329,7 +1786,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/treatments',
-          title: 'العلاجات الطبية والعمليات الجراحية في الهند | التكاليف والمستشفيات | ندوة',
+          title: 'العلاجات والعمليات الجراحية في الهند | ندوة للرعاية',
           description: 'دليل العلاجات المتقدمة في الهند: جراحة القلب، علاج الأورام، زراعة الأعضاء، وعلاج العقم بأفضل الأسعار وبأعلى معايير الجودة العالمية.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/treatments',
           lang: 'ar',
@@ -1337,7 +1794,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/services',
-          title: 'خدمات المرضى الدوليين والتأشيرة العلاجية | ندوة للرعاية الصحية',
+          title: 'خدمات المرضى الدوليين والتأشيرة | ندوة للرعاية الصحية',
           description: 'خدمات شاملة للمرضى العرب: تأشيرة طبية سريعة، مترجم فوري عربي، استقبال وتوديع في المطار، وتوفير خيارات السكن.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/services',
           lang: 'ar',
@@ -1345,7 +1802,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/about',
-          title: 'من نحن | ندوة للرعاية الصحية | خدمات السياحة العلاجية في الهند',
+          title: 'من نحن | خدمات السياحة العلاجية في الهند | ندوة',
           description: 'ندوة للرعاية الصحية شريكك المعتمد لرحلة علاج ناجحة في أرقى مستشفيات الهند بدون أي رسوم وساطة.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/about',
           lang: 'ar',
@@ -1361,7 +1818,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/faqs',
-          title: 'الأسئلة الشائعة حول العلاج والتأشيرة الطبية للهند | ندوة للرعاية الصحية',
+          title: 'الأسئلة الشائعة حول العلاج في الهند | ندوة للرعاية',
           description: 'إجابات شاملة لجميع استفسارات المرضى حول التأشيرة الطبية الهندية، تكاليف السفر، وفترة النقاهة.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/faqs',
           lang: 'ar',
@@ -1369,7 +1826,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/blog',
-          title: 'دليل السياحة العلاجية وتكاليف العلاج في الهند | ندوة للرعاية الصحية',
+          title: 'دليل وتكاليف السياحة العلاجية بالهند | ندوة للرعاية',
           description: 'أدلة طبية متخصصة ومحدثة لعام 2026 للمرضى الدوليين. قارن تكاليف جراحة القلب، علاج الأورام، استبدال المفاصل وزراعة الأعضاء في الهند مع مساعدة مجانية في التأشيرة.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/blog',
           lang: 'ar',
@@ -1377,7 +1834,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/patient-stories',
-          title: 'تجارب وقصص المرضى الدوليين في الهند | ندوة للرعاية الصحية',
+          title: 'قصص وتجارب المرضى الدوليين في الهند | ندوة للرعاية',
           description: 'قصص وتجارب واقعية لمرضى من مختلف الدول العربية تلقوا علاجهم بنجاح في أرقى مستشفيات الهند مع ندوة للرعاية الصحية.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/patient-stories',
           lang: 'ar',
@@ -1385,7 +1842,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/privacy-policy',
-          title: 'سياسة الخصوصية وسرية البيانات الطبية | ندوة للرعاية الصحية',
+          title: 'سياسة الخصوصية | ندوة للرعاية الصحية',
           description: 'تعرف على سياسة الخصوصية ومعايير حماية البيانات وسرية المعلومات الطبية للمرضى لدى ندوة للرعاية الصحية.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/privacy-policy',
           lang: 'ar',
@@ -1393,7 +1850,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ar/terms-and-conditions',
-          title: 'الشروط والأحكام وسياسة التنسيق الطبي | ندوة للرعاية الصحية',
+          title: 'الشروط والأحكام | ندوة للرعاية الصحية',
           description: 'الشروط والأحكام الخاصة بخدمات التنسيق الطبي الدولي وتسهيل العلاج في الهند من ندوة للرعاية الصحية.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/terms-and-conditions',
           lang: 'ar',
@@ -1413,7 +1870,7 @@ export function prerenderSSGPlugin(): Plugin {
       pages.push(
         {
           route: '/fr',
-          title: 'Soins Médicaux de Classe Mondiale en Inde | Nadwa Healthcare',
+          title: 'Soins Médicaux en Inde | Nadwa Healthcare',
           description: 'Accédez aux meilleurs hôpitaux accrédités JCI et aux chirurgiens éminents en Inde. Assistance visa médical 100% gratuite et coordination francophone.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr',
           lang: 'fr',
@@ -1421,7 +1878,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/hospitals',
-          title: 'Meilleurs Hôpitaux Accrédités JCI & NABH en Inde | Nadwa Healthcare',
+          title: 'Hôpitaux Accrédités JCI en Inde | Nadwa Healthcare',
           description: 'Découvrez les plus grands hôpitaux d excellence à Delhi NCR : Medanta, Apollo, Fortis et Max. Zéro frais de coordination.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/hospitals',
           lang: 'fr',
@@ -1429,7 +1886,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/doctors',
-          title: 'Éminents Médecins & Chirurgiens Spécialistes en Inde | Nadwa Healthcare',
+          title: 'Meilleurs Médecins & Chirurgiens en Inde | Nadwa',
           description: 'Consultez les plus grands professeurs en cardiologie, oncologie, orthopédie et greffes d organes en Inde. Avis médical sous 24h.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/doctors',
           lang: 'fr',
@@ -1437,7 +1894,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/treatments',
-          title: 'Traitements Médicaux & Chirurgies de Pointe en Inde | Nadwa Healthcare',
+          title: 'Soins Médicaux & Chirurgies en Inde | Nadwa Healthcare',
           description: 'Chirurgie cardiaque, oncologie robotique, prothèses de genou et greffes à des tarifs très abordables en Inde.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/treatments',
           lang: 'fr',
@@ -1445,7 +1902,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/services',
-          title: 'Services aux Patients Internationaux & Visa Médical | Nadwa Healthcare',
+          title: 'Services Internationaux & Visa Médical | Nadwa',
           description: 'Prise en charge complète : invitation officielle VIL sous 24-48h, accueil à l aéroport de Delhi et accompagnement.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/services',
           lang: 'fr',
@@ -1453,7 +1910,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/about',
-          title: 'À Propos de Nadwa Healthcare | Facilitateur Médical Agréé en Inde',
+          title: 'À Propos de Nadwa Healthcare | Soins en Inde',
           description: 'Nadwa Healthcare guide les patients africains et internationaux vers les meilleurs centres médicaux de Delhi NCR sans aucun frais d agence.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/about',
           lang: 'fr',
@@ -1461,7 +1918,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/contact',
-          title: 'Contactez le Bureau International 24/7 | Nadwa Healthcare',
+          title: 'Contactez Notre Bureau Médical 24/7 | Nadwa Healthcare',
           description: 'Contactez notre équipe via WhatsApp pour une estimation gratuite et rapide de votre traitement médical en Inde.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/contact',
           lang: 'fr',
@@ -1469,7 +1926,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/faqs',
-          title: 'Foire Aux Questions (FAQ) | Traitement Médical en Inde | Nadwa Healthcare',
+          title: 'FAQ Traitement Médical en Inde | Nadwa Healthcare',
           description: 'Toutes les réponses sur les visas médicaux pour l Inde, les coûts d hospitalisation et l organisation de votre séjour.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/faqs',
           lang: 'fr',
@@ -1477,7 +1934,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/blog',
-          title: 'Guides de Voyage Médical & Coûts des Traitements en Inde | Nadwa Healthcare',
+          title: 'Guides de Voyage Médical en Inde | Nadwa Healthcare',
           description: 'Guides médicaux complets 2026 pour patients internationaux. Comparez les coûts de chirurgie cardiaque, cancérologie, prothèse du genou et greffes en Inde avec visa gratuit.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/blog',
           lang: 'fr',
@@ -1485,7 +1942,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/patient-stories',
-          title: 'Témoignages & Histoires de Patients en Inde | Nadwa Healthcare',
+          title: 'Témoignages de Patients en Inde | Nadwa Healthcare',
           description: 'Découvrez les récits et avis réels de patients internationaux soignés avec succès dans les meilleurs hôpitaux de Delhi NCR.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/patient-stories',
           lang: 'fr',
@@ -1521,7 +1978,7 @@ export function prerenderSSGPlugin(): Plugin {
       pages.push(
         {
           route: '/ru',
-          title: 'Высококлассное Лечение в Индии для Иностранных Пациентов | Nadwa Healthcare',
+          title: 'Лечение в Индии для Иностранных Пациентов | Nadwa',
           description: 'Ведущие аккредитованные клиники JCI и лучшие профессора Индии. 100% бесплатная медицинская виза (VIL) и русскоязычные координаторы.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru',
           lang: 'ru',
@@ -1529,7 +1986,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/hospitals',
-          title: 'Лучшие Клиники Индии с Аккредитацией JCI и NABH | Nadwa Healthcare',
+          title: 'Клиники Индии с Аккредитацией JCI | Nadwa Healthcare',
           description: 'Ведущие многопрофильные клиники Дели: Меданта, Аполло, Фортис и Макс. Бесплатный подбор клиники и организация лечения.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/hospitals',
           lang: 'ru',
@@ -1537,7 +1994,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/doctors',
-          title: 'Ведущие Врачи и Хирурги Индии | Лучшие Профессора | Nadwa Healthcare',
+          title: 'Ведущие Врачи и Хирурги в Индии | Nadwa Healthcare',
           description: 'Консультации и операции у лучших кардиохирургов, онкологов, ортопедов и трансплантологов Индии. Второе медицинское мнение за 24 часа.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/doctors',
           lang: 'ru',
@@ -1545,7 +2002,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/treatments',
-          title: 'Направления Лечения и Операции в Индии | Цены и Клиники | Nadwa Healthcare',
+          title: 'Лечение и Операции в Индии: Цены | Nadwa Healthcare',
           description: 'Операции на сердце, роботизированная онкология, замена суставов и трансплантация органов в Индии по доступным ценам.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/treatments',
           lang: 'ru',
@@ -1553,7 +2010,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/services',
-          title: 'Услуги для Пациентов и Медицинская Виза в Индию | Nadwa Healthcare',
+          title: 'Услуги для Пациентов и Виза в Индию | Nadwa Healthcare',
           description: 'Полный комплекс услуг: оформление визового приглашения VIL за 24-48 часов, трансфер из аэропорта и русскоязычный переводчик.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/services',
           lang: 'ru',
@@ -1561,7 +2018,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/about',
-          title: 'О Компании Nadwa Healthcare | Координация Лечения в Индии',
+          title: 'О Компании Nadwa Healthcare | Лечение в Индии',
           description: 'Nadwa Healthcare — надежный партнер для пациентов из СНГ и Центральной Азии по организации лечения в клиниках Дели без комиссии.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/about',
           lang: 'ru',
@@ -1569,7 +2026,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/contact',
-          title: 'Контакты Международного Отдела 24/7 | Nadwa Healthcare',
+          title: 'Контакты Отдела Пациентов 24/7 | Nadwa Healthcare',
           description: 'Свяжитесь с нами через WhatsApp для быстрого расчета стоимости и консультации врача по вашим медицинским выпискам.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/contact',
           lang: 'ru',
@@ -1577,7 +2034,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/faqs',
-          title: 'Частые Вопросы о Лечении в Индии | Виза и Клиники | Nadwa Healthcare',
+          title: 'Частые Вопросы о Лечении в Индии | Nadwa Healthcare',
           description: 'Ответы на популярные вопросы: получение медицинской визы в Индию, стоимость лечения, проживание и сроки пребывания.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/faqs',
           lang: 'ru',
@@ -1585,7 +2042,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/blog',
-          title: 'Гид по Лечению и Цены на Медицинский Туризм в Индии | Nadwa Healthcare',
+          title: 'Гид и Цены на Лечение в Индии | Nadwa Healthcare',
           description: 'Подробные медицинские руководства 2026 для пациентов из СНГ. Сравнение цен на кардиохирургию, онкологию, эндопротезирование суставов и трансплантацию в клиниках Индии.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/blog',
           lang: 'ru',
@@ -1593,7 +2050,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/patient-stories',
-          title: 'Отзывы и Истории Пациентов о Лечении в Индии | Nadwa Healthcare',
+          title: 'Истории Пациентов о Лечении в Индии | Nadwa',
           description: 'Реальные истории и видеоотзывы пациентов из стран СНГ, прошедших успешное лечение в лучших клиниках Индии.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/patient-stories',
           lang: 'ru',
@@ -1630,7 +2087,7 @@ export function prerenderSSGPlugin(): Plugin {
         const hospShort = doc.hospitalName.split('–')[0].trim();
         pages.push({
           route: `/doctors/${doc.slug}`,
-          title: `${doc.name} Appointment, Fees & Surgery Cost | ${hospShort}`,
+          title: `${doc.name} - ${doc.specialty} in India | Nadwa`.slice(0, 58),
           description: `Consult ${doc.name} (${doc.designation} at ${hospShort}). Get free medical opinion, surgery cost estimate & fast appointment booking in India.`,
           canonicalUrl: `https://www.nadwahealthcare.com/doctors/${doc.slug}`,
           ogImage: doc.image,
@@ -1651,7 +2108,7 @@ export function prerenderSSGPlugin(): Plugin {
       hospitalsData.forEach((hosp) => {
         pages.push({
           route: `/hospitals/${hosp.slug}`,
-          title: `${hosp.name} - Best Hospital in ${hosp.city} | Nadwa Healthcare`,
+          title: `${hosp.name} - ${hosp.city} | Nadwa Healthcare`.slice(0, 58),
           description: `${hosp.name} in ${hosp.locationDetail}. ${hosp.bedCapacity} beds, accredited by ${hosp.accreditation.join(', ')}. Free patient coordination and medical visa assistance.`,
           canonicalUrl: `https://www.nadwahealthcare.com/hospitals/${hosp.slug}`,
           ogImage: hosp.image,
@@ -1676,7 +2133,7 @@ export function prerenderSSGPlugin(): Plugin {
       treatmentsData.forEach((treat) => {
         pages.push({
           route: `/treatments/${treat.slug}`,
-          title: `${treat.title} in India - Cost, Top Hospitals & Surgeons | Nadwa Healthcare`,
+          title: `${treat.title} in India | Nadwa Healthcare`.slice(0, 58),
           description: `${treat.shortDesc} Compare accredited hospitals in Delhi NCR, top specialist surgeons, stay: ${treat.recommendedStay}, and get 100% free Medical Visa assistance.`,
           canonicalUrl: `https://www.nadwahealthcare.com/treatments/${treat.slug}`,
           ogImage: treat.image,
@@ -1700,7 +2157,7 @@ export function prerenderSSGPlugin(): Plugin {
           const inIndiaSuffix = lang === 'ar' ? 'في الهند' : lang === 'fr' ? 'en Inde' : 'в Индии';
           pages.push({
             route: `/${lang}/treatments/${treat.slug}`,
-            title: `${loc.title} ${inIndiaSuffix} | Nadwa Healthcare`,
+            title: `${loc.title} ${inIndiaSuffix} | Nadwa`.slice(0, 58),
             description: `${loc.shortDesc}`,
             canonicalUrl: `https://www.nadwahealthcare.com/${lang}/treatments/${treat.slug}`,
             ogImage: treat.image,
@@ -1714,7 +2171,7 @@ export function prerenderSSGPlugin(): Plugin {
           const inIndiaTitle = lang === 'ar' ? `مستشفى ${hosp.name} في ${loc.city}` : lang === 'fr' ? `${hosp.name} à ${loc.city}` : `${hosp.name} в г. ${loc.city}`;
           pages.push({
             route: `/${lang}/hospitals/${hosp.slug}`,
-            title: `${inIndiaTitle} | Nadwa Healthcare`,
+            title: `${inIndiaTitle} | Nadwa`.slice(0, 58),
             description: `${loc.shortDesc}`,
             canonicalUrl: `https://www.nadwahealthcare.com/${lang}/hospitals/${hosp.slug}`,
             ogImage: hosp.image,
@@ -1725,18 +2182,18 @@ export function prerenderSSGPlugin(): Plugin {
 
         doctorsData.forEach((doc) => {
           const loc = getLocalizedDoctor(doc, lang);
-          const hospShort = doc.hospitalName.split('–')[0].trim();
-          let title = `${doc.name} Appointment, Fees & Surgery Cost | ${hospShort}`;
+          const hospShort = doc.hospitalName.split('–')[0].split(',')[0].trim();
+          let title = `${doc.name} - ${doc.specialty} in India | Nadwa`.slice(0, 56);
           let description = `Consult ${doc.name} (${loc.designation} at ${hospShort}). Get free medical opinion, surgery cost estimate & fast appointment booking in India.`;
 
           if (lang === 'fr') {
-            title = `${doc.name} : Rendez-vous, Tarifs et Avis Médical | ${hospShort}`;
+            title = `${doc.name} - Spécialiste en Inde | Nadwa`.slice(0, 56);
             description = `Consultez le ${doc.name} (${loc.designation} à ${hospShort}). Obtenez un avis médical gratuit, estimation du coût et prise de rendez-vous rapide.`;
           } else if (lang === 'ar') {
-            title = `${doc.name} - حجز موعد واستشارة جراحية وتكلفة العلاج | ${hospShort}`;
+            title = `${doc.name} - استشاري في الهند | ندوة للرعاية`.slice(0, 56);
             description = `احجز موعداً واستشارة مجانية مع ${doc.name} (${loc.designation} في ${hospShort}). تقييم التقارير الطبية وتكلفة العلاج بدون أي رسوم.`;
           } else if (lang === 'ru') {
-            title = `${doc.name} - Запись на прием, консультация и стоимость | ${hospShort}`;
+            title = `${doc.name} - Врач в Индии | Nadwa Healthcare`.slice(0, 56);
             description = `Консультация с ${doc.name} (${loc.designation} в ${hospShort}). Бесплатное второе мнение и расчет стоимости лечения в Индии.`;
           }
 
@@ -1756,7 +2213,7 @@ export function prerenderSSGPlugin(): Plugin {
       blogsData.forEach((blog) => {
         pages.push({
           route: `/blog/${blog.slug}`,
-          title: `${blog.metaTitle} | Nadwa Healthcare`,
+          title: `${blog.metaTitle.replace(/&/g, 'and').split('|')[0].trim()} | Nadwa`.slice(0, 56),
           description: blog.metaDescription,
           canonicalUrl: `https://www.nadwahealthcare.com/blog/${blog.slug}`,
           ogImage: blog.coverImage,
@@ -1788,7 +2245,7 @@ export function prerenderSSGPlugin(): Plugin {
           const loc = getLocalizedBlog(blog, lang);
           pages.push({
             route: `/${lang}/blog/${blog.slug}`,
-            title: `${loc.h1Title} | Nadwa Healthcare`,
+            title: `${loc.h1Title.replace(/&/g, 'and').split('|')[0].trim()} | Nadwa`.slice(0, 56),
             description: blog.metaDescription,
             canonicalUrl: `https://www.nadwahealthcare.com/${lang}/blog/${blog.slug}`,
             ogImage: blog.coverImage,
@@ -1802,13 +2259,13 @@ export function prerenderSSGPlugin(): Plugin {
       pages.push(
         {
           route: '/blog/heart-surgery-india-cost-guide',
-          title: 'Heart Surgery in India: Costs, Top Cardiac Hospitals & Recovery Guide for International Patients | Nadwa Healthcare',
+          title: 'Heart Surgery in India: Cost & Top Hospitals | Nadwa',
           description: '2026 international guide to heart surgery in India. Compare CABG & valve surgery costs, top Delhi cardiac surgeons, and get free medical visa assistance.',
           canonicalUrl: 'https://www.nadwahealthcare.com/blog/heart-surgery-india-cost-guide',
         },
         {
           route: '/ar/blog/heart-surgery-india-cost-guide',
-          title: 'جراحة القلب في الهند: التكاليف، أفضل مستشفيات القلب ودليل التعافي للمرضى الدوليين | Nadwa Healthcare',
+          title: 'تكلفة جراحة القلب في الهند وأفضل المستشفيات | ندوة',
           description: 'دليل جراحة القلب في الهند لعام 2026. مقارنة تكاليف مجازة الشريان التاجي والصمامات في أفضل مستشفيات نيودلهي مع مساعدة مجانية في التأشيرة.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/blog/heart-surgery-india-cost-guide',
           lang: 'ar',
@@ -1816,7 +2273,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/blog/heart-surgery-india-cost-guide',
-          title: 'Chirurgie cardiaque en Inde : Coûts, meilleurs hôpitaux et guide de rétablissement | Nadwa Healthcare',
+          title: 'Chirurgie Cardiaque en Inde: Coûts & Hôpitaux | Nadwa',
           description: 'Guide 2026 de chirurgie cardiaque en Inde. Comparez les coûts de pontage et valves dans les meilleurs hôpitaux de Delhi.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/blog/heart-surgery-india-cost-guide',
           lang: 'fr',
@@ -1824,7 +2281,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/blog/heart-surgery-india-cost-guide',
-          title: 'Кардиохирургия в Индии: стоимость, лучшие кардиоцентры и реабилитация | Nadwa Healthcare',
+          title: 'Кардиохирургия в Индии: Цены и Клиники | Nadwa',
           description: 'Гид 2026 по кардиохирургии в Индии. Сравнение цен на АКШ и замену клапанов в лучших клиниках Дели.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/blog/heart-surgery-india-cost-guide',
           lang: 'ru',
@@ -1832,13 +2289,13 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Cancer Treatment in India: Advanced Oncology, Top Hospitals & Cost Breakdown for Foreign Patients | Nadwa Healthcare',
+          title: 'Cancer Treatment in India: Cost & Oncology | Nadwa',
           description: 'Comprehensive guide to cancer treatment in India. Explore surgical oncology, CyberKnife radiation, chemotherapy costs, and top Delhi NCR hospitals with free visa help.',
           canonicalUrl: 'https://www.nadwahealthcare.com/blog/cancer-treatment-india-oncology-cost-guide',
         },
         {
           route: '/ar/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'علاج السرطان في الهند: أحدث تقنيات الأورام، أفضل المستشفيات وتفاصيل التكلفة للمرضى الدوليين | Nadwa Healthcare',
+          title: 'علاج السرطان في الهند: التكاليف وأفضل المراكز | ندوة',
           description: 'دليل علاج السرطان في الهند لعام 2026 للمرضى الدوليين. مقارنة تكاليف الجراحة الروبوتية، السايبر نايف، والكيماوي في أفضل مستشفيات نيودلهي مع تأشيرة مجانية.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ar/blog/cancer-treatment-india-oncology-cost-guide',
           lang: 'ar',
@@ -1846,7 +2303,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/fr/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Traitement du cancer en Inde : Oncologie de pointe, meilleurs hôpitaux et coûts pour les patients internationaux | Nadwa Healthcare',
+          title: 'Traitement du Cancer en Inde: Coûts & Soins | Nadwa',
           description: 'Guide 2026 du traitement du cancer en Inde. Comparez les coûts de chirurgie robotique, CyberKnife et chimiothérapie avec assistance visa.',
           canonicalUrl: 'https://www.nadwahealthcare.com/fr/blog/cancer-treatment-india-oncology-cost-guide',
           lang: 'fr',
@@ -1854,7 +2311,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/ru/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Лечение рака в Индии: передовая онкология, лучшие клиники и стоимость для зарубежных пациентов | Nadwa Healthcare',
+          title: 'Лечение Рака в Индии: Цены и Клиники | Nadwa',
           description: 'Гид 2026 по лечению онкологии в Индии. Сравнение цен на роботизированные операции, CyberKnife и химиотерапию с бесплатной визовой поддержкой.',
           canonicalUrl: 'https://www.nadwahealthcare.com/ru/blog/cancer-treatment-india-oncology-cost-guide',
           lang: 'ru',
@@ -1862,7 +2319,7 @@ export function prerenderSSGPlugin(): Plugin {
         },
         {
           route: '/blog/complete-guide-indian-medical-visa-international-patients',
-          title: 'Complete Guide to Indian Medical Visa for International Patients | Nadwa Healthcare',
+          title: 'Indian Medical Visa Guide for Patients | Nadwa Healthcare',
           description: 'Comprehensive guide for international patients applying for an Indian Medical Visa (MED) and Medical Attendant Visa (MED-X). Official 24-48h Hospital Invitation Letters.',
           canonicalUrl: 'https://www.nadwahealthcare.com/blog/complete-guide-indian-medical-visa-international-patients',
         }

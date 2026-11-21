@@ -3,6 +3,7 @@ import { Search, Activity, ShieldCheck } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { Breadcrumb } from "../components/Breadcrumb";
 import { TreatmentCard } from "../components/TreatmentCard";
+import { TreatmentsSeoOverview } from "../components/TreatmentsSeoOverview";
 import { treatmentsData } from "../data/treatmentsData";
 import { useLanguage } from "../context/LanguageContext";
 import { getLocalizedTreatment } from "../utils/localizedData";
@@ -41,15 +42,15 @@ export const Treatments: React.FC<TreatmentsProps> = ({ onOpenConsultation }) =>
   });
 
   return (
-    <div className="bg-white min-h-screen">
+    <main className="bg-white min-h-screen">
       <SEOHead
-        title={`${t("treatmentsPage.title", "World-Class")} ${t("treatmentsPage.titleHighlight", "Medical Treatments")} ${t("treatmentsPage.titleEnd", "in India")} | Nadwa Healthcare`}
+        title="Medical Treatments & Surgeries in India | Nadwa Healthcare"
         description={t("treatmentsPage.desc", "Explore advanced treatments in India across cardiology, oncology, orthopedics, neurosurgery, and IVF at JCI-accredited hospitals.")}
         canonicalUrl={`https://www.nadwahealthcare.com${localizeUrl('/treatments')}`}
       />
 
       {/* Header Banner */}
-      <section className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+      <header className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: t("nav.treatments", "Treatments") }]} />
           <div className="mt-4 max-w-3xl">
@@ -67,7 +68,7 @@ export const Treatments: React.FC<TreatmentsProps> = ({ onOpenConsultation }) =>
             </p>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Filter & Search Bar */}
       <section className="py-8 bg-slate-50 border-b border-slate-200">
@@ -152,6 +153,9 @@ export const Treatments: React.FC<TreatmentsProps> = ({ onOpenConsultation }) =>
           )}
         </div>
       </section>
-    </div>
+
+      {/* Comprehensive Clinical Treatments SEO Knowledge Base & FAQs */}
+      <TreatmentsSeoOverview />
+    </main>
   );
 };

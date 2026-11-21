@@ -20,15 +20,15 @@ export const Contact: React.FC = () => {
   const { currentLang, t, localizeUrl } = useLanguage();
 
   return (
-    <div className="bg-white min-h-screen">
+    <main className="bg-white min-h-screen">
       <SEOHead
-        title={`${t("contactPage.title", "Contact")} ${t("contactPage.titleHighlight", "NadwaHealthcare")} | Medical Tourism India`}
+        title="Contact 24/7 International Patient Desk | Nadwa Healthcare"
         description={t("contactPage.desc", "We assist international patients seeking medical treatment across Delhi NCR, India. Reach us via WhatsApp, email, or enquiry form.")}
         canonicalUrl={`https://www.nadwahealthcare.com${localizeUrl('/contact')}`}
       />
 
       {/* Header Banner */}
-      <section className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+      <header className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: t("nav.contact", "Contact Us") }]} />
           <div className="mt-4 max-w-3xl">
@@ -45,7 +45,7 @@ export const Contact: React.FC = () => {
             </p>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Main Contact Grid */}
       <section className="py-14 lg:py-20 bg-slate-50/60">
@@ -175,6 +175,6 @@ export const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };

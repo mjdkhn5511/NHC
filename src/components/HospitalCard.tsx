@@ -17,7 +17,7 @@ export const HospitalCard: React.FC<HospitalCardProps> = ({ hospital, onRequestA
   const localizedHospital = getLocalizedHospital(hospital, currentLang);
 
   return (
-    <div className="group bg-white rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 flex flex-col overflow-hidden">
+    <article className="group bg-white rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 flex flex-col overflow-hidden">
       {/* Hospital Image */}
       <div className="relative h-52 w-full overflow-hidden bg-slate-100 aspect-[16/9]">
         <Image
@@ -116,6 +116,6 @@ export const HospitalCard: React.FC<HospitalCardProps> = ({ hospital, onRequestA
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };

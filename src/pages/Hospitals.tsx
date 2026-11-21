@@ -44,15 +44,15 @@ export const Hospitals: React.FC<HospitalsProps> = ({ onOpenConsultation }) => {
   });
 
   return (
-    <div className="bg-white min-h-screen">
+    <main className="bg-white min-h-screen">
       <SEOHead
-        title={`${t("hospitalsPage.title", "Accredited Hospitals in")} ${t("hospitalsPage.titleHighlight", "Delhi NCR, India")} | Nadwa Healthcare`}
+        title="Top JCI & NABH Hospitals in Delhi NCR | Nadwa Healthcare"
         description={t("hospitalsPage.desc", "Explore leading quaternary medical centers across New Delhi, Gurugram, Noida, and Faridabad.")}
         canonicalUrl={`https://www.nadwahealthcare.com${localizeUrl('/hospitals')}`}
       />
 
       {/* Page Header */}
-      <section className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+      <header className="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: t("nav.hospitals", "Hospitals") }]} />
           <div className="mt-4 max-w-3xl">
@@ -69,7 +69,7 @@ export const Hospitals: React.FC<HospitalsProps> = ({ onOpenConsultation }) => {
             </p>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Filter & Search Bar */}
       <section className="py-8 bg-slate-50 border-b border-slate-200">
@@ -184,6 +184,6 @@ export const Hospitals: React.FC<HospitalsProps> = ({ onOpenConsultation }) => {
           )}
         </div>
       </section>
-    </div>
+    </main>
   );
 };

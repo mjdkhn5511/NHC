@@ -11,6 +11,7 @@ import { DoctorCard } from "../components/DoctorCard";
 import { Image } from "../components/Image";
 import { EnquiryForm } from "../components/EnquiryForm";
 import { FAQAccordion } from "../components/FAQAccordion";
+import { HomeSeoOverview } from "../components/HomeSeoOverview";
 import { treatmentsData } from "../data/treatmentsData";
 import { hospitalsData } from "../data/hospitalsData";
 import { doctorsData } from "../data/doctorsData";
@@ -37,9 +38,9 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
   const featuredDoctors = doctorsData.filter((d) => d.featured).slice(0, 3);
 
   return (
-    <>
+    <main className="bg-white">
       <SEOHead
-        title="Nadwa Healthcare | Medical Visa for India & Medical Tourism"
+        title="Nadwa Healthcare | Medical Tourism & Top Doctors in India"
         description="100% Free Medical Visa for India assistance and official hospital visa invitation letters (VIL) in 24-48 hours. Premier Delhi NCR hospital selection and specialist doctor coordination."
         canonicalUrl={currentLang === "en" ? "https://www.nadwahealthcare.com/" : `https://www.nadwahealthcare.com/${currentLang}`}
       />
@@ -486,6 +487,9 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
         </div>
       </section>
 
+      {/* 8.8 Comprehensive Medical Tourism SEO Knowledge Base & FAQs */}
+      <HomeSeoOverview />
+
       {/* 9. Prominent Consultation & Medical Enquiry Section */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-slate-50 to-teal-50/40 relative content-auto">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -538,6 +542,6 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 };

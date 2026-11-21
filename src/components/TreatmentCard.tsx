@@ -16,7 +16,7 @@ export const TreatmentCard: React.FC<TreatmentCardProps> = ({ treatment, onConsu
   const localizedTreatment = getLocalizedTreatment(treatment, currentLang);
 
   return (
-    <div className="group bg-white rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 flex flex-col overflow-hidden">
+    <article className="group bg-white rounded-3xl border border-slate-200/90 hover:border-teal-400/60 shadow-sm hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 flex flex-col overflow-hidden">
       {/* Image Thumbnail with Overlay Tag */}
       <div className="relative h-48 w-full overflow-hidden bg-slate-100 aspect-[16/10]">
         <Image
@@ -73,6 +73,6 @@ export const TreatmentCard: React.FC<TreatmentCardProps> = ({ treatment, onConsu
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
