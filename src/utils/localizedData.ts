@@ -4808,6 +4808,29 @@ export const BLOG_LOCALIZATIONS: Record<string, Record<string, {
       readingTime: "6 min de lecture",
       summary: "Retrouvez un sourire éclatant grâce aux implants dentaires suisses et allemands en titane pur, au scan 3D intra-oral et aux couronnes en zircone à Delhi NCR avec 70% d'économie."
     }
+  },
+  "what-is-bone-marrow-types-diseases-care-guide": {
+    ar: {
+      h1Title: "ما هو نخاع العظم؟ أنواعه ووظائفه وزراعته | ندوة",
+      category: "أمراض الدم والأورام",
+      badge: "دليل أمراض الدم 2026",
+      readingTime: "9 دقائق قراءة",
+      summary: "دليل شامل حول نخاع العظم الأحمر والأصفر، تكوين خلايا الدم، أمراض اللوكيميا والأنيميا اللاتنسجية، وزراعة نخاع العظم (BMT) في أفضل مستشفيات دلهي المعتمدة بتوفير حتى 85%."
+    },
+    fr: {
+      h1Title: "La Moelle Osseuse : Types, Greffe et Soins | Nadwa",
+      category: "Oncologie & Hématologie",
+      badge: "Guide Hématologie 2026",
+      readingTime: "9 min de lecture",
+      summary: "Guide complet sur la moelle osseuse rouge et jaune, l'hématopoïèse, les maladies hématologiques (leucémie, myélome, aplasie) et la greffe de moelle osseuse en Inde avec 80% d'économie."
+    },
+    ru: {
+      h1Title: "Костный Мозг: Виды, Функции и Пересадка | Nadwa",
+      category: "Онкология и гематология",
+      badge: "Гид по гематологии 2026",
+      readingTime: "9 мин чтения",
+      summary: "Полное клиническое руководство по костному мозгу: красный и желтый мозг, кроветворение, лейкоз, апластическая анемия, трансплантация костного мозга (ТКМ) в лучших клиниках Индии."
+    }
   }
 };
 
