@@ -38,6 +38,7 @@ const KEYWORD_RULES: KeywordRule[] = [
   // Senior Specialist Doctors
   { pattern: /\b(Dr\.?\s+Naresh Trehan)\b/i, url: "/doctors/dr-naresh-trehan" },
   { pattern: /\b(Dr\.?\s+Ashok Seth)\b/i, url: "/doctors/dr-ashok-seth" },
+  { pattern: /\b(Dr\.?\s+Ashok Rajgopal)\b/i, url: "/doctors/dr-ashok-rajgopal" },
   { pattern: /\b(Dr\.?\s+Randhir Sud)\b/i, url: "/doctors/dr-randhir-sud" },
   { pattern: /\b(Dr\.?\s+Anant Kumar)\b/i, url: "/doctors/dr-anant-kumar" },
   { pattern: /\b(Dr\.?\s+Vinod Raina)\b/i, url: "/doctors/dr-vinod-raina" },
@@ -46,6 +47,10 @@ const KEYWORD_RULES: KeywordRule[] = [
   { pattern: /\b(Dr\.?\s+Subhash Gupta)\b/i, url: "/doctors/dr-subhash-gupta" },
   { pattern: /\b(Dr\.?\s+Rajesh(?: Kumar)? Ahlawat)\b/i, url: "/doctors/dr-rajesh-ahlawat" },
   { pattern: /\b(Dr\.?\s+Harit Chaturvedi)\b/i, url: "/doctors/dr-harit-chaturvedi" },
+
+  // Clinical Guides & Comparison Hubs
+  { pattern: /\b(liver transplant cost guide in India|liver transplant cost in India)\b/i, url: "/blog/liver-transplant-cost-in-india-complete-guide" },
+  { pattern: /\b(accredited hospitals in Delhi NCR|accredited quaternary care hospitals)\b/i, url: "/hospitals" },
 
   // Visa & Services
   { pattern: /\b(Indian Medical Visa|Medical Visa for India|medical visa assistance|medical visa invitation letter)\b/i, url: "/services" },
@@ -578,6 +583,44 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                           </li>
                         ))}
                       </ul>
+                    )}
+
+                    {/* Hospital Comparison Table */}
+                    {section.hospitalTable && section.hospitalTable.length > 0 && (
+                      <div className="my-6 overflow-hidden rounded-xl border border-slate-200 shadow-xs">
+                        <div className="bg-[#08221E] text-white px-4 py-2.5 text-xs sm:text-sm font-bold flex items-center justify-between">
+                          <span>{t("blogDetails.hospitalTableTitle", "Best Accredited Hospitals in Delhi NCR (Comparison)")}</span>
+                          <span className="text-teal-400 text-xs font-semibold">{t("blogDetails.hospitalTableBadge", "JCI & NABH")}</span>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-start border-collapse text-xs sm:text-sm">
+                            <thead>
+                              <tr className="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                                <th className="py-2.5 px-3.5 text-start">{t("blogDetails.thHospital", "Hospital Name")}</th>
+                                <th className="py-2.5 px-3.5 text-start">{t("blogDetails.thLocation", "Location")}</th>
+                                <th className="py-2.5 px-3.5 text-start">{t("blogDetails.thAccreditations", "Accreditations")}</th>
+                                <th className="py-2.5 px-3.5 text-start">{t("blogDetails.thSpecialties", "Flagship Specialties")}</th>
+                                <th className="py-2.5 px-3.5 text-start text-teal-800">{t("blogDetails.thDistance", "Distance from DEL Airport")}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                              {section.hospitalTable.map((hRow, hIdx) => (
+                                <tr key={hIdx} className="hover:bg-teal-50/30 transition-colors">
+                                  <td className="py-3 px-3.5 font-bold text-slate-900">{renderParagraphWithLinks(hRow.hospitalName, localizeUrl)}</td>
+                                  <td className="py-3 px-3.5 text-slate-600 whitespace-nowrap">{hRow.location}</td>
+                                  <td className="py-3 px-3.5 whitespace-nowrap">
+                                    <span className="inline-block px-2 py-0.5 rounded-full bg-teal-100 text-teal-900 font-bold text-[11px]">
+                                      {hRow.accreditations}
+                                    </span>
+                                  </td>
+                                  <td className="py-3 px-3.5 text-slate-700 leading-snug">{hRow.specialties}</td>
+                                  <td className="py-3 px-3.5 font-semibold text-teal-700 whitespace-nowrap">{hRow.distanceAirport}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     )}
 
                     {/* Cost Comparison Table */}

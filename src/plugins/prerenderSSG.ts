@@ -275,6 +275,14 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
               `;
             }).join('')}
           </div>
+          <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="${prefix}/hospitals" class="px-8 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-md">
+              ${isAr ? 'عرض جميع مستشفيات دلهي إن سي آر' : isFr ? 'Voir tous les hôpitaux de Delhi NCR' : isRu ? 'Все клиники Дели NCR' : 'Explore All Delhi NCR Hospitals'}
+            </a>
+            <a href="${prefix}/blog/top-nabh-jci-accredited-hospitals-delhi-ncr" class="px-6 py-3.5 rounded-full bg-white border border-slate-300 text-slate-800 hover:text-teal-700 font-bold text-xs sm:text-sm shadow-xs">
+              Compare Top NABH & JCI Accredited Hospitals in Delhi NCR
+            </a>
+          </div>
         </div>
       </section>
 
@@ -916,6 +924,19 @@ function getHospitalsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   const reqCare = isAr ? 'طلب رعاية' : isFr ? 'Demande de soins' : isRu ? 'Заявка' : 'Request Care';
 
   return `
+    <section class="bg-teal-50 border-b border-teal-200/80 py-3.5 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center gap-2 text-teal-950 font-medium">
+          <span>Comparing accreditations, ICU safety standards, and DEL airport distances across Delhi NCR?</span>
+        </div>
+        <a
+          href="${prefix}/blog/top-nabh-jci-accredited-hospitals-delhi-ncr"
+          class="inline-flex items-center gap-1.5 font-bold text-teal-700 hover:text-teal-900 underline underline-offset-4 shrink-0"
+        >
+          <span>Compare Top NABH & JCI Accredited Hospitals in Delhi NCR</span>
+        </a>
+      </div>
+    </section>
     <section class="py-8 bg-slate-50 border-b border-slate-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -1453,6 +1474,235 @@ function getCriticalHospitalDetailsHtml(hosp: any, lang: 'en' | 'ar' | 'fr' | 'r
   </div>`;
 }
 
+function getCriticalBlogDetailsHtml(blog: any, lang: 'en' | 'ar' | 'fr' | 'ru'): string {
+  const isAr = lang === 'ar';
+  const isFr = lang === 'fr';
+  const isRu = lang === 'ru';
+  const prefix = isAr ? '/ar' : isFr ? '/fr' : isRu ? '/ru' : '';
+
+  const loc = getLocalizedBlog(blog, lang);
+  const deskTitle = isAr ? 'مكتب السياحة العلاجية' : isFr ? 'Bureau tourisme médical' : isRu ? 'Международный отдел' : 'Medical Tourism Desk';
+  const emergencyText = isAr ? 'مكتب الطوارئ 24/7: <bdi dir="ltr">+91 96485 78320</bdi>' : isFr ? 'Urgences 24/7 : +91 96485 78320' : isRu ? 'Экстренно 24/7: +91 96485 78320' : 'Emergency 24/7: +91 96485 78320';
+  const ctaConsult = isAr ? 'استشارة مجانية' : isFr ? 'Consultation' : isRu ? 'Консультация' : 'Get Free Consultation';
+  const breadcrumbHome = isAr ? 'الرئيسية' : isFr ? 'Accueil' : isRu ? 'Главная' : 'Home';
+  const breadcrumbBlog = isAr ? 'المدونة' : isFr ? 'Blog' : isRu ? 'Блог' : 'Blog';
+  const publishedText = isAr ? 'تاريخ النشر' : isFr ? 'Publié le' : isRu ? 'Опубликовано' : 'Published';
+  const faqTitle = isAr ? 'الأسئلة الشائعة' : isFr ? 'Foire Aux Questions (FAQ)' : isRu ? 'Часто задаваемые вопросы (FAQ)' : 'Frequently Asked Questions (FAQs)';
+
+  return `
+  <div class="min-h-screen flex flex-col bg-white">
+    <div class="relative z-50 bg-[#051714] text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-3 sm:px-4 border-b border-teal-950/80">
+      <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-1">
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="inline-flex items-center gap-1.5 text-teal-300 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ${deskTitle}
+          </span>
+          <span class="hidden md:inline text-slate-400">|</span>
+          <a href="tel:+919648578320" class="hover:text-teal-300 transition-colors">${emergencyText}</a>
+        </div>
+      </div>
+    </div>
+    <header class="sticky top-0 z-40 bg-[#08221E] border-b border-teal-900/60 shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20">
+          <a href="${prefix || '/'}" class="flex items-center gap-2 sm:gap-2.5">
+            <span class="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30 font-black text-xs">NHC</span>
+            <span class="text-base sm:text-xl font-black text-white tracking-tight">Nadwa <span class="text-teal-400">Healthcare</span></span>
+          </a>
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a href="${prefix}/contact" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-colors">
+              ${ctaConsult}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <article class="bg-white min-h-screen">
+        <header class="bg-slate-50/80 border-b border-slate-200/90 py-8 lg:py-10 text-start">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav aria-label="Breadcrumb" class="py-2 text-xs md:text-sm text-slate-500">
+              <ol class="flex items-center flex-wrap gap-1.5">
+                <li><a href="${prefix || '/'}" class="hover:text-teal-700 font-medium">${breadcrumbHome}</a></li>
+                <li><span class="text-slate-400">/</span></li>
+                <li><a href="${prefix}/blog" class="hover:text-teal-700 font-medium">${breadcrumbBlog}</a></li>
+                <li><span class="text-slate-400">/</span></li>
+                <li><span class="font-semibold text-slate-800" aria-current="page">${escapeHtml(loc.badge || blog.badge)}</span></li>
+              </ol>
+            </nav>
+            <div class="mt-4 max-w-4xl">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-900 border border-teal-200">
+                  ${escapeHtml(loc.category || blog.category)}
+                </span>
+                <span class="text-xs text-slate-500 font-medium">
+                  ${loc.readingTime || blog.readingTime}
+                </span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                ${escapeHtml(loc.h1Title)}
+              </h1>
+              <p class="mt-4 text-xs sm:text-base text-slate-600 leading-relaxed">
+                ${escapeHtml(loc.summary || blog.summary)}
+              </p>
+              <div class="mt-4 text-xs text-slate-500">
+                <span>${publishedText}: ${blog.publishDate}</span> • <span>${blog.author}</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+          <div class="max-w-4xl">
+            <div class="mb-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm aspect-[16/9]">
+              <img
+                src="${blog.coverImage}"
+                alt="${escapeHtml(loc.h1Title)}"
+                width="1200"
+                height="675"
+                class="w-full h-full object-cover aspect-[16/9]"
+                loading="eager"
+              />
+            </div>
+
+            <!-- Blog Content Sections -->
+            ${(loc.sections || blog.sections || []).map((sec: any) => `
+              <section class="mb-10 text-start">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  ${escapeHtml(sec.h2)}
+                </h2>
+                ${(sec.paragraphs || []).map((p: string) => `
+                  <p class="mt-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+                    ${escapeHtml(p)}
+                  </p>
+                `).join('')}
+
+                ${sec.hospitalTable && sec.hospitalTable.length > 0 ? `
+                  <div class="my-6 overflow-hidden rounded-xl border border-slate-200">
+                    <table class="w-full text-start border-collapse text-xs sm:text-sm">
+                      <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                          <th class="py-2.5 px-3 text-start">Hospital Name</th>
+                          <th class="py-2.5 px-3 text-start">Location</th>
+                          <th class="py-2.5 px-3 text-start">Accreditations</th>
+                          <th class="py-2.5 px-3 text-start">Flagship Specialties</th>
+                          <th class="py-2.5 px-3 text-start text-teal-800">Distance DEL Airport</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-100">
+                        ${sec.hospitalTable.map((hRow: any) => `
+                          <tr>
+                            <td class="py-2.5 px-3 font-bold text-slate-900">${escapeHtml(hRow.hospitalName)}</td>
+                            <td class="py-2.5 px-3 text-slate-600">${escapeHtml(hRow.location)}</td>
+                            <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-teal-100 text-teal-900 font-bold text-[11px]">${escapeHtml(hRow.accreditations)}</span></td>
+                            <td class="py-2.5 px-3 text-slate-700">${escapeHtml(hRow.specialties)}</td>
+                            <td class="py-2.5 px-3 font-semibold text-teal-700">${escapeHtml(hRow.distanceAirport)}</td>
+                          </tr>
+                        `).join('')}
+                      </tbody>
+                    </table>
+                  </div>
+                ` : ''}
+
+                ${sec.costTable && sec.costTable.length > 0 ? `
+                  <div class="my-6 overflow-hidden rounded-xl border border-slate-200">
+                    <table class="w-full text-start border-collapse text-xs sm:text-sm">
+                      <thead>
+                        <tr class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                          <th class="py-2.5 px-3 text-start">Procedure</th>
+                          <th class="py-2.5 px-3 text-start text-teal-800">India Cost (Package)</th>
+                          <th class="py-2.5 px-3 text-start text-slate-500">Western Benchmark</th>
+                          <th class="py-2.5 px-3 text-start text-emerald-700">Savings</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-100">
+                        ${sec.costTable.map((cRow: any) => `
+                          <tr>
+                            <td class="py-2.5 px-3 font-bold text-slate-900">${escapeHtml(cRow.procedure)}</td>
+                            <td class="py-2.5 px-3 font-bold text-teal-700">${escapeHtml(cRow.indiaCostUsd)}</td>
+                            <td class="py-2.5 px-3 text-slate-400 line-through">${escapeHtml(cRow.westernCostUsd)}</td>
+                            <td class="py-2.5 px-3 text-emerald-700 font-bold">${escapeHtml(cRow.savingsPercentage)}</td>
+                          </tr>
+                        `).join('')}
+                      </tbody>
+                    </table>
+                  </div>
+                ` : ''}
+
+                ${sec.bulletPoints && sec.bulletPoints.length > 0 ? `
+                  <ul class="mt-4 space-y-2">
+                    ${sec.bulletPoints.map((bp: string) => `
+                      <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                        <span class="text-teal-600 font-bold">•</span>
+                        <span>${escapeHtml(bp)}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                ` : ''}
+
+                ${sec.h3List && sec.h3List.length > 0 ? sec.h3List.map((h3: any) => `
+                  <div class="mt-6 pl-4 border-l-2 border-teal-500 space-y-2">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">${escapeHtml(h3.h3)}</h3>
+                    ${(h3.paragraphs || []).map((p: string) => `
+                      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(p)}</p>
+                    `).join('')}
+                  </div>
+                `).join('') : ''}
+
+                ${sec.callout ? `
+                  <div class="mt-6 p-4 rounded-xl bg-teal-50 border border-teal-200 text-teal-900 text-xs sm:text-sm font-medium">
+                    ${escapeHtml(sec.callout)}
+                  </div>
+                ` : ''}
+              </section>
+            `).join('')}
+
+            <!-- FAQs Section -->
+            ${(loc.faqs || blog.faqs || []).length > 0 ? `
+              <section class="my-12 p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 text-start">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
+                  ${faqTitle}
+                </h2>
+                <div class="space-y-6">
+                  ${(loc.faqs || blog.faqs || []).map((f: any) => `
+                    <div class="border-b border-slate-200/80 pb-4 last:border-0 last:pb-0">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-1.5">
+                        ${escapeHtml(f.question)}
+                      </h3>
+                      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        ${escapeHtml(f.answer)}
+                      </p>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+            ` : ''}
+
+            <!-- Consultation Banner -->
+            <section class="my-10 p-6 sm:p-8 rounded-3xl bg-[#08221E] text-white text-center">
+              <h2 class="text-xl sm:text-2xl font-black mb-3">
+                ${isAr ? 'احصل على رأي طبي وتقدير تكلفة مجاناً' : isFr ? 'Obtenez un avis médical et un devis gratuits' : isRu ? 'Бесплатное медицинское заключение и расчет стоимости' : 'Get a Free Medical Opinion & Itemized Cost Estimate'}
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-6">
+                ${isAr ? 'شارك تقاريرك الطبية مع فريقنا الطبي المعتمد في دلهي إن سي آر وتلقى خطة علاج تفصيلية وتأشيرة علاجية خلال 24-48 ساعة.' : isFr ? 'Envoyez vos rapports médicaux pour recevoir sous 24 à 48h les avis des chefs de service et une lettre d\'invitation visa.' : isRu ? 'Отправьте медицинские выписки для получения планов лечения от ведущих профессоров Дели и визового приглашения.' : 'Share your medical records with our medical board to receive treatment plans from 2-3 senior hospital chairs and official Visa Invitation Letters within 24-48 hours.'}
+              </p>
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="${prefix}/contact" class="px-8 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-teal-600/30">
+                  ${ctaConsult}
+                </a>
+                <a href="https://wa.me/919648578320" class="px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm">
+                  WhatsApp (+91 96485 78320)
+                </a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>`;
+}
+
 function renderHtml(templateHtml: string, meta: PageMetadata): string {
   let html = templateHtml;
 
@@ -1462,8 +1712,12 @@ function renderHtml(templateHtml: string, meta: PageMetadata): string {
 
   html = html.replace(/<html\b[^>]*>/i, `<html lang="${lang}" dir="${dir}">`);
 
-  // 1. Replace Title
-  html = html.replace(/<title>.*?<\/title>/is, `<title>${escapeHtml(meta.title)}</title>`);
+  // 1. Replace Title (guaranteed <= 60 characters for SEO / Semrush)
+  let finalTitle = escapeHtml(meta.title);
+  if (finalTitle.length > 60) {
+    finalTitle = finalTitle.slice(0, 60).replace(/&[a-z0-9#]*$/i, '').trim();
+  }
+  html = html.replace(/<title>.*?<\/title>/is, `<title>${finalTitle}</title>`);
 
   // 2. Replace Meta Description
   html = html.replace(
@@ -1635,6 +1889,14 @@ function renderHtml(templateHtml: string, meta: PageMetadata): string {
     if (hosp) {
       injectEarlyPreload(`<link rel="preload" as="image" href="${hosp.image}" type="image/webp" fetchpriority="high" />`);
       const criticalHtml = getCriticalHospitalDetailsHtml(hosp, lang as 'en' | 'ar' | 'fr' | 'ru');
+      html = html.replace('<div id="root"></div>', `<div id="root">${criticalHtml}</div>`);
+    }
+  } else if (cleanRoutePrefix.startsWith('/blog/')) {
+    const slug = cleanRoutePrefix.replace('/blog/', '');
+    const blog = blogsData.find(b => b.slug === slug);
+    if (blog) {
+      injectEarlyPreload(`<link rel="preload" as="image" href="${blog.coverImage}" type="image/webp" fetchpriority="high" />`);
+      const criticalHtml = getCriticalBlogDetailsHtml(blog, lang as 'en' | 'ar' | 'fr' | 'ru');
       html = html.replace('<div id="root"></div>', `<div id="root">${criticalHtml}</div>`);
     }
   }
@@ -2209,43 +2471,66 @@ export function prerenderSSGPlugin(): Plugin {
         });
       });
 
-      // H. All 12 Blogs (Dynamic Treatment Blogs)
+      // H. All Blogs (Dynamic Treatment & Comparison Blogs)
       blogsData.forEach((blog) => {
+        const rawTitle = blog.metaTitle.includes('|')
+          ? blog.metaTitle
+          : (blog.metaTitle.length > 50 ? blog.metaTitle : `${blog.metaTitle} | Nadwa`);
+        const safeTitle = rawTitle.length <= 56 ? rawTitle : rawTitle.slice(0, 56);
+
         pages.push({
           route: `/blog/${blog.slug}`,
-          title: `${blog.metaTitle.replace(/&/g, 'and').split('|')[0].trim()} | Nadwa`.slice(0, 56),
+          title: safeTitle,
           description: blog.metaDescription,
           canonicalUrl: `https://www.nadwahealthcare.com/blog/${blog.slug}`,
           ogImage: blog.coverImage,
           schema: {
             '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            'headline': blog.h1Title,
-            'description': blog.metaDescription,
-            'author': {
-              '@type': 'Organization',
-              'name': blog.author
-            },
-            'publisher': {
-              '@type': 'Organization',
-              'name': 'Nadwa Healthcare',
-              'logo': {
-                '@type': 'ImageObject',
-                'url': 'https://www.nadwahealthcare.com/images/brand-logo-square.png'
-              }
-            },
-            'datePublished': '2026-10-28',
-            'url': `https://www.nadwahealthcare.com/blog/${blog.slug}`,
-            'image': blog.coverImage.startsWith('http') ? blog.coverImage : `https://www.nadwahealthcare.com${blog.coverImage}`
+            '@graph': [
+              {
+                '@type': 'BlogPosting',
+                'headline': blog.h1Title,
+                'description': blog.metaDescription,
+                'author': {
+                  '@type': 'Organization',
+                  'name': blog.author
+                },
+                'publisher': {
+                  '@type': 'Organization',
+                  'name': 'Nadwa Healthcare',
+                  'logo': {
+                    '@type': 'ImageObject',
+                    'url': 'https://www.nadwahealthcare.com/images/brand-logo-square.png'
+                  }
+                },
+                'datePublished': '2026-10-28',
+                'url': `https://www.nadwahealthcare.com/blog/${blog.slug}`,
+                'image': blog.coverImage.startsWith('http') ? blog.coverImage : `https://www.nadwahealthcare.com${blog.coverImage}`
+              },
+              ...(blog.faqs && blog.faqs.length > 0 ? [{
+                '@type': 'FAQPage',
+                'mainEntity': blog.faqs.map((f: any) => ({
+                  '@type': 'Question',
+                  'name': f.question,
+                  'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': f.answer
+                  }
+                }))
+              }] : [])
+            ]
           }
         });
 
         // Localized Blog Pre-rendering (/ar, /fr, /ru)
         (['ar', 'fr', 'ru'] as const).forEach((lang) => {
           const loc = getLocalizedBlog(blog, lang);
+          const rawLocTitle = loc.h1Title.includes('|')
+            ? loc.h1Title
+            : (loc.h1Title.length > 50 ? loc.h1Title : `${loc.h1Title} | Nadwa`);
           pages.push({
             route: `/${lang}/blog/${blog.slug}`,
-            title: `${loc.h1Title.replace(/&/g, 'and').split('|')[0].trim()} | Nadwa`.slice(0, 56),
+            title: rawLocTitle.slice(0, 56),
             description: blog.metaDescription,
             canonicalUrl: `https://www.nadwahealthcare.com/${lang}/blog/${blog.slug}`,
             ogImage: blog.coverImage,

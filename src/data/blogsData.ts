@@ -15,6 +15,14 @@ export interface BlogCostRow {
   savingsPercentage: string;
 }
 
+export interface BlogHospitalRow {
+  hospitalName: string;
+  location: string;
+  accreditations: string;
+  specialties: string;
+  distanceAirport: string;
+}
+
 export interface BlogSection {
   h2: string;
   h3List?: {
@@ -26,6 +34,7 @@ export interface BlogSection {
   bulletPoints?: string[];
   callout?: string;
   costTable?: BlogCostRow[];
+  hospitalTable?: BlogHospitalRow[];
 }
 
 export interface BlogPost {
@@ -322,7 +331,7 @@ export const blogsData: BlogPost[] = [
       "medical visa for joint surgery india"
     ],
     searchIntent: "Commercial Intent — Elderly patients and their adult children researching pain-free walking, robotic implant precision, and total joint replacement packages in India.",
-    metaTitle: "Knee & Hip Replacement in India: Robotic Surgery & Costs",
+    metaTitle: "Knee and Hip Replacement in India: Robotic Surgery Costs",
     metaDescription: "Guide to knee & hip replacement in India. Explore robotic joint surgery costs, recovery timelines, and top Delhi NCR orthopedic surgeons with free visa support.",
     category: "Orthopedics & Joint Replacement",
     treatmentId: "orthopedics",
@@ -404,7 +413,7 @@ export const blogsData: BlogPost[] = [
       "deep brain stimulation cost india"
     ],
     searchIntent: "Clinical & Practical Decision Making — Patients researching micro-neurosurgery, spine decompression, brain tumor resections, and top Delhi NCR neurosurgeons.",
-    metaTitle: "Neurosurgery in India: Brain & Spine Surgery Costs & Care",
+    metaTitle: "Neurosurgery in India: Brain and Spine Surgery Costs",
     metaDescription: "Guide to brain and spine surgery in India. Compare brain tumor and slip disc surgery costs, top Delhi neurosurgeons, and get free medical visa assistance.",
     category: "Neurosurgery & Spine",
     treatmentId: "neurosurgery",
@@ -467,7 +476,7 @@ export const blogsData: BlogPost[] = [
       "urology hospitals in delhi"
     ],
     searchIntent: "Commercial & Informational — Patients seeking laser kidney stone removal (RIRS), prostate enlargement treatment (HoLEP), and chronic kidney disease management.",
-    metaTitle: "Kidney & Urology Treatment in India: Costs & Hospitals",
+    metaTitle: "Kidney and Urology Care in India: Costs and Top Hospitals",
     metaDescription: "Guide to kidney & urology treatments in India. Learn about laser stone removal costs, prostate surgery, and top Delhi NCR nephrology centers with free visa help.",
     category: "Kidney & Urology",
     treatmentId: "kidney-urology",
@@ -706,7 +715,7 @@ export const blogsData: BlogPost[] = [
       "affordable surgery in india"
     ],
     searchIntent: "Practical Informational — Patients seeking swift, affordable laparoscopic repairs for hernia, appendix, and gallbladder stones with rapid return to normal life.",
-    metaTitle: "General & Laparoscopic Surgery in India: Costs & Care",
+    metaTitle: "Laparoscopic Surgery in India: Costs and Care Guide",
     metaDescription: "Learn about advanced laparoscopic and robotic general surgery in India. Compare hernia and gallbladder procedure costs with top Delhi NCR surgical specialists.",
     category: "General Surgery",
     treatmentId: "general-surgery",
@@ -763,7 +772,7 @@ export const blogsData: BlogPost[] = [
       "emg ncv test cost india"
     ],
     searchIntent: "Specialist Seeking & Informational — Families looking for specialized neurologists, long-term stroke rehabilitation, and advanced epilepsy mapping.",
-    metaTitle: "Neurology Treatment in India: Stroke, Parkinson's & Rehab",
+    metaTitle: "Neurology Care in India: Stroke and Parkinson's Rehab",
     metaDescription: "Guide to neurological care and stroke rehabilitation in India. Explore advanced diagnostics, Parkinson's management, and top Delhi NCR neurology hospitals.",
     category: "Neurology",
     treatmentId: "neurology",
@@ -1159,6 +1168,198 @@ export const blogsData: BlogPost[] = [
       {
         question: "How does Nadwa Healthcare assist foreign patients seeking BMT in India?",
         answer: "Nadwa Healthcare provides 100% free facilitation: we coordinate direct medical opinions from senior BMT department chairs, secure official 24-48h Hospital Visa Invitation Letters (VIL), arrange airport transfers, provide multilingual interpreters (Arabic, French, Russian), and guide patients through their entire treatment journey with zero agency fees."
+      }
+    ]
+  },
+  // 14. Top NABH & JCI Accredited Hospitals in Delhi NCR (2026)
+  {
+    id: "top-nabh-jci-accredited-hospitals-delhi-ncr",
+    slug: "top-nabh-jci-accredited-hospitals-delhi-ncr",
+    h1Title: "Top NABH & JCI Accredited Hospitals in Delhi NCR: Complete Guide for Patients (2026)",
+    primaryKeyword: "nabh accredited hospitals in delhi",
+    secondaryKeywords: [
+      "jci accredited hospitals in delhi ncr",
+      "best multispecialty hospitals in delhi",
+      "manipal hospital dwarka international patients",
+      "medical tourism hospitals in new delhi"
+    ],
+    searchIntent: "Commercial & Informational Guide for International Patients comparing Delhi NCR's top accredited hospitals",
+    metaTitle: "Top NABH & JCI Accredited Hospitals in Delhi NCR (2026)",
+    metaDescription: "Compare the top NABH and JCI accredited hospitals in Delhi NCR—Medanta, Apollo, Fortis, Max & Manipal Dwarka. Get free medical opinions & visa support.",
+    category: "Hospital Guides",
+    treatmentId: "general-surgery",
+    badge: "Hospital Comparison Guide",
+    readingTime: "8 min read",
+    publishDate: "2026-11-21",
+    author: "Nadwa Healthcare Clinical Advisory Board",
+    coverImage: "/images/delhi-hospitals-guide.webp",
+    targetCountries: ["UAE", "Saudi Arabia", "Oman", "Qatar", "Kuwait", "Uzbekistan", "Russia"],
+    summary: "Choosing an internationally accredited hospital is the single most important step when planning complex surgery or specialized medical treatment in India. NABH and JCI certifications ensure strict clinical safety protocols, infection control standards, transparent billing, and globally trained super-specialists across Delhi NCR's leading quaternary institutions.",
+    medicalTerms: [
+      {
+        term: "NABH Accreditation",
+        simpleExplanation: "National Accreditation Board for Hospitals & Healthcare Providers; India's highest national benchmark setting stringent clinical safety, sterilization, and patient rights standards equivalent to global healthcare protocols."
+      },
+      {
+        term: "JCI Accreditation",
+        simpleExplanation: "Joint Commission International; the gold-standard US-based worldwide hospital accreditation recognizing quaternary medical excellence, surgical sterilization, and international patient care."
+      },
+      {
+        term: "NABL Accreditation",
+        simpleExplanation: "National Accreditation Board for Testing and Calibration Laboratories; certifying hospital diagnostic pathology and imaging laboratories for clinical accuracy and precision."
+      },
+      {
+        term: "Quaternary Care",
+        simpleExplanation: "The highest tier of specialized medicine involving advanced robotic surgery, multi-organ transplants, cellular immunotherapies, and complex neurosurgical interventions."
+      }
+    ],
+    sections: [
+      {
+        h2: "Why Does NABH & JCI Accreditation Matter for Patients?",
+        paragraphs: [
+          "Choosing an internationally accredited hospital is the single most important step when planning complex surgery or specialized medical treatment in India. National Accreditation Board for Hospitals & Healthcare Providers (NABH) and Joint Commission International (JCI) certifications ensure strict clinical safety protocols, infection control standards, transparent billing, and globally trained super-specialists.",
+          "Delhi NCR—comprising New Delhi, Gurugram, and Noida—hosts India's highest concentration of NABH- and JCI-accredited quaternary care hospitals, making it the premier healthcare destination for domestic and international patients from the Middle East, CIS countries, and Africa."
+        ],
+        bulletPoints: [
+          "Zero-Compromise Patient Safety: Accredited hospitals undergo rigorous external audits covering surgical sterilization, ICU nurse-to-patient ratios, and blood bank safety protocols.",
+          "Evidence-Based Clinical Protocols: Treatment plans follow international clinical guidelines, significantly reducing post-operative complications and hospital stay durations.",
+          "Transparent Package Pricing: Patients receive itemized surgical package estimates before travel, preventing unexpected hospital costs or hidden billing charges.",
+          "Seamless Medical Visa Eligibility: Indian embassies prioritize Indian Medical Visa (MED) applications backed by official invitation letters from NABH/JCI-accredited institutions."
+        ]
+      },
+      {
+        h2: "Quick Comparison: Best NABH & JCI Accredited Hospitals in Delhi NCR",
+        paragraphs: [
+          "International medical travelers benefit from Delhi NCR's close proximity of world-class medical infrastructure to the Indira Gandhi International (DEL) Airport, with top centers reachable within 15 to 35 minutes:"
+        ],
+        hospitalTable: [
+          {
+            hospitalName: "Medanta – The Medicity",
+            location: "Sector 38, Gurugram",
+            accreditations: "JCI, NABH, NABL",
+            specialties: "Cardiac Surgery, Liver Transplant, Robotic Orthopedics, Oncology",
+            distanceAirport: "~18 km (25 mins)"
+          },
+          {
+            hospitalName: "Indraprastha Apollo Hospital",
+            location: "Sarita Vihar, New Delhi",
+            accreditations: "JCI, NABH, NABL",
+            specialties: "Organ Transplants, Neurosurgery, Spine, Pediatric Cardiology",
+            distanceAirport: "~22 km (35 mins)"
+          },
+          {
+            hospitalName: "Fortis Memorial Research Institute (FMRI)",
+            location: "Sector 44, Gurugram",
+            accreditations: "JCI, NABH, NABL",
+            specialties: "Bone Marrow Transplant, Hematology, Oncology, Robotic Surgery",
+            distanceAirport: "~16 km (20 mins)"
+          },
+          {
+            hospitalName: "Manipal Hospital Dwarka",
+            location: "Sector 6, Dwarka, New Delhi",
+            accreditations: "NABH, NABL",
+            specialties: "Cardiology, Renal Sciences, Gastroenterology, Joint Replacement",
+            distanceAirport: "~12 km (15 mins)"
+          },
+          {
+            hospitalName: "Max Super Speciality Hospital",
+            location: "Saket, New Delhi",
+            accreditations: "JCI, NABH, NABL",
+            specialties: "Minimal Access Surgery, Bariatric, Urology, Cancer Care",
+            distanceAirport: "~15 km (25 mins)"
+          },
+          {
+            hospitalName: "Artemis Hospital",
+            location: "Sector 51, Gurugram",
+            accreditations: "JCI, NABH",
+            specialties: "Neurosciences, Heart Care, Orthopedics, Oncology",
+            distanceAirport: "~20 km (30 mins)"
+          }
+        ]
+      },
+      {
+        h2: "Detailed Overview of Leading Accredited Hospitals in Delhi NCR",
+        paragraphs: [
+          "Each hospital in the capital region has cultivated distinct clinical super-specialties. Review our comprehensive breakdown to determine which institution best matches your diagnostic and surgical requirements, or explore our full directory of accredited hospitals in Delhi NCR:"
+        ],
+        h3List: [
+          {
+            h3: "1. Medanta – The Medicity (Gurugram)",
+            paragraphs: [
+              "Founded by renowned cardiovascular surgeon Dr. Naresh Trehan, Medanta is a 1,600+ bed multi-super-specialty institute accredited by both JCI and NABH.",
+              "Why Patients Choose Medanta: Houses dedicated institutes for Heart Care, Liver Transplantation, and Bone & Joint replacement (led by Dr. Ashok Rajgopal). International patients seeking complex organ replacement can also consult our comprehensive liver transplant cost guide in India for donor requirements and clinical timelines.",
+              "International Facilities: Dedicated International Patient Lounge, Arabic/Russian/French interpreters, and comfortable on-campus guest suites."
+            ]
+          },
+          {
+            h3: "2. Indraprastha Apollo Hospital (New Delhi)",
+            paragraphs: [
+              "Located in South Delhi (Sarita Vihar), Indraprastha Apollo was the first hospital in India to receive JCI accreditation and holds full NABH and NABL certifications.",
+              "Why Patients Choose Apollo: Renowned globally for high-success-rate Living Donor Liver & Kidney Transplants, Gamma Knife neurosurgery, and complex pediatric cardiac procedures.",
+              "International Facilities: 24/7 international concierge, airport ambulance/cab transfers, and customized Halal and continental meal plans."
+            ]
+          },
+          {
+            h3: "3. Manipal Hospital (Dwarka, New Delhi)",
+            paragraphs: [
+              "Strategically situated in Sector 6, Dwarka, just 15 minutes from Indira Gandhi International (DEL) Airport, Manipal Hospital Dwarka is a premier NABH-accredited tertiary care facility.",
+              "Why Patients Choose Manipal Dwarka: Equipped with automated pneumatic chute systems, advanced robotic surgical suites, and dedicated centers of excellence for Cardiology, Nephrology, and Orthopedics.",
+              "International Patient Coordination: For priority appointments, treatment estimates, or international desk coordination at Manipal Hospital Dwarka, patients can connect directly through Nadwa Healthcare's 24/7 International Patient Desk (+91 96485 78320)."
+            ]
+          },
+          {
+            h3: "4. Fortis Memorial Research Institute – FMRI (Gurugram)",
+            paragraphs: [
+              "Accredited by both JCI and NABH, FMRI is an advanced quaternary care hospital known for cutting-edge oncology and hematology protocols.",
+              "Why Patients Choose FMRI: A leading center in North India for Bone Marrow Transplants (BMT), CAR-T cell therapy, CyberKnife radiosurgery, and neuro-rehabilitation."
+            ]
+          },
+          {
+            h3: "5. Max Super Speciality Hospital (Saket, New Delhi)",
+            paragraphs: [
+              "With dual JCI and NABH accreditations, Max Saket is one of South Delhi's most trusted medical hubs for minimally invasive and robotic procedures.",
+              "Why Patients Choose Max Saket: Excels in Robotic Urology (HoLEP, Radical Prostatectomy), Gastrointestinal Oncology, and advanced IVF & Fertility treatments."
+            ]
+          },
+          {
+            h3: "6. Artemis Hospital (Gurugram)",
+            paragraphs: [
+              "Artemis Hospital was the first hospital in Gurugram to receive JCI accreditation and NABH certification, operating 400+ tertiary care beds.",
+              "Why Patients Choose Artemis: Renowned for high-volume Neurosciences interventions, specialized pediatric orthopedics, comprehensive cancer care, and personalized international patient concierge services."
+            ]
+          }
+        ]
+      },
+      {
+        h2: "How Nadwa Healthcare Assists You at Zero Facilitation Fee",
+        paragraphs: [
+          "Nadwa Healthcare (NHC) partners directly with the international patient departments of all top NABH- and JCI-accredited hospitals across New Delhi, Gurugram, and Noida:"
+        ],
+        bulletPoints: [
+          "Free Written Medical Opinions: Share your medical reports via WhatsApp or email to receive treatment plans from 2–3 senior specialists within 24–48 hours.",
+          "Hospital Cost Comparison: Compare exact surgical packages across Medanta, Apollo, Fortis, Max, and Manipal before making a decision.",
+          "Free Medical Visa Invitation Letter: Complete embassy documentation support for the patient and up to two medical attendants within 24–48 hours.",
+          "On-Ground Concierge & Interpreters: Complimentary airport pick-up, nearby hotel/guest house booking, and dedicated Arabic, Russian, French, and English interpreters throughout your hospital stay."
+        ],
+        callout: "Need an appointment or cost estimate from an NABH/JCI hospital in Delhi NCR? WhatsApp / Call (24/7): +91 96485 78320 | Email: info@nadwahealthcare.com"
+      }
+    ],
+    faqs: [
+      {
+        question: "Which is the best NABH and JCI accredited hospital in Delhi NCR for heart surgery?",
+        answer: "Medanta – The Medicity (Gurugram), Indraprastha Apollo Hospital (New Delhi), and Fortis Escorts Heart Institute are among the top JCI- and NABH-accredited cardiac centers in Delhi NCR, offering minimally invasive bypass (CABG), valve replacement, and TAVR procedures."
+      },
+      {
+        question: "How can international patients book an appointment at Manipal Hospital Dwarka or Medanta?",
+        answer: "International patients can send their latest diagnostic reports to Nadwa Healthcare (+91 96485 78320 / info@nadwahealthcare.com) to receive a free doctor opinion, itemized cost estimate, and priority OPD/surgery booking at zero facilitation fee."
+      },
+      {
+        question: "Are NABH-accredited hospitals in Delhi affordable for international patients?",
+        answer: "Yes. Treatments at NABH- and JCI-accredited hospitals in Delhi NCR typically cost 60% to 75% less than equivalent procedures in the US, UK, UAE, or Europe while maintaining identical international clinical standards."
+      },
+      {
+        question: "Does Nadwa Healthcare charge any service fee from patients?",
+        answer: "No. Nadwa Healthcare provides medical opinion coordination, hospital cost comparisons, medical visa invitation letters, and airport transfers 100% free of charge to patients."
       }
     ]
   }

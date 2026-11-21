@@ -4831,6 +4831,29 @@ export const BLOG_LOCALIZATIONS: Record<string, Record<string, {
       readingTime: "9 мин чтения",
       summary: "Полное клиническое руководство по костному мозгу: красный и желтый мозг, кроветворение, лейкоз, апластическая анемия, трансплантация костного мозга (ТКМ) в лучших клиниках Индии."
     }
+  },
+  "top-nabh-jci-accredited-hospitals-delhi-ncr": {
+    ar: {
+      h1Title: "أفضل مستشفيات معتمدة في دلهي إن سي آر | ندوة",
+      category: "المستشفيات المعتمدة",
+      badge: "دليل المستشفيات 2026",
+      readingTime: "8 دقائق قراءة",
+      summary: "مقارنة شاملة بين أفضل المستشفيات المعتمدة دولياً NABH و JCI في دلهي إن سي آر: ميدانتا، أبولو، فورتيس، مانيبال دواركا، وماكس، مع رأي طبي وتأشيرة مجاناً."
+    },
+    fr: {
+      h1Title: "Hôpitaux Accrédités NABH & JCI Delhi NCR | Nadwa",
+      category: "Hôpitaux Accrédités",
+      badge: "Guide Hôpitaux 2026",
+      readingTime: "8 min de lecture",
+      summary: "Comparez les meilleurs hôpitaux accrédités NABH et JCI à Delhi NCR : Medanta, Apollo, Fortis, Max et Manipal Dwarka. Avis médical et visa gratuits."
+    },
+    ru: {
+      h1Title: "Клиники NABH и JCI в Дели NCR: Гид 2026 | Nadwa",
+      category: "Аккредитованные клиники",
+      badge: "Гид по клиникам 2026",
+      readingTime: "8 мин чтения",
+      summary: "Сравнение ведущих клиник Дели NCR с международной аккредитацией NABH и JCI: Medanta, Apollo, Fortis, Manipal Dwarka, Max. Бесплатная консультация и визовая поддержка."
+    }
   }
 };
 

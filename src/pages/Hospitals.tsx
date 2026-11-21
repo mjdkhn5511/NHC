@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Search, Building2, MapPin, Filter, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Search, Building2, MapPin, Filter, ShieldCheck, ArrowRight } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { Breadcrumb } from "../components/Breadcrumb";
 import { HospitalCard } from "../components/HospitalCard";
@@ -70,6 +71,23 @@ export const Hospitals: React.FC<HospitalsProps> = ({ onOpenConsultation }) => {
           </div>
         </div>
       </header>
+
+      {/* Featured Editorial Guide Callout */}
+      <section className="bg-teal-50 border-b border-teal-200/80 py-3.5 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
+          <div className="flex items-center gap-2 text-teal-950 font-medium">
+            <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
+            <span>{t("hospitalsPage.guideBannerText", "Comparing accreditations, ICU safety standards, and DEL airport distances across Delhi NCR?")}</span>
+          </div>
+          <Link
+            to={localizeUrl("/blog/top-nabh-jci-accredited-hospitals-delhi-ncr")}
+            className="inline-flex items-center gap-1.5 font-bold text-teal-700 hover:text-teal-900 underline underline-offset-4 shrink-0 transition-colors"
+          >
+            <span>Compare Top NABH & JCI Accredited Hospitals in Delhi NCR</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </section>
 
       {/* Filter & Search Bar */}
       <section className="py-8 bg-slate-50 border-b border-slate-200">

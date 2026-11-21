@@ -208,14 +208,21 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
             ))}
           </div>
 
-          {/* Centered CTA Just Below Cards */}
-          <div className="mt-12 text-center">
+          {/* Centered CTAs Just Below Cards */}
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to={localizeUrl("/hospitals")}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm sm:text-base tracking-wide shadow-xl shadow-teal-600/25 hover:shadow-teal-600/40 transition-all duration-200 transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-xl shadow-teal-600/25 hover:shadow-teal-600/40 transition-all duration-200 transform hover:-translate-y-0.5"
             >
               <span>{t("homeHospitals.exploreAllBtn", "Explore All Delhi NCR Hospitals")}</span>
-              <ArrowRight className={`w-5 h-5 ${isRTL ? "rotate-180" : ""}`} />
+              <ArrowRight className={`w-4 h-4 ${isRTL ? "rotate-180" : ""}`} />
+            </Link>
+            <Link
+              to={localizeUrl("/blog/top-nabh-jci-accredited-hospitals-delhi-ncr")}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-slate-50 hover:bg-teal-50 border border-slate-300 hover:border-teal-300 text-slate-800 hover:text-teal-900 font-bold text-xs sm:text-sm shadow-sm transition-all"
+            >
+              <span>Compare Top NABH & JCI Accredited Hospitals in Delhi NCR</span>
+              <ArrowRight className={`w-4 h-4 text-teal-600 ${isRTL ? "rotate-180" : ""}`} />
             </Link>
           </div>
         </div>
