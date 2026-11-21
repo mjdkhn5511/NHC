@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { 
-  Clock, Globe, CheckCircle2, 
+  Clock, CheckCircle2, 
   MessageCircle, ArrowRight, Share2, HelpCircle, AlertCircle, BookOpen, ShieldCheck
 } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
@@ -69,36 +69,6 @@ const TREATMENT_KEYWORD_MAP: Record<string, RegExp> = {
   "neurology": /\b(Neurology Treatment in India|Stroke Rehabilitation|Parkinson's Care)\b/i,
   "liver-transplant": /\b(Liver Transplant in India|Living Donor Transplant)\b/i,
   "dental": /\b(Dental Tourism in India|Dental Implants in India|Full Mouth Reconstruction)\b/i,
-};
-
-const COUNTRY_MAP: Record<string, Record<string, string>> = {
-  ar: {
-    "UAE": "الإمارات",
-    "Saudi Arabia": "المملكة العربية السعودية",
-    "Oman": "سلطنة عمان",
-    "Qatar": "قطر",
-    "Kuwait": "الكويت",
-    "Uzbekistan": "أوزبكستان",
-    "Russia": "روسيا",
-  },
-  fr: {
-    "UAE": "Émirats Arabes Unis",
-    "Saudi Arabia": "Arabie Saoudite",
-    "Oman": "Oman",
-    "Qatar": "Qatar",
-    "Kuwait": "Koweït",
-    "Uzbekistan": "Ouzbékistan",
-    "Russia": "Russie",
-  },
-  ru: {
-    "UAE": "ОАЭ",
-    "Saudi Arabia": "Саудовская Аравия",
-    "Oman": "Оман",
-    "Qatar": "Катар",
-    "Kuwait": "Кувейт",
-    "Uzbekistan": "Узбекистан",
-    "Russia": "Россия",
-  }
 };
 
 function renderParagraphWithLinks(
@@ -371,17 +341,6 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
             <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
               {blog.summary}
             </p>
-
-            {/* Target Countries Ribbon */}
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
-              <Globe className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-              <span className="font-semibold text-slate-700">
-                {t("blogDetails.targetedTravelers", "Targeted for International Travelers:")}
-              </span>
-              <span className="text-slate-600">
-                {blog.targetCountries.map((c) => COUNTRY_MAP[currentLang]?.[c] || c).join(" • ")}
-              </span>
-            </div>
           </div>
         </header>
 
