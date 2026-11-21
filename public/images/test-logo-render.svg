@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="360" height="360" fill="none">
+  <!-- Medical Plus / Cross -->
+  <rect x="110" y="8" width="36" height="72" rx="14" fill="#3E808D" />
+  <rect x="84" y="26" width="88" height="36" rx="14" fill="#3E808D" />
+  
+  <!-- Continuous Stylized N Path -->
+  <path
+    d="M 32 170 L 32 50 C 32 20, 56 18, 76 44 L 108 126 C 118 148, 128 148, 128 134 L 128 96"
+    stroke="#3E808D"
+    stroke-width="36"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

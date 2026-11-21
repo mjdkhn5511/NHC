@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200" fill="none">
+  <!-- Medical Plus / Cross -->
+  <path d="M 74 6 L 74 40 M 57 23 L 91 23" stroke="#3E808D" stroke-width="14" stroke-linecap="round" />
+  
+  <!-- Stylized N Lettermark -->
+  <path d="M 17 96 L 17 34 C 17 17, 31 16, 42 28 L 65 72 C 73 84, 82 82, 82 68 L 82 54" stroke="#3E808D" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

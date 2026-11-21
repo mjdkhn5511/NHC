@@ -1,0 +1,287 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "nadwahealthcare.com"
+        }
+      ],
+      "destination": "https://www.nadwahealthcare.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/complete-guide-indian-medical-visa-international-patients",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/cost-of-cardiac-surgery-india-vs-usa-uk",
+      "destination": "/blog/heart-surgery-cost-in-india-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/liver-transplant-india-top-hospitals-costs-success-rates",
+      "destination": "/blog/liver-transplant-cost-in-india-complete-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/top-cancer-hospitals-delhi-ncr-advanced-therapies",
+      "destination": "/blog/cancer-treatment-in-india-oncology-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/robotic-knee-replacement-india-costs-recovery",
+      "destination": "/blog/knee-hip-replacement-surgery-cost-india",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ivf-treatment-delhi-ncr-success-rates-costs",
+      "destination": "/blog/ivf-fertility-treatment-in-india-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-plan-medical-trip-india-step-by-step-guide",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/blog/why-international-patients-choose-delhi-ncr-medical-treatment",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/bmt-hematology",
+      "destination": "/treatments/cancer-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/bmt",
+      "destination": "/treatments/cancer-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/bone-marrow-transplant",
+      "destination": "/treatments/cancer-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/gastroenterology",
+      "destination": "/treatments/liver-gastroenterology",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/ophthalmology",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/treatments/pediatric-care",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/cardiology",
+      "destination": "/treatments/cardiology",
+      "permanent": true
+    },
+    {
+      "source": "/neurology",
+      "destination": "/treatments/neurology",
+      "permanent": true
+    },
+    {
+      "source": "/cancer-treatment",
+      "destination": "/treatments/cancer-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/orthopedics",
+      "destination": "/treatments/orthopedics",
+      "permanent": true
+    },
+    {
+      "source": "/neurosurgery",
+      "destination": "/treatments/neurosurgery",
+      "permanent": true
+    },
+    {
+      "source": "/kidney-urology",
+      "destination": "/treatments/kidney-urology",
+      "permanent": true
+    },
+    {
+      "source": "/liver-gastroenterology",
+      "destination": "/treatments/liver-gastroenterology",
+      "permanent": true
+    },
+    {
+      "source": "/liver-transplant",
+      "destination": "/treatments/liver-transplant",
+      "permanent": true
+    },
+    {
+      "source": "/ivf-fertility",
+      "destination": "/treatments/ivf-fertility",
+      "permanent": true
+    },
+    {
+      "source": "/cosmetic-surgery",
+      "destination": "/treatments/cosmetic-surgery",
+      "permanent": true
+    },
+    {
+      "source": "/general-surgery",
+      "destination": "/treatments/general-surgery",
+      "permanent": true
+    },
+    {
+      "source": "/dental-treatment",
+      "destination": "/treatments/dental-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/dr-naresh-trehan",
+      "destination": "/doctors/dr-naresh-trehan",
+      "permanent": true
+    },
+    {
+      "source": "/dr-ashok-seth",
+      "destination": "/doctors/dr-ashok-seth",
+      "permanent": true
+    },
+    {
+      "source": "/dr-arvinder-soin",
+      "destination": "/doctors/dr-arvinder-soin",
+      "permanent": true
+    },
+    {
+      "source": "/dr-subhash-gupta",
+      "destination": "/doctors/dr-subhash-gupta",
+      "permanent": true
+    },
+    {
+      "source": "/dr-ashok-rajgopal",
+      "destination": "/doctors/dr-ashok-rajgopal",
+      "permanent": true
+    },
+    {
+      "source": "/dr-rana-patir",
+      "destination": "/doctors/dr-rana-patir",
+      "permanent": true
+    },
+    {
+      "source": "/dr-vinod-raina",
+      "destination": "/doctors/dr-vinod-raina",
+      "permanent": true
+    },
+    {
+      "source": "/dr-ashok-kumar-vaid",
+      "destination": "/doctors/dr-ashok-kumar-vaid",
+      "permanent": true
+    },
+    {
+      "source": "/dr-harit-chaturvedi",
+      "destination": "/doctors/dr-harit-chaturvedi",
+      "permanent": true
+    },
+    {
+      "source": "/dr-rajesh-ahlawat",
+      "destination": "/doctors/dr-rajesh-ahlawat",
+      "permanent": true
+    },
+    {
+      "source": "/dr-anant-kumar",
+      "destination": "/doctors/dr-anant-kumar",
+      "permanent": true
+    },
+    {
+      "source": "/dr-yk-mishra",
+      "destination": "/doctors/dr-yk-mishra",
+      "permanent": true
+    },
+    {
+      "source": "/dr-balram-airan",
+      "destination": "/doctors/dr-balram-airan",
+      "permanent": true
+    },
+    {
+      "source": "/dr-sks-marya",
+      "destination": "/doctors/dr-sks-marya",
+      "permanent": true
+    },
+    {
+      "source": "/dr-subhash-jangid",
+      "destination": "/doctors/dr-subhash-jangid",
+      "permanent": true
+    },
+    {
+      "source": "/dr-ips-oberoi",
+      "destination": "/doctors/dr-ips-oberoi",
+      "permanent": true
+    },
+    {
+      "source": "/dr-sandeep-vaishya",
+      "destination": "/doctors/dr-sandeep-vaishya",
+      "permanent": true
+    },
+    {
+      "source": "/dr-aditya-gupta",
+      "destination": "/doctors/dr-aditya-gupta",
+      "permanent": true
+    },
+    {
+      "source": "/dr-randhir-sud",
+      "destination": "/doctors/dr-randhir-sud",
+      "permanent": true
+    },
+    {
+      "source": "/dr-sunil-choudhary",
+      "destination": "/doctors/dr-sunil-choudhary",
+      "permanent": true
+    },
+    {
+      "source": "/dr-lokesh-kumar",
+      "destination": "/doctors/dr-lokesh-kumar",
+      "permanent": true
+    },
+    {
+      "source": "/dr-abha-majumdar",
+      "destination": "/doctors/dr-abha-majumdar",
+      "permanent": true
+    },
+    {
+      "source": "/dr-kaberi-banerjee",
+      "destination": "/doctors/dr-kaberi-banerjee",
+      "permanent": true
+    },
+    {
+      "source": "/dr-gaurav-kharya",
+      "destination": "/doctors/dr-gaurav-kharya",
+      "permanent": true
+    },
+    {
+      "source": "/dr-dharma-choudhary",
+      "destination": "/doctors/dr-dharma-choudhary",
+      "permanent": true
+    },
+    {
+      "source": "/dr-dinesh-khullar",
+      "destination": "/doctors/dr-dinesh-khullar",
+      "permanent": true
+    },
+    {
+      "source": "/dr-sanjay-gogoi",
+      "destination": "/doctors/dr-sanjay-gogoi",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Medical Plus (+) Sign directly above the right stem -->
+  <rect x="68" y="4" width="14" height="34" rx="6" fill="#3E808D" />
+  <rect x="56" y="14" width="38" height="14" rx="6" fill="#3E808D" />
+
+  <!-- Stylized N Monogram Path -->
+  <path
+    d="M 18 94 L 18 28 C 18 12, 32 10, 43 24 L 62 66 C 70 82, 75 80, 75 66 L 75 52"
+    stroke="#3E808D"
+    stroke-width="14"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
