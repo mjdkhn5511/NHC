@@ -1919,21 +1919,6 @@ export function prerenderSSGPlugin(): Plugin {
 
       let templateHtml = fs.readFileSync(indexPath, 'utf-8');
 
-      // Zero Render-Blocking CSS: Inline compiled stylesheet into <style> in <head>
-      const assetsDir = path.join(distDir, 'assets');
-      if (fs.existsSync(assetsDir)) {
-        const cssFiles = fs.readdirSync(assetsDir).filter(f => f.endsWith('.css'));
-        if (cssFiles.length > 0) {
-          const cssPath = path.join(assetsDir, cssFiles[0]);
-          const cssContent = fs.readFileSync(cssPath, 'utf-8');
-          templateHtml = templateHtml.replace(
-            /<link\s+rel="stylesheet"[^>]+href="\/assets\/[^"]+\.css"[^>]*>/i,
-            `<style id="inlined-styles">${cssContent}</style>`
-          );
-          fs.writeFileSync(indexPath, templateHtml, 'utf-8');
-        }
-      }
-
       const pages: PageMetadata[] = [];
 
       // A. English Root Pages
