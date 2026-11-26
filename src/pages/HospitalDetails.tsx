@@ -147,6 +147,7 @@ export const HospitalDetails: React.FC<HospitalDetailsProps> = ({ onOpenConsulta
                   loading="eager"
                   fetchPriority="high"
                   decoding="sync"
+                  style={{ aspectRatio: "16 / 9" }}
                   className="w-full h-full object-cover aspect-[16/9]"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-[#08221E]/90 p-3 rounded-2xl flex items-center justify-between text-white text-xs">

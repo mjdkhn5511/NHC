@@ -413,7 +413,7 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-3">
         {/* Name Input */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+          <label htmlFor="quick-consult-name" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 cursor-pointer">
             {currentLang === "ar" ? "الاسم" : currentLang === "fr" ? "Nom" : currentLang === "ru" ? "Имя" : "Name"}
             <span className="text-teal-600 ml-0.5">*</span>
           </label>
@@ -422,7 +422,10 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
               <User className="w-4 h-4" />
             </div>
             <input
+              id="quick-consult-name"
+              name="fullName"
               type="text"
+              autoComplete="name"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -434,12 +437,15 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
 
         {/* Number Input (Country Code + Phone) */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+          <label htmlFor="quick-consult-phone" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 cursor-pointer">
             {currentLang === "ar" ? "رقم الهاتف / الواتساب" : currentLang === "fr" ? "Numéro" : currentLang === "ru" ? "Номер" : "Number"}
             <span className="text-teal-600 ml-0.5">*</span>
           </label>
           <div className="flex rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus-within:bg-white focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-500/20 overflow-hidden transition-all">
             <select
+              id="quick-consult-calling-code"
+              name="callingCode"
+              autoComplete="tel-country-code"
               aria-label="Calling Code"
               value={callingCode}
               onChange={handleCallingCodeChange}
@@ -453,7 +459,10 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
             </select>
             <div className="relative flex-1 flex items-center">
               <input
+                id="quick-consult-phone"
+                name="phone"
                 type="tel"
+                autoComplete="tel"
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -466,7 +475,7 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
 
         {/* Country Input */}
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+          <label htmlFor="quick-consult-country" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1 cursor-pointer">
             {currentLang === "ar" ? "الدولة" : currentLang === "fr" ? "Pays" : currentLang === "ru" ? "Страна" : "Country"}
             <span className="text-teal-600 ml-0.5">*</span>
           </label>
@@ -475,7 +484,10 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
               <Globe className="w-4 h-4" />
             </div>
             <input
+              id="quick-consult-country"
+              name="country"
               type="text"
+              autoComplete="country-name"
               required
               list="popular-countries-list"
               value={country}
@@ -494,7 +506,7 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
         {/* Text Area (Auto-filled according to related page) */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700">
+            <label htmlFor="quick-consult-message" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 cursor-pointer">
               {currentLang === "ar"
                 ? "رسالتك / استفسار طبي"
                 : currentLang === "fr"
@@ -515,6 +527,8 @@ export const QuickConsultationForm: React.FC<QuickConsultationFormProps> = ({
           </div>
           <div className="relative">
             <textarea
+              id="quick-consult-message"
+              name="message"
               rows={3}
               value={message}
               onChange={(e) => setMessage(e.target.value)}

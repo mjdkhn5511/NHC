@@ -375,8 +375,10 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                 ) : (
                   <form onSubmit={handleQuickSubmit} className="space-y-3">
                     <input
+                      id="blog-quick-fullname"
                       type="text"
                       name="fullName"
+                      autoComplete="name"
                       required
                       value={quickForm.fullName}
                       onChange={(e) => setQuickForm({ ...quickForm, fullName: e.target.value })}
@@ -385,8 +387,10 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                     />
                     
                     <input
+                      id="blog-quick-phone"
                       type="tel"
                       name="phone"
+                      autoComplete="tel"
                       value={quickForm.phone}
                       onChange={(e) => setQuickForm({ ...quickForm, phone: e.target.value })}
                       placeholder={t("blogDetails.phonePlaceholder", "Enter Phone Number")}
@@ -394,8 +398,10 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                     />
 
                     <input
+                      id="blog-quick-email"
                       type="email"
                       name="email"
+                      autoComplete="email"
                       required
                       value={quickForm.email}
                       onChange={(e) => setQuickForm({ ...quickForm, email: e.target.value })}
@@ -404,8 +410,10 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                     />
 
                     <input
+                      id="blog-quick-country"
                       type="text"
                       name="country"
+                      autoComplete="country-name"
                       value={quickForm.country}
                       onChange={(e) => setQuickForm({ ...quickForm, country: e.target.value })}
                       placeholder={t("blogDetails.countryPlaceholder", "Preferred Location / Country")}
@@ -489,6 +497,7 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                   alt={blog.h1Title}
                   width={1200}
                   height={675}
+                  style={{ aspectRatio: "16 / 9" }}
                   className="w-full h-full max-h-[420px] object-cover aspect-[16/9]"
                   loading="eager"
                   fetchPriority="high"
@@ -700,6 +709,7 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
                           alt={locRel.h1Title}
                           width={320}
                           height={112}
+                          style={{ width: "100%", height: "112px", aspectRatio: "20 / 7" }}
                           className="w-full h-28 object-cover rounded-lg mb-2.5 group-hover:opacity-90 transition-opacity aspect-[20/7]"
                           loading="lazy"
                           decoding="async"

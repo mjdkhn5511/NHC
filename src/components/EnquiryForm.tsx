@@ -487,6 +487,7 @@ export const EnquiryForm: React.FC<{
         <input
           type="checkbox"
           id="nhc-consent"
+          name="consent"
           checked={formData.consent}
           onChange={(e) => {
             setFormData({ ...formData, consent: e.target.checked });

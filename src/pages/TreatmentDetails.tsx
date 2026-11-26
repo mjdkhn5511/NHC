@@ -140,6 +140,7 @@ export const TreatmentDetails: React.FC<TreatmentDetailsProps> = ({ onOpenConsul
                   loading="eager"
                   fetchPriority="high"
                   decoding="sync"
+                  style={{ aspectRatio: "5 / 2" }}
                   className="w-full h-full object-cover aspect-[5/2]"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-[#08221E]/90 p-3.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-white text-xs">
@@ -299,6 +300,7 @@ export const TreatmentDetails: React.FC<TreatmentDetailsProps> = ({ onOpenConsul
                             height={48}
                             loading="lazy"
                             decoding="async"
+                            style={{ width: "48px", height: "48px", aspectRatio: "1 / 1" }}
                             className="w-12 h-12 rounded-xl object-cover shrink-0 aspect-square"
                           />
                           <div className="flex-1">

@@ -161,6 +161,7 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
                   loading="eager"
                   fetchPriority="high"
                   decoding="sync"
+                  style={{ aspectRatio: "1 / 1" }}
                   className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover object-top border-2 border-white shadow-md shrink-0 mx-auto sm:mx-0 aspect-square"
                 />
                 <div className="space-y-3 flex-1 text-center sm:text-left">

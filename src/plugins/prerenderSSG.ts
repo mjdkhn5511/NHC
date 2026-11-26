@@ -191,6 +191,7 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
                       height="250"
                       loading="lazy"
                       decoding="async"
+                      style="aspect-ratio: 16 / 10;"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/10]"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -248,6 +249,7 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
                       height="338"
                       loading="lazy"
                       decoding="async"
+                      style="aspect-ratio: 16 / 9;"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/9]"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -313,6 +315,7 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
                       height="480"
                       loading="lazy"
                       decoding="async"
+                      style="aspect-ratio: 5 / 6;"
                       class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 aspect-[5/6]"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
@@ -566,6 +569,7 @@ function getCriticalTreatmentsHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
                       height="250"
                       loading="lazy"
                       decoding="async"
+                      style="aspect-ratio: 16 / 10;"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-[16/10]"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -804,7 +808,7 @@ function getDoctorsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
           <div class="relative w-full lg:w-96">
             <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"></circle><path stroke-width="2" d="m21 21-4.3-4.3"></path></svg>
-            <input type="text" placeholder="${searchPlaceholder}" class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-300 text-xs sm:text-sm bg-white" readonly />
+            <input id="ssg-doctors-search" name="doctorSearch" type="text" placeholder="${searchPlaceholder}" class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-300 text-xs sm:text-sm bg-white" readonly />
           </div>
           <div class="flex items-center gap-2 w-full lg:w-auto">
             <span class="text-xs font-bold text-slate-500 flex items-center gap-1 shrink-0">
@@ -942,7 +946,7 @@ function getHospitalsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
           <div class="relative w-full lg:w-96">
             <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"></circle><path stroke-width="2" d="m21 21-4.3-4.3"></path></svg>
-            <input type="text" placeholder="${searchPlaceholder}" class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-300 text-xs sm:text-sm bg-white" readonly />
+            <input id="ssg-hospitals-search" name="hospitalSearch" type="text" placeholder="${searchPlaceholder}" class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-300 text-xs sm:text-sm bg-white" readonly />
           </div>
           <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
             <span class="text-xs font-bold text-slate-500 flex items-center gap-1 mr-1">
