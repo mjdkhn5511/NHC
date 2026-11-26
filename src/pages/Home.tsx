@@ -35,7 +35,12 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
     : treatmentsData.filter((t) => t.id === treatmentFilter || t.badge.toLowerCase().includes(treatmentFilter));
 
   const featuredHospitals = hospitalsData.filter((h) => h.featured).slice(0, 3);
-  const featuredDoctors = doctorsData.filter((d) => d.featured).slice(0, 3);
+  const featuredDoctors = [
+    doctorsData.find((d) => d.id === "dr-naresh-trehan"),
+    doctorsData.find((d) => d.id === "dr-ashok-rajgopal"),
+    doctorsData.find((d) => d.id === "dr-arvinder-singh-soin"),
+    doctorsData.find((d) => d.id === "dr-subhash-gupta")
+  ].filter(Boolean) as typeof doctorsData;
 
   return (
     <main className="bg-white">
@@ -255,7 +260,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredDoctors.map((doctor) => (
               <DoctorCard
                 key={doctor.id}

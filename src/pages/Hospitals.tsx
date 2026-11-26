@@ -74,10 +74,14 @@ export const Hospitals: React.FC<HospitalsProps> = ({ onOpenConsultation }) => {
 
       {/* Featured Editorial Guide Callout */}
       <section className="bg-teal-50 border-b border-teal-200/80 py-3.5 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-teal-950 font-medium">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
+          <div className="flex flex-wrap items-center gap-2 text-teal-950 font-medium">
             <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
             <span>{t("hospitalsPage.guideBannerText", "Comparing accreditations, ICU safety standards, and DEL airport distances across Delhi NCR?")}</span>
+            <span className="hidden lg:inline text-teal-400">|</span>
+            <span className="text-[11px] text-teal-800">
+              Top Chairs: <Link to={localizeUrl("/doctors/dr-ashok-rajgopal")} className="font-bold hover:underline">Dr. Ashok Rajgopal</Link> (Medanta), <Link to={localizeUrl("/doctors/dr-naresh-trehan")} className="font-bold hover:underline">Dr. Naresh Trehan</Link>
+            </span>
           </div>
           <Link
             to={localizeUrl("/blog/top-nabh-jci-accredited-hospitals-delhi-ncr")}

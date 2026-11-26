@@ -83,7 +83,12 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
 
   const featuredTreatments = treatmentsData.slice(0, 6);
   const featuredHospitals = hospitalsData.filter(h => h.featured).slice(0, 3);
-  const featuredDoctors = doctorsData.filter(d => d.featured).slice(0, 3);
+  const featuredDoctors = [
+    doctorsData.find(d => d.id === 'dr-naresh-trehan'),
+    doctorsData.find(d => d.id === 'dr-ashok-rajgopal'),
+    doctorsData.find(d => d.id === 'dr-arvinder-singh-soin'),
+    doctorsData.find(d => d.id === 'dr-subhash-gupta')
+  ].filter(Boolean) as typeof doctorsData;
   const journeySteps = servicesJourneyData.slice(0, 4);
   const patientStories = patientStoriesData.slice(0, 2);
 
@@ -302,7 +307,7 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
               ${featDoctorsSubtitle}
             </p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             ${featuredDoctors.map((doc) => {
               const locDoc = getLocalizedDoctor(doc, lang);
               return `
@@ -1337,11 +1342,104 @@ function getCriticalDoctorDetailsHtml(doc: any, lang: 'en' | 'ar' | 'fr' | 'ru')
                     loading="eager"
                     fetchpriority="high"
                     decoding="sync"
+                    style="aspect-ratio: 1 / 1;"
                     class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover object-top border-2 border-white shadow-md shrink-0 mx-auto sm:mx-0 aspect-square"
                   />
                   <div class="space-y-3 flex-1 text-center sm:text-left">
-                    <h3 class="text-lg font-bold text-slate-900">${doc.name}</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">${doc.bio}</p>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900">${doc.name}</h2>
+                    <p class="text-xs font-semibold text-teal-700">${loc.designation}</p>
+                    <div class="text-xs text-slate-500">
+                      <strong>${isAr ? 'المؤهلات:' : isFr ? 'Qualifications :' : isRu ? 'Квалификация:' : 'Qualifications:'}</strong> ${doc.qualifications}
+                    </div>
+                    <div class="text-xs text-slate-500">
+                      <strong>${isAr ? 'المستشفى:' : isFr ? 'Hôpital :' : isRu ? 'Клиника:' : 'Hospital:'}</strong> ${doc.hospitalName} (${loc.city})
+                    </div>
+                  </div>
+                </div>
+
+                ${loc.highlights && loc.highlights.length > 0 ? `
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    ${loc.highlights.map((h: any) => `
+                      <div class="relative p-5 rounded-2xl border border-slate-200/90 bg-white shadow-xs flex flex-col justify-between">
+                        <div class="flex items-center justify-end mb-3">
+                          <span class="text-xs font-extrabold text-slate-400 bg-slate-100/80 px-2.5 py-0.5 rounded-full border border-slate-200/60">${h.number}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">${h.text}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : ''}
+
+                <div>
+                  <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3">${isAr ? 'نبذة عن الطبيب' : isFr ? 'Biographie' : isRu ? 'О враче' : 'Professional Background & Bio'}</h3>
+                  <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${loc.bio}</p>
+                </div>
+
+                ${doc.expertise && doc.expertise.length > 0 ? `
+                  <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">${isAr ? 'التخصص والخبرة السريرية' : isFr ? 'Spécialisations & Expertise' : isRu ? 'Специализация' : 'Specialization And Expertise'}</h3>
+                    <div class="flex flex-wrap gap-2">
+                      ${doc.expertise.map((exp: string, idx: number) => `
+                        <span class="px-3.5 py-2 rounded-xl text-xs font-semibold ${idx === 0 ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-700 border border-slate-200'}">${exp}</span>
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+
+                ${doc.awardsAndAchievements && doc.awardsAndAchievements.length > 0 ? `
+                  <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">${isAr ? 'الجوائز والإنجازات' : isFr ? 'Prix et distinctions' : isRu ? 'Награды и достижения' : 'Honors & Key Achievements'}</h3>
+                    <ul class="space-y-2">
+                      ${doc.awardsAndAchievements.map((award: string) => `
+                        <li class="p-3 rounded-xl bg-amber-50/50 border border-amber-200/60 text-xs text-amber-950 flex items-start gap-2">
+                          <span class="text-amber-500 font-bold">★</span>
+                          <span>${award}</span>
+                        </li>
+                      `).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+
+                ${loc.faqs && loc.faqs.length > 0 ? `
+                  <div class="pt-6 border-t border-slate-200">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-4">${isAr ? `الأسئلة الشائعة حول الاستشارة والجراحة مع ${doc.name}` : isFr ? `Questions fréquentes avec le ${doc.name}` : isRu ? `Часто задаваемые вопросы: ${doc.name}` : `Frequently Asked Questions: ${doc.name}`}</h3>
+                    <div class="space-y-3">
+                      ${loc.faqs.map((faq: any, i: number) => `
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                          <h4 class="text-xs sm:text-sm font-bold text-slate-900 mb-1 flex items-start gap-2">
+                            <span class="text-teal-700 font-extrabold">Q${i + 1}.</span>
+                            <span>${faq.question}</span>
+                          </h4>
+                          <p class="text-xs text-slate-600 leading-relaxed pl-5">${faq.answer}</p>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Right Column Consultation Info -->
+              <div class="space-y-6">
+                <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200 space-y-4">
+                  <h3 class="text-base font-bold text-slate-900">${isAr ? `استشارة مجانية مع ${doc.name}` : isFr ? `Consultation avec le ${doc.name}` : isRu ? `Консультация: ${doc.name}` : `Consult ${doc.name}`}</h3>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    ${isAr
+                      ? 'أرسل تقاريرك الطبية وفحوصات الأشعة للحصول على رأي طبي رسمي وتقدير تكلفة الجراحة من مستشفى ميدانتا مجاناً.'
+                      : isFr
+                      ? 'Partagez vos rapports médicaux et radios pour obtenir un avis chirurgical et une estimation officielle sans frais.'
+                      : isRu
+                      ? 'Отправьте медицинские выписки и снимки для получения официального второго мнения и расчета стоимости операции бесплатно.'
+                      : 'Send your medical reports and imaging scans for an official hospital opinion and surgery cost estimate with zero service fees.'}
+                  </p>
+                  <div class="pt-2 text-xs space-y-1.5 border-t border-slate-200">
+                    <div><strong>${isAr ? 'الهاتف والطوارئ 24/7:' : '24/7 International Desk:'}</strong> +91 96485 78320</div>
+                    <div><strong>${isAr ? 'البريد الإلكتروني:' : 'Email:'}</strong> info@nadwahealthcare.com</div>
+                    <div><strong>${isAr ? 'خطاب التأشيرة الطبية:' : 'Medical Visa Support:'}</strong> ${isAr ? 'مجاني خلال 24–48 ساعة' : '100% Free in 24–48h'}</div>
+                  </div>
+                  <div class="pt-2">
+                    <a href="https://wa.me/919648578320" class="block w-full text-center py-2.5 px-4 rounded-xl bg-teal-600 text-white font-bold text-xs shadow-sm hover:bg-teal-700">
+                      ${isAr ? 'تواصل عبر واتساب' : isFr ? 'Contacter via WhatsApp' : isRu ? 'Связаться в WhatsApp' : 'Contact via WhatsApp'}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1478,6 +1576,18 @@ function getCriticalHospitalDetailsHtml(hosp: any, lang: 'en' | 'ar' | 'fr' | 'r
   </div>`;
 }
 
+function renderBlogTextWithInternalLinks(text: string, prefix: string): string {
+  let safe = escapeHtml(text);
+  safe = safe.replace(/Dr\.?\s+Ashok Rajgopal/g, `<a href="${prefix}/doctors/dr-ashok-rajgopal" class="text-teal-700 font-semibold hover:underline">Dr. Ashok Rajgopal</a>`);
+  safe = safe.replace(/Dr\.?\s+Naresh Trehan/g, `<a href="${prefix}/doctors/dr-naresh-trehan" class="text-teal-700 font-semibold hover:underline">Dr. Naresh Trehan</a>`);
+  safe = safe.replace(/Dr\.?\s+Ashok Seth/g, `<a href="${prefix}/doctors/dr-ashok-seth" class="text-teal-700 font-semibold hover:underline">Dr. Ashok Seth</a>`);
+  safe = safe.replace(/Medanta – The Medicity/g, `<a href="${prefix}/hospitals/medanta-the-medicity" class="text-teal-700 font-semibold hover:underline">Medanta – The Medicity</a>`);
+  safe = safe.replace(/Indraprastha Apollo Hospital/g, `<a href="${prefix}/hospitals/indraprastha-apollo-hospitals" class="text-teal-700 font-semibold hover:underline">Indraprastha Apollo Hospital</a>`);
+  safe = safe.replace(/Manipal Hospital Dwarka/g, `<a href="${prefix}/hospitals/manipal-hospital-dwarka" class="text-teal-700 font-semibold hover:underline">Manipal Hospital Dwarka</a>`);
+  safe = safe.replace(/Fortis Memorial Research Institute/g, `<a href="${prefix}/hospitals/fortis-memorial-research-institute" class="text-teal-700 font-semibold hover:underline">Fortis Memorial Research Institute</a>`);
+  return safe;
+}
+
 function getCriticalBlogDetailsHtml(blog: any, lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   const isAr = lang === 'ar';
   const isFr = lang === 'fr';
@@ -1578,7 +1688,7 @@ function getCriticalBlogDetailsHtml(blog: any, lang: 'en' | 'ar' | 'fr' | 'ru'):
                 </h2>
                 ${(sec.paragraphs || []).map((p: string) => `
                   <p class="mt-3 text-sm sm:text-base text-slate-700 leading-relaxed">
-                    ${escapeHtml(p)}
+                    ${renderBlogTextWithInternalLinks(p, prefix)}
                   </p>
                 `).join('')}
 
@@ -1649,7 +1759,7 @@ function getCriticalBlogDetailsHtml(blog: any, lang: 'en' | 'ar' | 'fr' | 'ru'):
                   <div class="mt-6 pl-4 border-l-2 border-teal-500 space-y-2">
                     <h3 class="text-base sm:text-lg font-bold text-slate-900">${escapeHtml(h3.h3)}</h3>
                     ${(h3.paragraphs || []).map((p: string) => `
-                      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(p)}</p>
+                      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${renderBlogTextWithInternalLinks(p, prefix)}</p>
                     `).join('')}
                   </div>
                 `).join('') : ''}
@@ -2333,25 +2443,52 @@ export function prerenderSSGPlugin(): Plugin {
         }
       );
 
-      // E. All 27 Doctors (Dynamic Profiles)
+      // E. All Doctors (Dynamic Profiles)
       doctorsData.forEach((doc) => {
         const hospShort = doc.hospitalName.split('–')[0].trim();
+        const localizedCanonical = `https://www.nadwahealthcare.com/doctors/${doc.slug}`;
+        const physicianObj: any = {
+          '@type': 'Physician',
+          'name': doc.name,
+          'medicalSpecialty': doc.specialty,
+          'jobTitle': doc.designation,
+          'hospitalAffiliation': doc.hospitalName,
+          'description': doc.bio,
+          'url': localizedCanonical,
+          'image': doc.image.startsWith('http') ? doc.image : `https://www.nadwahealthcare.com${doc.image}`,
+          ...(doc.awardsAndAchievements && doc.awardsAndAchievements.length > 0 ? { 'award': doc.awardsAndAchievements } : {})
+        };
+
+        const schema = doc.faqs && doc.faqs.length > 0
+          ? {
+              '@context': 'https://schema.org',
+              '@graph': [
+                physicianObj,
+                {
+                  '@type': 'FAQPage',
+                  'mainEntity': doc.faqs.map((f: any) => ({
+                    '@type': 'Question',
+                    'name': f.question,
+                    'acceptedAnswer': {
+                      '@type': 'Answer',
+                      'text': f.answer
+                    }
+                  }))
+                }
+              ]
+            }
+          : {
+              '@context': 'https://schema.org',
+              ...physicianObj
+            };
+
         pages.push({
           route: `/doctors/${doc.slug}`,
           title: `${doc.name} - ${doc.specialty} in India | Nadwa`.slice(0, 58),
           description: `Consult ${doc.name} (${doc.designation} at ${hospShort}). Get free medical opinion, surgery cost estimate & fast appointment booking in India.`,
-          canonicalUrl: `https://www.nadwahealthcare.com/doctors/${doc.slug}`,
+          canonicalUrl: localizedCanonical,
           ogImage: doc.image,
-          schema: {
-            '@context': 'https://schema.org',
-            '@type': 'Physician',
-            'name': doc.name,
-            'medicalSpecialty': doc.specialty,
-            'hospitalAffiliation': doc.hospitalName,
-            'description': doc.bio,
-            'url': `https://www.nadwahealthcare.com/doctors/${doc.slug}`,
-            'image': doc.image.startsWith('http') ? doc.image : `https://www.nadwahealthcare.com${doc.image}`
-          }
+          schema
         });
       });
 
@@ -2448,12 +2585,49 @@ export function prerenderSSGPlugin(): Plugin {
             description = `Консультация с ${doc.name} (${loc.designation} в ${hospShort}). Бесплатное второе мнение и расчет стоимости лечения в Индии.`;
           }
 
+          const localizedCanonical = `https://www.nadwahealthcare.com/${lang}/doctors/${doc.slug}`;
+          const physicianObj: any = {
+            '@type': 'Physician',
+            'name': doc.name,
+            'medicalSpecialty': loc.specialty,
+            'jobTitle': loc.designation,
+            'hospitalAffiliation': doc.hospitalName,
+            'description': description,
+            'url': localizedCanonical,
+            'image': doc.image.startsWith('http') ? doc.image : `https://www.nadwahealthcare.com${doc.image}`,
+            ...(doc.awardsAndAchievements && doc.awardsAndAchievements.length > 0 ? { 'award': doc.awardsAndAchievements } : {})
+          };
+
+          const schema = loc.faqs && loc.faqs.length > 0
+            ? {
+                '@context': 'https://schema.org',
+                '@graph': [
+                  physicianObj,
+                  {
+                    '@type': 'FAQPage',
+                    'mainEntity': loc.faqs.map((f: any) => ({
+                      '@type': 'Question',
+                      'name': f.question,
+                      'acceptedAnswer': {
+                        '@type': 'Answer',
+                        'text': f.answer
+                      }
+                    }))
+                  }
+                ]
+              }
+            : {
+                '@context': 'https://schema.org',
+                ...physicianObj
+              };
+
           pages.push({
             route: `/${lang}/doctors/${doc.slug}`,
             title,
             description,
-            canonicalUrl: `https://www.nadwahealthcare.com/${lang}/doctors/${doc.slug}`,
+            canonicalUrl: localizedCanonical,
             ogImage: doc.image,
+            schema,
             lang: lang,
             dir: lang === 'ar' ? 'rtl' : 'ltr',
           });

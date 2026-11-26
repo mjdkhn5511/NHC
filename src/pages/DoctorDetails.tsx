@@ -4,16 +4,16 @@ import {
   Building, 
   Award, 
   Briefcase, 
-  CheckCircle2, 
   ArrowLeft, 
   MessageSquare, 
   Calendar, 
-  ShieldCheck
+  ShieldCheck,
+  HelpCircle
 } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { Breadcrumb } from "../components/Breadcrumb";
 import { QuickConsultationForm } from "../components/QuickConsultationForm";
-import { getDoctorBySlug, doctorsData } from "../data/doctorsData";
+import { getDoctorBySlug, doctorsData, type DoctorHighlight, type DoctorFAQ } from "../data/doctorsData";
 import { getWhatsAppUrl } from "../config/siteConfig";
 import { useLanguage } from "../context/LanguageContext";
 import { getLocalizedDoctor, getLocalizedHospitalName } from "../utils/localizedData";
@@ -70,8 +70,7 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
     ? `https://www.nadwahealthcare.com/doctors/${doctor.slug}`
     : `https://www.nadwahealthcare.com/${currentLang}/doctors/${doctor.slug}`;
 
-  const doctorSchema = {
-    "@context": "https://schema.org",
+  const physicianSchema = {
     "@type": "Physician",
     "name": doctor.name,
     "jobTitle": localizedDoctor.designation,
@@ -82,8 +81,32 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
     },
     "description": seoDesc,
     "url": localizedCanonicalUrl,
-    "image": doctor.image.startsWith("http") ? doctor.image : `https://www.nadwahealthcare.com${doctor.image}`
+    "image": doctor.image.startsWith("http") ? doctor.image : `https://www.nadwahealthcare.com${doctor.image}`,
+    ...(doctor.awardsAndAchievements && doctor.awardsAndAchievements.length > 0 ? { "award": doctor.awardsAndAchievements } : {})
   };
+
+  const doctorSchema = localizedDoctor.faqs && localizedDoctor.faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          physicianSchema,
+          {
+            "@type": "FAQPage",
+            "mainEntity": localizedDoctor.faqs.map((faq: DoctorFAQ) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          }
+        ]
+      }
+    : {
+        "@context": "https://schema.org",
+        ...physicianSchema
+      };
 
   return (
     <div className="bg-white min-h-screen">
@@ -199,6 +222,29 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
                 </div>
               </div>
 
+              {/* Key Clinical Highlights (Cards 01, 02, 03 matching reference) */}
+              {localizedDoctor.highlights && localizedDoctor.highlights.length > 0 && (
+                <div className="content-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {localizedDoctor.highlights.map((item: DoctorHighlight, idx: number) => (
+                      <div
+                        key={idx}
+                        className="relative p-5 rounded-2xl border border-slate-200/90 bg-white hover:border-teal-500/60 transition-all shadow-xs flex flex-col justify-between group"
+                      >
+                        <div className="flex items-center justify-end mb-3">
+                          <span className="text-xs font-extrabold text-slate-400 group-hover:text-teal-700 group-hover:bg-teal-50 transition-colors bg-slate-100/80 px-2.5 py-0.5 rounded-full border border-slate-200/60 tracking-wider">
+                            {item.number}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                          {item.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Biography */}
               <div className="content-auto">
                 <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mb-4">
@@ -209,19 +255,28 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
                 </p>
               </div>
 
-              {/* Clinical Expertise & Specializations */}
+              {/* Specialization and Expertise */}
               <div className="content-auto">
-                <h3 className="text-lg font-bold text-slate-900 mb-4">
-                  {t("doctorDetails.expertiseTitle", "Areas of Clinical Expertise")}
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">
+                  {currentLang === "ar"
+                    ? "التخصص والخبرة السريرية"
+                    : currentLang === "fr"
+                    ? "Spécialisation et expertise clinique"
+                    : currentLang === "ru"
+                    ? "Специализация и клинический опыт"
+                    : "Specialization And Expertise"}
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="flex flex-wrap gap-2.5">
                   {doctor.expertise.map((exp, i) => (
                     <div
                       key={i}
-                      className="p-3.5 rounded-2xl bg-teal-50/50 border border-teal-100 flex items-start gap-2.5 text-xs sm:text-sm text-slate-800 font-medium"
+                      className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition-all border ${
+                        i === 0
+                          ? "bg-teal-600 text-white border-teal-600 shadow-sm"
+                          : "bg-white text-slate-800 border-slate-200 hover:border-teal-400 hover:bg-teal-50/30"
+                      }`}
                     >
-                      <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                      <span>{exp}</span>
+                      {exp}
                     </div>
                   ))}
                 </div>
@@ -262,6 +317,37 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ onOpenConsultation
                       >
                         {mem}
                       </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Doctor Specific FAQs */}
+              {localizedDoctor.faqs && localizedDoctor.faqs.length > 0 && (
+                <div className="content-auto pt-6 border-t border-slate-200">
+                  <div className="flex items-center gap-2 mb-5">
+                    <HelpCircle className="w-5 h-5 text-teal-600 shrink-0" />
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                      {currentLang === "ar"
+                        ? `الأسئلة الشائعة حول الاستشارة والجراحة مع ${doctor.name}`
+                        : currentLang === "fr"
+                        ? `Questions fréquentes sur les consultations et chirurgies avec le ${doctor.name}`
+                        : currentLang === "ru"
+                        ? `Часто задаваемые вопросы о приеме и операциях у доктора ${doctor.name}`
+                        : `Frequently Asked Questions: Consultation & Surgeries with ${doctor.name}`}
+                    </h3>
+                  </div>
+                  <div className="space-y-3.5">
+                    {localizedDoctor.faqs.map((faq: DoctorFAQ, i: number) => (
+                      <div key={i} className="p-4 sm:p-5 rounded-2xl bg-slate-50/80 border border-slate-200/90 shadow-2xs">
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 mb-2 flex items-start gap-2">
+                          <span className="text-teal-700 font-extrabold shrink-0">Q{i + 1}.</span>
+                          <span>{faq.question}</span>
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
+                          {faq.answer}
+                        </p>
+                      </div>
                     ))}
                   </div>
                 </div>

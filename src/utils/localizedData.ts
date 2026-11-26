@@ -1,4 +1,4 @@
-import type { DoctorItem } from "../data/doctorsData.ts";
+import type { DoctorItem, DoctorHighlight, DoctorFAQ } from "../data/doctorsData.ts";
 import type { HospitalItem } from "../data/hospitalsData.ts";
 import type { TreatmentItem } from "../data/treatmentsData.ts";
 import type { FAQItem } from "../data/faqsData.ts";
@@ -225,7 +225,12 @@ export function formatExperience(exp: string, lang: string): string {
 }
 
 // Doctor translations dictionary
-const DOCTOR_LOCALIZATIONS: Record<string, Record<string, { designation?: string; bio?: string }>> = {
+const DOCTOR_LOCALIZATIONS: Record<string, Record<string, {
+  designation?: string;
+  bio?: string;
+  highlights?: DoctorHighlight[];
+  faqs?: DoctorFAQ[];
+}>> = {
   "dr-naresh-trehan": {
     "ar": {
       "designation": "رئيس مجلس الإدارة والمدير العام، كبير جراحي القلب والصدر",
@@ -284,16 +289,100 @@ const DOCTOR_LOCALIZATIONS: Record<string, Record<string, { designation?: string
   },
   "dr-ashok-rajgopal": {
     "ar": {
-      "designation": "رئيس قسم جراحة العظام واستبدال المفاصل بالروبوت",
-      "bio": "الدكتور أشوك راجغوبال من أبرز جراحي استبدال المفاصل في العالم، أجرى أكثر من 30,000 عملية استبدال لمفصل الركبة وكان أول جراح ينفذ استبدال الركبة بالكامل بمساعدة الروبوت في الهند."
+      "designation": "رئيس مجلس الإدارة لمعهد اضطرابات الجهاز العضلي الهيكلي وجراحة العظام",
+      "bio": "الابتكار كلمة مقترنة دائماً باسم الدكتور أشوك راجغوبال. جراح عظام ذو شهرة عالمية، يمتلك العديد من الإنجازات السباقة في الهند: أول جراحة لاستبدال مفصل الركبة بالكامل في كلا الجانبين، وأول جراحة استبدال مفصل طفيفة التوغل (MIS)، وأول استبدال افتراضي للركبة باستخدام أدوات مخصصة لكل مريض، وأول جراح يستخدم مفاصل ركبة مخصصة حسب الجنس في الهند. أجرى أكثر من 39,000 عملية استبدال للركبة وأكثر من 60,000 عملية تنظير للمفاصل والإصابات الرياضية. كما شارك في فريق تصميم نظام الركبة Persona من شركة Zimmer وصمم أدوات جراحة استبدال الركبة طفيفة التوغل المستخدمة عالمياً. وحصل على العديد من الجوائز المرموقة بما في ذلك وسام بادما شري وجائزة الدكتور بي سي روي.",
+      "highlights": [
+        {
+          "number": "01",
+          "text": "جراح عظام ذو شهرة دولية أجرى أكثر من 39,000 جراحة استبدال للركبة و60,000 جراحة تنظيرية."
+        },
+        {
+          "number": "02",
+          "text": "أول جراح في الهند ينفذ استبدال الركبة الثنائي والجراحة طفيفة التوغل (MIS) والافتراضية بأدوات مخصصة."
+        },
+        {
+          "number": "03",
+          "text": "شارك في تصميم نظام Zimmer Persona وطور أدوات MIS الحاصلة على براءات اختراع والمستخدمة عالمياً."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "ما هي رسوم كشف العيادة الخارجية وإجراءات حجز الموعد مع الدكتور أشوك راجغوبال في ميدانتا جوروجرام؟",
+          "answer": "تتراوح رسوم كشف العيادة الخارجية (OPD) مع الدكتور أشوك راجغوبال في مستشفى ميدانتا – ذا ميديسيتي عادةً بين 2000 إلى 3000 روبية هندية (حوالي 25 - 40 دولاراً). يمكن للمرضى الدوليين الحصول على موعد ذي أولوية وتقييم طبي مجاني للتقارير والأشعة مع تقدير تكلفة الجراحة قبل السفر عبر التواصل مع ندوة للرعاية الصحية (+91 96485 78320 / info@nadwahealthcare.com) بدون أي رسوم وساطة."
+        },
+        {
+          "question": "ما هي تكلفة جراحة استبدال مفصل الركبة بالكامل (TKR) مع الدكتور أشوك راجغوبال في ميدانتا؟",
+          "answer": "تبدأ تكلفة استبدال مفصل الركبة الأحادية (ركبة واحدة) مع الدكتور أشوك راجغوبال في ميدانتا من 250,000 إلى 350,000 روبية (3000 - 4200 دولار)، بينما تتراوح باقة استبدال الركبتين معاً (Bilateral TKR) بين 450,000 و650,000 روبية (5500 - 7800 دولار) بحسب اختيار التقنية التقليدية أو طفيفة التوغل أو الروبوتية مع مفاصل Zimmer Persona. تشمل الباقات أتعاب الجراحة وإقامة 4-5 أيام والفحوصات والعلاج الطبيعي."
+        },
+        {
+          "question": "كيف يمكن للمرضى الدوليين الحصول على خطاب دعوة التأشيرة الطبية للعلاج مع الدكتور أشوك راجغوبال؟",
+          "answer": "يمكن للمرضى الدوليين الحصول على خطاب دعوة تأشيرة علاجية رسمي (VIL) من مستشفى ميدانتا عبر ندوة للرعاية الصحية في غضون 24 إلى 48 ساعة مجاناً. يكفي إرسال نسخ من جواز سفر المريض والمرافق مع أحدث صور أشعة الركبة والتقارير عبر واتساب (+91 96485 78320) أو البريد الإلكتروني (info@nadwahealthcare.com)."
+        }
+      ]
     },
     "fr": {
-      "designation": "Président du groupe d'orthopédie et de remplacement robotisé",
-      "bio": "Le Dr Ashok Rajgopal a réalisé plus de 30 000 chirurgies de remplacement du genou et a été le premier chirurgien en Inde à pratiquer une arthroplastie totale du genou assistée par robot."
+      "designation": "Président du groupe – Institut des troubles musculo-squelettiques et d'orthopédie",
+      "bio": "L'innovation est indissociable du Dr Ashok Rajgopal. Chirurgien orthopédique de renommée internationale, il compte de nombreuses premières à son actif en Inde : première chirurgie de remplacement bilatéral du genou, première chirurgie mini-invasive (MIS), premier remplacement virtuel avec instrumentation personnalisée, et premier chirurgien à utiliser des prothèses adaptées au sexe du patient. Il a réalisé plus de 39 000 arthroplasties totales du genou et plus de 60 000 arthroscopies. Co-concepteur du système de genou Persona de Zimmer, il a également conçu les instruments de chirurgie mini-invasive utilisés aujourd'hui par les chirurgiens du monde entier. Il a reçu de prestigieuses distinctions dont le Padma Shri et le prix Dr B.C. Roy.",
+      "highlights": [
+        {
+          "number": "01",
+          "text": "Chirurgien orthopédiste de renommée internationale avec plus de 39 000 prothèses de genou et 60 000 arthroscopies."
+        },
+        {
+          "number": "02",
+          "text": "Premier en Inde à pratiquer l'arthroplastie bilatérale et mini-invasive (MIS) ainsi que la chirurgie virtuelle personnalisée."
+        },
+        {
+          "number": "03",
+          "text": "Co-concepteur du système de genou Zimmer Persona et concepteur d'instruments MIS brevetés utilisés dans le monde entier."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Quels sont les tarifs de consultation et les démarches de rendez-vous avec le Dr Ashok Rajgopal à Medanta Gurugram ?",
+          "answer": "Une consultation en clinique externe (OPD) avec le Dr Ashok Rajgopal à Medanta – The Medicity varie généralement entre 2 000 et 3 000 INR (environ 25 à 40 USD). Les patients internationaux bénéficient d'un rendez-vous prioritaire et d'un deuxième avis médical gratuit avant le départ via Nadwa Healthcare (+91 96485 78320 / info@nadwahealthcare.com) sans aucuns frais d'intermédiation."
+        },
+        {
+          "question": "Quel est le coût d'une prothèse totale de genou avec le Dr Ashok Rajgopal à Medanta ?",
+          "answer": "Une arthroplastie unilatérale (un seul genou) avec le Dr Ashok Rajgopal à Medanta démarre entre 250 000 et 350 000 INR (3 000 à 4 200 USD). Un forfait bilatéral (les deux genoux) varie entre 450 000 et 650 000 INR (5 500 à 7 800 USD) selon la technique conventionnelle, mini-invasive ou robotique Zimmer Persona. Le forfait comprend la chirurgie, 4 à 5 jours d'hospitalisation, les examens et la rééducation."
+        },
+        {
+          "question": "Comment obtenir une lettre d'invitation pour visa médical pour être soigné par le Dr Ashok Rajgopal ?",
+          "answer": "Les patients internationaux reçoivent gratuitement une lettre d'invitation officielle pour visa médical (VIL) de l'hôpital Medanta sous 24 à 48 heures via Nadwa Healthcare. Il suffit de transmettre la copie des passeports du patient et de l'accompagnateur ainsi que les radiographies récentes du genou par WhatsApp (+91 96485 78320) ou par e-mail (info@nadwahealthcare.com)."
+        }
+      ]
     },
     "ru": {
-      "designation": "Руководитель отделения ортопедии и роботизированного протезирования",
-      "bio": "Д-р Ашок Раджгопал выполнил более 30 000 операций по эндопротезированию суставов и был первым хирургом в Индии, внедрившим роботизированную замену коленного сустава."
+      "designation": "Руководитель Института заболеваний опорно-двигательного аппарата и ортопедии",
+      "bio": "Инновации неразрывно связаны с именем доктора Ашока Раджгопала. Ортопед-хирург мирового уровня, он впервые в Индии выполнил двустороннее эндопротезирование коленного сустава, первую минимально инвазивную операцию (MIS), первую виртуальную замену с персонализированными инструментами и впервые применил гендерно-специфичные протезы. На его счету более 39 000 операций по тотальному эндопротезированию колена и свыше 60 000 артроскопических операций. Он входит в группу разработчиков системы коленного сустава Persona компании Zimmer и запатентовал хирургические инструменты для MIS, используемые по всему миру. Удостоен престижных наград Падма Шри и премии доктора Б. К. Роя.",
+      "highlights": [
+        {
+          "number": "01",
+          "text": "Всемирно признанный ортопед: более 39 000 операций по замене коленного сустава и 60 000 артроскопий."
+        },
+        {
+          "number": "02",
+          "text": "Первый в Индии выполнил двустороннюю и минимально инвазивную (MIS) замену коленного сустава."
+        },
+        {
+          "number": "03",
+          "text": "Соразработчик коленной системы Zimmer Persona и создатель запатентованных инструментов MIS."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Какова стоимость амбулаторного приема и порядок записи к доктору Ашоку Раджгопалу в Medanta Gurugram?",
+          "answer": "Стоимость очной консультации доктора Ашока Раджгопала в Medanta – The Medicity составляет от 2 000 до 3 000 INR (около 25–40 USD). Иностранные пациенты могут получить приоритетную запись на прием, а также бесплатное предварительное второе мнение и расчет стоимости операции через Nadwa Healthcare (+91 96485 78320 / info@nadwahealthcare.com) без агентских комиссий."
+        },
+        {
+          "question": "Сколько стоит операция по замене коленного сустава у доктора Ашока Раджгопала в Medanta?",
+          "answer": "Операция по замене одного коленного сустава (одностороннее эндопротезирование) у доктора Ашока Раджгопала в Medanta начинается от 250 000 до 350 000 INR (3 000–4 200 USD). Пакет двусторонней замены коленей составляет от 450 000 до 650 000 INR (5 500–7 800 USD) в зависимости от использования робота и имплантов Zimmer Persona. Пакет включает операцию, 4–5 дней госпитализации, анализы и реабилитацию."
+        },
+        {
+          "question": "Как иностранным пациентам получить приглашение для медицинской визы на лечение у доктора Ашока Раджгопала?",
+          "answer": "Иностранные пациенты получают официальное визовое приглашение (VIL) от клиники Medanta через Nadwa Healthcare бесплатно в течение 24–48 часов. Достаточно отправить копии загранпаспортов пациента и сопровождающего лица, а также рентгеновские снимки коленей по WhatsApp (+91 96485 78320) или на электронную почту (info@nadwahealthcare.com)."
+        }
+      ]
     }
   },
   "dr-rana-patir": {
@@ -4266,6 +4355,8 @@ export function getLocalizedDoctor(doctor: DoctorItem, lang: string) {
     experienceFormatted,
     designation: loc.designation || doctor.designation,
     bio: loc.bio || doctor.bio,
+    highlights: loc.highlights || doctor.highlights,
+    faqs: loc.faqs || doctor.faqs,
   };
 }
 

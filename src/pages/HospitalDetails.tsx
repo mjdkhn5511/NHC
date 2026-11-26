@@ -8,15 +8,17 @@ import {
   CheckCircle2, 
   ArrowLeft, 
   MessageSquare, 
-  Globe2
+  Globe2,
+  Stethoscope
 } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { Breadcrumb } from "../components/Breadcrumb";
 import { QuickConsultationForm } from "../components/QuickConsultationForm";
 import { getHospitalBySlug, hospitalsData } from "../data/hospitalsData";
+import { doctorsData } from "../data/doctorsData";
 import { getWhatsAppUrl } from "../config/siteConfig";
 import { useLanguage } from "../context/LanguageContext";
-import { getLocalizedHospital, getLocalizedHospitalName } from "../utils/localizedData";
+import { getLocalizedHospital, getLocalizedHospitalName, getLocalizedDoctor } from "../utils/localizedData";
 
 interface HospitalDetailsProps {
   onOpenConsultation: (hospitalName?: string) => void;
@@ -49,6 +51,9 @@ export const HospitalDetails: React.FC<HospitalDetailsProps> = ({ onOpenConsulta
 
   const localizedHospital = getLocalizedHospital(hospital, currentLang);
   const otherHospitals = hospitalsData.filter((h) => h.id !== hospital.id).slice(0, 3);
+  const associatedDoctors = doctorsData.filter(
+    (d) => d.hospitalSlug === hospital.slug || d.hospitalName.toLowerCase().includes(hospital.name.split("–")[0].trim().toLowerCase())
+  );
 
   const hospitalSchema = {
     "@context": "https://schema.org",
@@ -247,6 +252,58 @@ export const HospitalDetails: React.FC<HospitalDetailsProps> = ({ onOpenConsulta
                   ))}
                 </ul>
               </div>
+
+              {/* Department Leads & Key Specialists at this Hospital */}
+              {associatedDoctors.length > 0 && (
+                <div className="content-auto pt-4 border-t border-slate-200">
+                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <Stethoscope className="w-5 h-5 text-teal-600" />
+                    <span>
+                      {currentLang === "ar"
+                        ? `كبار الأطباء والاستشاريين في ${getLocalizedHospitalName(hospital.name, currentLang)}`
+                        : currentLang === "fr"
+                        ? `Chefs de département et spécialistes à ${getLocalizedHospitalName(hospital.name, currentLang)}`
+                        : currentLang === "ru"
+                        ? `Ведущие врачи и руководители отделений в ${getLocalizedHospitalName(hospital.name, currentLang)}`
+                        : `Key Specialists & Department Chairs at ${hospital.name}`}
+                    </span>
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {associatedDoctors.map((doc) => {
+                      const locD = getLocalizedDoctor(doc, currentLang);
+                      return (
+                        <Link
+                          key={doc.id}
+                          to={localizeUrl(`/doctors/${doc.slug}`)}
+                          className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-teal-500 transition-colors flex items-center gap-3.5 group"
+                        >
+                          <img
+                            src={doc.image}
+                            alt={doc.name}
+                            width={48}
+                            height={48}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ width: "48px", height: "48px", aspectRatio: "1 / 1" }}
+                            className="w-12 h-12 rounded-xl object-cover shrink-0 aspect-square"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-teal-600 transition-colors truncate">
+                              {doc.name}
+                            </h4>
+                            <span className="text-[11px] text-teal-700 font-medium block truncate">
+                              {locD.designation}
+                            </span>
+                            <span className="text-[10px] text-slate-500 block">
+                              {doc.experienceYears} • {locD.specialty}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right Column: Sticky Inquiry Card */}

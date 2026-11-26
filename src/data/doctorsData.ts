@@ -1,3 +1,13 @@
+export interface DoctorHighlight {
+  number: string;
+  text: string;
+}
+
+export interface DoctorFAQ {
+  question: string;
+  answer: string;
+}
+
 export interface DoctorItem {
   id: string;
   slug: string;
@@ -15,6 +25,8 @@ export interface DoctorItem {
   awardsAndAchievements: string[];
   memberships: string[];
   featured: boolean;
+  highlights?: DoctorHighlight[];
+  faqs?: DoctorFAQ[];
 }
 
 export const doctorsData: DoctorItem[] = [
@@ -150,29 +162,61 @@ export const doctorsData: DoctorItem[] = [
     slug: "dr-ashok-rajgopal",
     name: "Dr. Ashok Rajgopal",
     specialty: "Orthopedics and Joint Replacement",
-    designation: "Group Chairman, Orthopedics & Robotic Joint Replacement",
+    designation: "Group Chairman – Institute of Musculoskeletal Disorders and Orthopaedics",
     hospitalName: "Medanta – The Medicity",
     hospitalSlug: "medanta-the-medicity",
     city: "Gurugram",
-    qualifications: "MBBS, MS (Ortho), M.Ch (Ortho, Liverpool), FIMSA, FRCS",
+    qualifications: "MBBS (AFMC), MS Orthopaedics (AIIMS), MCh Orthopaedics (UK), FRCS (Edinburgh), FIMSA",
     experienceYears: "40+ Years",
     image: "/images/doctors/Dr-Ashok-Rajgopal.webp",
-    bio: "Dr. Ashok Rajgopal is one of the world's most accomplished orthopedic joint replacement surgeons. He has performed more than 30,000 knee replacement surgeries, including being the first surgeon in India to perform robotic total knee replacement and bilateral simultaneous knee replacements.",
+    bio: "Innovation is a word that is immediately associated with Dr. Ashok Rajgopal. An orthopedic surgeon of international repute, he has several firsts to his credit. He performed the first bilateral total knee replacement surgery, the first minimally invasive joint replacement surgery in India, the first virtual total knee replacement using patient-specific instrumentation, and was the first surgeon to use gender-specific knees in India. A prolific surgeon, he has to his credit, more than 39,000 total knee replacement surgeries and over 60,000 arthroscopic surgeries for sports injuries. A designer surgeon, he was on the design team of the Persona knee system developed by Zimmer. He is also the designer of the instruments used in minimally invasive total knee replacement which are currently used by surgeons worldwide. His enduring passion for practicing and advancing medical and surgical sciences has seen him win a number of prestigious awards including the Padma Shri and Dr. B.C. Roy Award.",
+    highlights: [
+      {
+        number: "01",
+        text: "Over 39,000+ Total Knee Replacement surgeries & 60,000+ Arthroscopic surgeries performed."
+      },
+      {
+        number: "02",
+        text: "First in India to perform bilateral and minimally invasive (MIS) total knee replacement surgery, and virtual TKR with patient-specific instrumentation."
+      },
+      {
+        number: "03",
+        text: "Co-designer of the Zimmer Persona Knee System and developer of patented MIS total knee replacement instruments used worldwide."
+      }
+    ],
     expertise: [
-      "Robotic-Arm Total Knee Arthroplasty",
-      "Minimally Invasive Total Hip Replacement",
-      "Complex Revision Knee & Hip Arthroplasty",
-      "Computer-Navigated Joint Realignment",
-      "Arthroscopic Meniscal & Cartilage Restoration"
+      "Knee Replacement Surgery",
+      "Joint Replacement Surgery",
+      "Arthroscopic Ligament Surgeries",
+      "Arthroplasty Surgeries",
+      "Hip Surgery",
+      "Robotic Surgeries"
     ],
     awardsAndAchievements: [
-      "Padma Shri awarded by the President of India",
-      "Over 30,000 successful joint replacements completed",
-      "Co-designer of the Persona Knee prosthetic system"
+      "Padma Shri awarded by the President of India (2014)",
+      "Dr. B.C. Roy National Award (2014)",
+      "Lifetime Achievement Award, Asia Pacific Arthroplasty Society (APAS)",
+      "Pioneered Bilateral MIS Total Knee Replacement & Virtual Patient-Specific TKR in India"
     ],
     memberships: [
+      "Royal College of Surgeons of Edinburgh (FRCS)",
       "International Society of Arthroscopy, Knee Surgery and Orthopaedic Sports Medicine (ISAKOS)",
-      "Royal College of Surgeons of Edinburgh"
+      "Fellow of the International Medical Sciences Academy (FIMSA)",
+      "Indian Orthopaedic Association (IOA)"
+    ],
+    faqs: [
+      {
+        question: "What are Dr. Ashok Rajgopal's OPD consultation fees and appointment process at Medanta Gurugram?",
+        answer: "An in-person OPD consultation with Dr. Ashok Rajgopal at Medanta – The Medicity (Sector 38, Gurugram) typically ranges from INR 2,000 to INR 3,000 (approx. USD $25 – $40). International and outstation patients can secure a priority OPD appointment, free pre-travel case review, and formal treatment estimates by contacting Nadwa Healthcare at +91 96485 78320 or info@nadwahealthcare.com. Nadwa Healthcare coordinates appointment scheduling directly with Medanta's surgical department at zero facilitation fee."
+      },
+      {
+        question: "What is the cost of Total Knee Replacement surgery by Dr. Ashok Rajgopal at Medanta?",
+        answer: "A Unilateral (Single Knee) Total Knee Replacement under Dr. Ashok Rajgopal at Medanta – The Medicity generally starts from INR 2,50,000 to INR 3,50,000 (USD $3,000 – $4,200). A Bilateral (Both Knees) Total Knee Replacement package ranges between INR 4,50,000 and INR 6,50,000 (USD $5,500 – $7,800), depending on whether conventional, minimally invasive (MIS), or robotic Zimmer Persona knee systems are selected. Standard packages include surgeon fees, 4-5 days hospital admission, pre-anesthetic testing, routine surgical consumables, and initial physical rehabilitation."
+      },
+      {
+        question: "How can international patients get a medical visa invitation letter for treatment under Dr. Ashok Rajgopal?",
+        answer: "International patients traveling to Medanta – The Medicity for joint replacement under Dr. Ashok Rajgopal can obtain an official Visa Invitation Letter (VIL) within 24 to 48 hours through Nadwa Healthcare. Simply submit copies of the patient's and accompanying attendant's valid passports along with recent knee X-rays and medical records via WhatsApp (+91 96485 78320) or email (info@nadwahealthcare.com). Nadwa Healthcare issues the official hospital invitation letter free of charge to facilitate rapid Indian e-Medical Visa processing."
+      }
     ],
     featured: true
   },

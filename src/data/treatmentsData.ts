@@ -140,7 +140,7 @@ export const treatmentsData: TreatmentItem[] = [
     shortDesc: "Robotic total knee and hip replacements, complex revision arthroplasties, arthroscopic sports medicine, and spinal stabilization.",
     badge: "Rapid Recovery",
     image: "/images/orthopedics-joint.webp",
-    overview: "Orthopedic excellence centers in Delhi NCR utilize AI-navigated robotic arms (Mako, Rosa) for joint replacements, ensuring microscopic millimeter accuracy, reduced tissue trauma, faster ambulation, and longer implant longevity.",
+    overview: "Orthopedic excellence centers in Delhi NCR—led by internationally acclaimed stalwarts such as Dr. Ashok Rajgopal (Group Chairman at Medanta – The Medicity with over 39,000 knee replacements)—utilize AI-navigated robotic arms (Mako, Rosa) and patient-specific instrumentation for joint replacements, ensuring microscopic millimeter accuracy, reduced tissue trauma, faster ambulation, and longer implant longevity.",
     conditionsTreated: [
       "Severe Osteoarthritis of the Knee & Hip",
       "Avascular Necrosis (AVN) of the Femoral Head",
