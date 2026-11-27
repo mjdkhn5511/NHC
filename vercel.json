@@ -18,6 +18,46 @@
       "permanent": true
     },
     {
+      "source": "/blog/heart-surgery-india-cost-guide",
+      "destination": "/blog/heart-surgery-cost-in-india-guide",
+      "permanent": true
+    },
+    {
+      "source": "/ar/blog/heart-surgery-india-cost-guide",
+      "destination": "/ar/blog/heart-surgery-cost-in-india-guide",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/heart-surgery-india-cost-guide",
+      "destination": "/fr/blog/heart-surgery-cost-in-india-guide",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/heart-surgery-india-cost-guide",
+      "destination": "/ru/blog/heart-surgery-india-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/cancer-treatment-india-oncology-cost-guide",
+      "destination": "/blog/cancer-treatment-in-india-oncology-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/ar/blog/cancer-treatment-india-oncology-cost-guide",
+      "destination": "/ar/blog/cancer-treatment-in-india-oncology-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/cancer-treatment-india-oncology-cost-guide",
+      "destination": "/fr/blog/cancer-treatment-in-india-oncology-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/cancer-treatment-india-oncology-cost-guide",
+      "destination": "/ru/blog/cancer-treatment-in-india-oncology-cost-guide",
+      "permanent": true
+    },
+    {
       "source": "/blog/cost-of-cardiac-surgery-india-vs-usa-uk",
       "destination": "/blog/heart-surgery-cost-in-india-guide",
       "permanent": true

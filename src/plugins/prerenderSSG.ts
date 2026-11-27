@@ -783,6 +783,249 @@ function getCriticalAboutHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   </div>`;
 }
 
+function getCriticalMedicalDisclaimerHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
+  const isAr = lang === 'ar';
+  const isFr = lang === 'fr';
+  const isRu = lang === 'ru';
+  const prefix = isAr ? '/ar' : isFr ? '/fr' : isRu ? '/ru' : '';
+
+  const deskTitle = isAr ? 'مكتب السياحة العلاجية' : isFr ? 'Bureau tourisme médical' : isRu ? 'Международный отдел' : 'Medical Tourism Desk';
+  const emergencyText = isAr ? 'مكتب الطوارئ 24/7: <bdi dir="ltr">+91 96485 78320</bdi>' : isFr ? 'Urgences 24/7 : +91 96485 78320' : isRu ? 'Экстренно 24/7: +91 96485 78320' : 'Emergency 24/7: +91 96485 78320';
+  const ctaConsult = isAr ? 'استشارة مجانية' : isFr ? 'Consultation' : isRu ? 'Консультация' : 'Get Free Consultation';
+
+  const breadcrumbHome = isAr ? 'الرئيسية' : isFr ? 'Accueil' : isRu ? 'Главная' : 'Home';
+  const breadcrumbDisclaimer = isAr ? 'إخلاء المسؤولية الطبية' : isFr ? 'Avis de Non-Responsabilité' : isRu ? 'Отказ от ответственности' : 'Medical Disclaimer';
+  const badgeText = isAr ? 'تنويه سريري وقانوني هام' : isFr ? 'Avis Clinique & Juridique Essentiel' : isRu ? 'Важное клиническое и правовое уведомление' : 'Essential Healthcare Notice';
+  const headingText = isAr
+    ? 'إخلاء المسؤولية الطبية والإشعار السريري'
+    : isFr
+    ? 'Avis de Non-Responsabilité Médicale & Notice Clinique'
+    : isRu
+    ? 'Медицинский Отказ от Ответственности'
+    : 'Medical Disclaimer & Clinical Notice';
+
+  const subtitleText = isAr
+    ? 'يرجى قراءة هذا الإشعار بعناية قبل طلب خدمات التنسيق الطبي من خلال ندوة للرعاية الصحية.'
+    : isFr
+    ? 'Veuillez lire attentivement cette notice avant de solliciter des services de coordination par l\'intermédiaire de NadwaHealthcare.'
+    : isRu
+    ? 'Пожалуйста, внимательно ознакомьтесь с данным уведомлением перед обращением за услугами через NadwaHealthcare.'
+    : 'Please read this notice carefully prior to seeking healthcare services through NadwaHealthcare.';
+
+  const highlightTitle = isAr
+    ? 'ندوة للرعاية الصحية ليست مزوداً طبياً مباشراً'
+    : isFr
+    ? 'NadwaHealthcare n\'est pas un établissement de soins'
+    : isRu
+    ? 'NadwaHealthcare не является медицинским учреждением'
+    : 'NadwaHealthcare is Not a Medical Provider';
+
+  const highlightText = isAr
+    ? 'ندوة للرعاية الصحية (NHC) هي وكالة مستقلة لتنسيق سفر المرضى الدوليين وخدمات المساعدة الطبية في دلهي إن سي آر، الهند. ندوة للرعاية الصحية لا تمتلك أو تشغل أو تدير أي مستشفيات أو مراكز طبية، ولا توظف أطباء أو جراحين أو ممرضين بشكل مباشر.'
+    : isFr
+    ? 'NadwaHealthcare ("NHC") est une agence indépendante de facilitation de voyages médicaux et de conciergerie pour patients internationaux basée à Delhi NCR, Inde. NHC ne possède, n\'exploite ni ne gère aucun établissement médical et n\'emploie aucun médecin, chirurgien ou infirmier.'
+    : isRu
+    ? 'NadwaHealthcare («NHC») — независимое международное агентство по организации медицинского туризма и сопровождению пациентов в Дели NCR, Индия. NHC не владеет, не управляет медицинскими учреждениями и не имеет в штате практикующих врачей или медицинского персонала.'
+    : 'NadwaHealthcare ("NHC") is an independent international patient facilitation agency and medical concierge service provider based in Delhi NCR, India. NHC does not own, operate, or control any medical facilities, nor does it employ doctors, surgeons, nurses, or medical practitioners.';
+
+  const sec1Title = isAr
+    ? '١. انتفاء العلاقة بين الطبيب والمريض مع الوكالة'
+    : isFr
+    ? '1. Absence de relation médecin-patient avec l\'agence'
+    : isRu
+    ? '1. Отсутствие отношений «врач-пациент» с компанией'
+    : '1. No Doctor-Patient Relationship';
+
+  const sec1P1 = isAr
+    ? 'المعلومات والبيانات المتبادلة عبر هذا الموقع الإلكتروني أو البريد الإلكتروني أو الهاتف أو تطبيق واتساب لا تشكل مشورة طبية مباشرة أو تشخيصاً سريرياً أو توصية علاجية ملزمة، ولا تنشئ علاقة تعاقدية بين الطبيب والمريض بينك وبين ندوة للرعاية الصحية.'
+    : isFr
+    ? 'Les informations communiquées via ce site web, par e-mail, téléphone ou WhatsApp ne constituent en aucun cas un avis médical direct, un diagnostic ou une recommandation clinique, et n\'établissent aucune relation médecin-patient entre vous et NadwaHealthcare.'
+    : isRu
+    ? 'Информация, передаваемая через данный сайт, электронную почту, телефон или WhatsApp, не является прямой медицинской консультацией, постановкой диагноза или клиническим назначением и не устанавливает отношений «врач-пациент» между вами и NadwaHealthcare.'
+    : 'Information communicated through this website, by email, phone, or WhatsApp does not constitute medical advice, diagnosis, or clinical recommendation, nor does it establish a doctor-patient relationship between you and NadwaHealthcare.';
+
+  const sec1P2 = isAr
+    ? 'الآراء الطبية التقديرية وتكلفة العلاج المقدمة عبر ندوة للرعاية الصحية هي آراء صادرة مباشرة عن أطباء وجراحين مرخصين ومستقلين يمارسون عملهم في المستشفيات الهندية المعتمدة دولياً. إن العلاقة الرسمية بين الطبيب والمريض تنشأ حصراً وبشكل مباشر بين المريض والطبيب المعالج المرخص في الهند.'
+    : isFr
+    ? 'Les avis médicaux préliminaires et les devis transmis par NHC sont émis directement par des médecins et chirurgiens agréés exerçant dans les hôpitaux partenaires accrédités en Inde. Toute relation médicale formelle s\'établit exclusivement entre le patient et le médecin traitant agréé en Inde.'
+    : isRu
+    ? 'Предварительные медицинские заключения и расчеты стоимости формируются непосредственно лицензированными врачами и хирургами аккредитованных индийских клиник. Официальные взаимоотношения «врач-пациент» возникают исключительно между пациентом и лечащим врачом в Индии.'
+    : 'Preliminary medical opinions and treatment estimates provided through NHC are direct opinions rendered by third-party licensed doctors and surgeons practicing at accredited partner hospitals. Any formal doctor-patient relationship is established exclusively between the patient and the licensed treating physician in India.';
+
+  const sec2Title = isAr
+    ? '٢. عدم وجود ضمانات طبية أو نتائج مؤكدة'
+    : isFr
+    ? '2. Absence de garanties de résultats médicaux'
+    : isRu
+    ? '2. Отсутствие медицинских гарантий'
+    : '2. No Medical Guarantees or Warranties';
+
+  const sec2P1 = isAr
+    ? 'الطب والجراحة ليسا من العلوم الدقيقة المطلقة. نظراً لاختلاف الاستجابة البيولوجية والمناعية لكل مريض وتطور الحالة الصحية ووجود أمراض مصاحبة، فإنه لا يمكن بأي حال من الأحوال ضمان نتائج طبية أو جراحية محددة أو الشفاء التام بنسبة 100%.'
+    : isFr
+    ? 'La médecine et la chirurgie ne sont pas des sciences exactes. En raison de la variabilité biologique individuelle, de l\'évolution des pathologies et des antécédents médicaux, aucun résultat clinique, succès chirurgical ou guérison ne peut être garanti.'
+    : isRu
+    ? 'Медицина и хирургия не являются точными науками. В силу индивидуальных биологических особенностей, течения заболеваний и иммунного ответа ни один клинический исход, результат операции или выздоровление не могут быть гарантированы.'
+    : 'Medicine and surgery are not exact sciences. Due to variations in individual human biology, disease progression, immune responses, and pre-existing medical conditions, no medical outcome, surgical result, or cure can be guaranteed.';
+
+  const sec2P2 = isAr
+    ? 'ترفض ندوة للرعاية الصحية صراحة أي ادعاء بنسب نجاح مضمونة أو شفاء كامل دون مضاعفات. إن جميع التدخلات الجراحية والعلاجية تنطوي على مخاطر سريرية متأصلة يجب مناقشتها بدقة ومباشرة مع الجراح المعالج قبل اتخاذ أي قرار.'
+    : isFr
+    ? 'NadwaHealthcare réfute expressément toute allégation de taux de réussite garanti ou de guérison à 100%. Tout acte médical ou chirurgical comporte des risques inhérents qui doivent être discutés directement avec l\'équipe chirurgicale.'
+    : isRu
+    ? 'NadwaHealthcare категорически отвергает любые заявления о 100% гарантии успеха или отсутствии осложнений. Любое хирургическое вмешательство сопряжено с рисками, которые должны быть подробно обсуждены непосредственно с хирургом.'
+    : 'NadwaHealthcare explicitly rejects any claim of guaranteed success rates, 100% cure, or complications-free treatments. All prospective surgical and medical interventions involve intrinsic clinical risks that should be thoroughly discussed directly with the operating surgeon.';
+
+  const sec3Title = isAr
+    ? '٣. وجوب الفحص السريري المباشر في المستشفى'
+    : isFr
+    ? '3. Nécessité d\'une consultation médicale directe sur place'
+    : isRu
+    ? '3. Необходимость очной консультации и диагностики'
+    : '3. Requirement for Direct Medical Consultation';
+
+  const sec3P1 = isAr
+    ? 'التقييمات الطبية الأولية التي تُجرى عن بُعد استناداً إلى صور الأشعة أو ملفات DICOM أو تقارير الخزعة هي تقييمات استرشادية أولية. يتم تأكيد التشخيص النهائي والخطة الجراحية ومدى ملاءمة المريض للعملية فقط بعد الفحص السريري الحضوري والفحوصات المخبرية وتقييم التخدير داخل المستشفى في الهند.'
+    : isFr
+    ? 'Les évaluations effectuées à distance à partir d\'imageries médicales, de scanners ou de rapports de laboratoire sont préliminaires. Le diagnostic final, le protocole opératoire et l\'éligibilité chirurgicale ne sont validés qu\'après l\'examen clinique en présentiel et le bilan pré-opératoire à l\'hôpital en Inde.'
+    : isRu
+    ? 'Дистанционные оценки на основании выписок, МРТ, КТ и анализов являются предварительными. Окончательный клинический диагноз, план лечения и допуск к операции определяются только после очного осмотра и предоперационного обследования в клинике в Индии.'
+    : 'Remote evaluations conducted using scans, digital DICOM files, or pathology reports are preliminary. The final diagnosis, surgical plan, and treatment suitability can only be confirmed after in-person clinical examination, secondary diagnostic validations, and anesthetic workups conducted at the hospital in India.';
+
+  const sec4Title = isAr
+    ? '٤. تنويه حالات الطوارئ الطبية الحادة'
+    : isFr
+    ? '4. Avertissement concernant les urgences vitales'
+    : isRu
+    ? '4. Предупреждение об экстренных состояниях'
+    : '4. Emergency Healthcare Warning';
+
+  const sec4P1 = isAr
+    ? 'هذا الموقع وقنوات التواصل الخاصة بنا غير مخصصة للحالات الطارئة المهددة للحياة. إذا كنت أنت أو أحد أفراد عائلتك تعاني من ألم حاد في الصدر أو نزيف غير مسيطر عليه أو فقدان للوعي أو ضيق تنفس حاد في بلد إقامتك، يرجى التوجه فوراً إلى أقرب قسم طوارئ أو الاتصال بالإسعاف فوراً.'
+    : isFr
+    ? 'Ce site web et nos canaux d\'assistance ne sont pas destinés aux urgences médicales vitales immédiates. Si vous ou un proche présentez des douleurs thoraciques aiguës, une hémorragie sévère, une perte de connaissance ou une détresse respiratoire dans votre pays de résidence, contactez immédiatement les services d\'urgence locaux.'
+    : isRu
+    ? 'Данный сайт и каналы связи не предназначены для оказания экстренной медицинской помощи при жизнеугрожающих состояниях. При острой боли в груди, кровотечении, потере сознания или нарушении дыхания в вашей стране немедленно вызовите скорую медицинскую помощь.'
+    : 'This website and our international intake channels are not designed for life-threatening acute medical emergencies. If you or a loved one is experiencing severe acute chest pain, uncontrolled hemorrhage, loss of consciousness, or sudden respiratory distress in your home country, please contact your local emergency services or nearest hospital emergency room immediately.';
+
+  const footerNote = isAr
+    ? 'لأي استفسار إضافي بخصوص سياستنا التشغيلية والتنظيمية، يرجى مراسلة قسم الشؤون القانونية على'
+    : isFr
+    ? 'Pour toute précision relative à nos mentions légales et opérationnelles, contactez notre département juridique à'
+    : isRu
+    ? 'По вопросам юридической и операционной структуры обращайтесь в юридический отдел:'
+    : 'For further clarification on our operational structure, please write to our legal desk at';
+
+  return `
+  <div class="min-h-screen flex flex-col bg-white">
+    <div class="relative z-50 bg-[#051714] text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-3 sm:px-4 border-b border-teal-950/80">
+      <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-1">
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="inline-flex items-center gap-1.5 text-teal-300 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ${deskTitle}
+          </span>
+          <span class="hidden md:inline text-slate-400">|</span>
+          <a href="tel:+919648578320" class="hover:text-teal-300 transition-colors">${emergencyText}</a>
+        </div>
+      </div>
+    </div>
+    <header class="sticky top-0 z-40 bg-[#08221E] border-b border-teal-900/60 shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20">
+          <a href="${prefix || '/'}" class="flex items-center gap-2 sm:gap-2.5">
+            <span class="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30 font-black text-xs">NHC</span>
+            <span class="text-base sm:text-xl font-black text-white tracking-tight">Nadwa <span class="text-teal-400">Healthcare</span></span>
+          </a>
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a href="${prefix}/contact" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-colors">
+              ${ctaConsult}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <div class="bg-white min-h-screen">
+        <header class="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav aria-label="Breadcrumb" class="py-3 text-xs md:text-sm text-slate-300">
+              <ol class="flex items-center flex-wrap gap-1.5">
+                <li>
+                  <a href="${prefix || '/'}" class="flex items-center gap-1 text-slate-300 hover:text-teal-300 font-medium">
+                    <span>${breadcrumbHome}</span>
+                  </a>
+                </li>
+                <li><span class="text-slate-400">/</span></li>
+                <li><span class="font-semibold text-white" aria-current="page">${breadcrumbDisclaimer}</span></li>
+              </ol>
+            </nav>
+            <div class="mt-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-3">
+                ${badgeText}
+              </span>
+              <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                ${headingText}
+              </h1>
+              <p class="mt-2 text-xs sm:text-sm text-slate-300">
+                ${subtitleText}
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <article class="py-14 lg:py-20">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-xs sm:text-sm text-slate-600 leading-relaxed text-start">
+            <section class="p-6 rounded-3xl bg-amber-50 border-2 border-amber-300/80 shadow-sm space-y-3">
+              <div class="flex items-center gap-2 text-amber-900 font-bold text-sm sm:text-base">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <h2>${highlightTitle}</h2>
+              </div>
+              <p class="text-amber-950/90 leading-relaxed">
+                ${highlightText}
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                ${sec1Title}
+              </h2>
+              <p>${sec1P1}</p>
+              <p>${sec1P2}</p>
+            </section>
+
+            <section class="space-y-3">
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                ${sec2Title}
+              </h2>
+              <p>${sec2P1}</p>
+              <p>${sec2P2}</p>
+            </section>
+
+            <section class="space-y-3">
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                ${sec3Title}
+              </h2>
+              <p>${sec3P1}</p>
+            </section>
+
+            <section class="space-y-3">
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                ${sec4Title}
+              </h2>
+              <p>${sec4P1}</p>
+            </section>
+
+            <footer class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-500">
+              ${footerNote} <a href="mailto:info@nadwahealthcare.com" class="text-teal-600 font-semibold underline">info@nadwahealthcare.com</a>.
+            </footer>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>`;
+}
+
 function getDoctorsExtraHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
   const isAr = lang === 'ar';
   const isFr = lang === 'fr';
@@ -2013,6 +2256,9 @@ function renderHtml(templateHtml: string, meta: PageMetadata): string {
       const criticalHtml = getCriticalBlogDetailsHtml(blog, lang as 'en' | 'ar' | 'fr' | 'ru');
       html = html.replace('<div id="root"></div>', `<div id="root">${criticalHtml}</div>`);
     }
+  } else if (cleanRoutePrefix === '/medical-disclaimer') {
+    const criticalHtml = getCriticalMedicalDisclaimerHtml(lang as 'en' | 'ar' | 'fr' | 'ru');
+    html = html.replace('<div id="root"></div>', `<div id="root">${criticalHtml}</div>`);
   }
 
   return html;
@@ -2702,76 +2948,6 @@ export function prerenderSSGPlugin(): Plugin {
           });
         });
       });
-
-      // H2. Static entry for alternative heart surgery slug & medical visa guide requested in GSC
-      pages.push(
-        {
-          route: '/blog/heart-surgery-india-cost-guide',
-          title: 'Heart Surgery in India: Cost & Top Hospitals | Nadwa',
-          description: '2026 international guide to heart surgery in India. Compare CABG & valve surgery costs, top Delhi cardiac surgeons, and get free medical visa assistance.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/blog/heart-surgery-india-cost-guide',
-        },
-        {
-          route: '/ar/blog/heart-surgery-india-cost-guide',
-          title: 'تكلفة جراحة القلب في الهند وأفضل المستشفيات | ندوة',
-          description: 'دليل جراحة القلب في الهند لعام 2026. مقارنة تكاليف مجازة الشريان التاجي والصمامات في أفضل مستشفيات نيودلهي مع مساعدة مجانية في التأشيرة.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/ar/blog/heart-surgery-india-cost-guide',
-          lang: 'ar',
-          dir: 'rtl',
-        },
-        {
-          route: '/fr/blog/heart-surgery-india-cost-guide',
-          title: 'Chirurgie Cardiaque en Inde: Coûts & Hôpitaux | Nadwa',
-          description: 'Guide 2026 de chirurgie cardiaque en Inde. Comparez les coûts de pontage et valves dans les meilleurs hôpitaux de Delhi.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/fr/blog/heart-surgery-india-cost-guide',
-          lang: 'fr',
-          dir: 'ltr',
-        },
-        {
-          route: '/ru/blog/heart-surgery-india-cost-guide',
-          title: 'Кардиохирургия в Индии: Цены и Клиники | Nadwa',
-          description: 'Гид 2026 по кардиохирургии в Индии. Сравнение цен на АКШ и замену клапанов в лучших клиниках Дели.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/ru/blog/heart-surgery-india-cost-guide',
-          lang: 'ru',
-          dir: 'ltr',
-        },
-        {
-          route: '/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Cancer Treatment in India: Cost & Oncology | Nadwa',
-          description: 'Comprehensive guide to cancer treatment in India. Explore surgical oncology, CyberKnife radiation, chemotherapy costs, and top Delhi NCR hospitals with free visa help.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/blog/cancer-treatment-india-oncology-cost-guide',
-        },
-        {
-          route: '/ar/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'علاج السرطان في الهند: التكاليف وأفضل المراكز | ندوة',
-          description: 'دليل علاج السرطان في الهند لعام 2026 للمرضى الدوليين. مقارنة تكاليف الجراحة الروبوتية، السايبر نايف، والكيماوي في أفضل مستشفيات نيودلهي مع تأشيرة مجانية.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/ar/blog/cancer-treatment-india-oncology-cost-guide',
-          lang: 'ar',
-          dir: 'rtl',
-        },
-        {
-          route: '/fr/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Traitement du Cancer en Inde: Coûts & Soins | Nadwa',
-          description: 'Guide 2026 du traitement du cancer en Inde. Comparez les coûts de chirurgie robotique, CyberKnife et chimiothérapie avec assistance visa.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/fr/blog/cancer-treatment-india-oncology-cost-guide',
-          lang: 'fr',
-          dir: 'ltr',
-        },
-        {
-          route: '/ru/blog/cancer-treatment-india-oncology-cost-guide',
-          title: 'Лечение Рака в Индии: Цены и Клиники | Nadwa',
-          description: 'Гид 2026 по лечению онкологии в Индии. Сравнение цен на роботизированные операции, CyberKnife и химиотерапию с бесплатной визовой поддержкой.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/ru/blog/cancer-treatment-india-oncology-cost-guide',
-          lang: 'ru',
-          dir: 'ltr',
-        },
-        {
-          route: '/blog/complete-guide-indian-medical-visa-international-patients',
-          title: 'Indian Medical Visa Guide for Patients | Nadwa Healthcare',
-          description: 'Comprehensive guide for international patients applying for an Indian Medical Visa (MED) and Medical Attendant Visa (MED-X). Official 24-48h Hospital Invitation Letters.',
-          canonicalUrl: 'https://www.nadwahealthcare.com/blog/complete-guide-indian-medical-visa-international-patients',
-        }
-      );
 
       // Generate static HTML files
       let createdCount = 0;
