@@ -2286,7 +2286,7 @@ export function prerenderSSGPlugin(): Plugin {
         {
           route: '/',
           title: 'Nadwa Healthcare | Medical Tourism and Doctors in India',
-          description: 'Connect with India\'s premier JCI & NABH accredited hospitals and leading specialist doctors across Delhi NCR with Nadwa Healthcare. 100% free medical visa invitation assistance.',
+          description: 'Connect with JCI & NABH accredited hospitals and top specialist doctors in Delhi NCR via Nadwa Healthcare. Free medical opinion & visa assistance.',
           canonicalUrl: 'https://www.nadwahealthcare.com/',
           lang: 'en',
           dir: 'ltr'

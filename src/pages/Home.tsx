@@ -46,7 +46,7 @@ export const Home: React.FC<HomeProps> = ({ onOpenConsultation }) => {
     <main className="bg-white">
       <SEOHead
         title="Nadwa Healthcare | Medical Tourism & Top Doctors in India"
-        description="100% Free Medical Visa for India assistance and official hospital visa invitation letters (VIL) in 24-48 hours. Premier Delhi NCR hospital selection and specialist doctor coordination."
+        description="Connect with JCI & NABH accredited hospitals and top specialist doctors in Delhi NCR via Nadwa Healthcare. Free medical opinion & visa assistance."
         canonicalUrl={currentLang === "en" ? "https://www.nadwahealthcare.com/" : `https://www.nadwahealthcare.com/${currentLang}`}
       />
 
