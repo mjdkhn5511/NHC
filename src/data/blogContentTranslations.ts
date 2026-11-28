@@ -1632,7 +1632,5 @@ export const BLOG_CONTENT_TRANSLATIONS: Record<string, Record<string, BlogConten
 };
 
 // Aliases for slug compatibility
-BLOG_CONTENT_TRANSLATIONS["heart-surgery-india-cost-guide"] = BLOG_CONTENT_TRANSLATIONS["cardiology-heart-surgery-india-cost-guide"];
 BLOG_CONTENT_TRANSLATIONS["heart-surgery-cost-in-india-guide"] = BLOG_CONTENT_TRANSLATIONS["cardiology-heart-surgery-india-cost-guide"];
-BLOG_CONTENT_TRANSLATIONS["cancer-treatment-india-oncology-cost-guide"] = BLOG_CONTENT_TRANSLATIONS["cancer-treatment-oncology-india-cost-guide"];
 BLOG_CONTENT_TRANSLATIONS["cancer-treatment-in-india-oncology-cost-guide"] = BLOG_CONTENT_TRANSLATIONS["cancer-treatment-oncology-india-cost-guide"];

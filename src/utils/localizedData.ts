@@ -4951,9 +4951,7 @@ export const BLOG_LOCALIZATIONS: Record<string, Record<string, {
 /**
  * Returns a fully localized Blog item
  */
-BLOG_LOCALIZATIONS["heart-surgery-india-cost-guide"] = BLOG_LOCALIZATIONS["cardiology-heart-surgery-india-cost-guide"];
 BLOG_LOCALIZATIONS["heart-surgery-cost-in-india-guide"] = BLOG_LOCALIZATIONS["cardiology-heart-surgery-india-cost-guide"];
-BLOG_LOCALIZATIONS["cancer-treatment-india-oncology-cost-guide"] = BLOG_LOCALIZATIONS["cancer-treatment-oncology-india-cost-guide"];
 BLOG_LOCALIZATIONS["cancer-treatment-in-india-oncology-cost-guide"] = BLOG_LOCALIZATIONS["cancer-treatment-oncology-india-cost-guide"];
 
 export function getLocalizedBlog(blog: BlogPost, lang: string): BlogPost {

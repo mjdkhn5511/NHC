@@ -152,11 +152,22 @@ export const BlogDetails: React.FC<BlogDetailsProps> = ({ onOpenConsultation: _o
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const rawBlog = blogsData.find((b) => 
-    b.slug === slug || 
-    (b.id === "cardiology-heart-surgery-india-cost-guide" && (slug === "heart-surgery-india-cost-guide" || slug === "heart-surgery-cost-in-india-guide")) ||
-    (b.id === "cancer-treatment-oncology-india-cost-guide" && (slug === "cancer-treatment-india-oncology-cost-guide" || slug === "cancer-treatment-in-india-oncology-cost-guide"))
-  );
+  // Client-side permanent redirect for legacy slugs
+  if (slug === "heart-surgery-india-cost-guide") {
+    const target = currentLang === "en"
+      ? "/blog/heart-surgery-cost-in-india-guide"
+      : `/${currentLang}/blog/heart-surgery-cost-in-india-guide`;
+    return <Navigate to={target} replace />;
+  }
+
+  if (slug === "cancer-treatment-india-oncology-cost-guide") {
+    const target = currentLang === "en"
+      ? "/blog/cancer-treatment-in-india-oncology-cost-guide"
+      : `/${currentLang}/blog/cancer-treatment-in-india-oncology-cost-guide`;
+    return <Navigate to={target} replace />;
+  }
+
+  const rawBlog = blogsData.find((b) => b.slug === slug);
 
   if (!rawBlog) {
     return <Navigate to={localizeUrl("/blog")} replace />;
