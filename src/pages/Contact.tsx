@@ -7,7 +7,8 @@ import {
   Clock, 
   Languages, 
   Plane, 
-  AlertCircle 
+  AlertCircle,
+  ExternalLink 
 } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { Breadcrumb } from "../components/Breadcrumb";
@@ -89,7 +90,14 @@ export const Contact: React.FC = () => {
                     <MapPin className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-slate-900 block font-semibold">{t("contactPage.officeTitle", "Delhi NCR Central Coordination Office")}</strong>
-                      <span>{siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}, India. PIN {siteConfig.address.postalCode}</span>
+                      <a
+                        href="https://maps.google.com/?q=28.6139,77.2090"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-teal-700 hover:underline transition-colors inline-block"
+                      >
+                        {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}, India. PIN {siteConfig.address.postalCode}
+                      </a>
                     </div>
                   </div>
 
@@ -171,6 +179,47 @@ export const Contact: React.FC = () => {
 
                 <EnquiryForm />
               </div>
+            </div>
+          </div>
+
+          {/* Google Maps Location Embed */}
+          <div className="mt-12 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200">
+                  <MapPin className="w-3.5 h-3.5 text-teal-600" />
+                  {currentLang === "ar" ? "موقع المكتب الرئيسي في دلهي" : currentLang === "fr" ? "Bureau central de Delhi NCR" : currentLang === "ru" ? "Центральный офис в Дели NCR" : "Delhi NCR Central Coordination Office"}
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mt-2">
+                  {currentLang === "ar" ? "خريطة الموقع الجغرافي – ندوة للرعاية الصحية" : currentLang === "fr" ? "Localisation géographique – Nadwa Healthcare" : currentLang === "ru" ? "Географическое расположение – Nadwa Healthcare" : "Office Location & Regional Map – New Delhi, Delhi NCR, India"}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                  Level 4, Jasola District Centre, Shaheen Bagh, New Delhi, Delhi NCR, India • Coordinates: 28.6139° N, 77.2090° E
+                </p>
+              </div>
+              <a
+                href="https://maps.google.com/?q=28.6139,77.2090"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-sm transition-colors shrink-0"
+              >
+                <span>{currentLang === "ar" ? "فتح في خرائط Google" : currentLang === "fr" ? "Ouvrir dans Google Maps" : currentLang === "ru" ? "Открыть в Google Maps" : "Open in Google Maps"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <div className="w-full h-72 sm:h-96 rounded-2xl overflow-hidden border border-slate-200 relative shadow-inner">
+              <iframe
+                title="Nadwa Healthcare Office Location - New Delhi"
+                src="https://maps.google.com/maps?q=28.6139,77.2090&z=14&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>

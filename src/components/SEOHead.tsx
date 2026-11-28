@@ -83,6 +83,12 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
       setMetaTag('meta[name="twitter:image"]', "name", "twitter:image", ogImage);
     }
 
+    // Geo Meta Tags for Local & Regional SEO
+    setMetaTag('meta[name="geo.region"]', "name", "geo.region", "IN-DL");
+    setMetaTag('meta[name="geo.placename"]', "name", "geo.placename", "New Delhi, Delhi NCR, India");
+    setMetaTag('meta[name="geo.position"]', "name", "geo.position", "28.6139;77.2090");
+    setMetaTag('meta[name="ICBM"]', "name", "ICBM", "28.6139, 77.2090");
+
     // Update Canonical URL
     let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (!linkCanonical) {

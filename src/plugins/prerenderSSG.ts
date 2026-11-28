@@ -467,7 +467,7 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
           <span>Serving International Patients Worldwide</span>
         </div>
         <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
-        <p class="text-slate-400">New Delhi, Delhi NCR, India • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-400"><a href="https://maps.google.com/?q=28.6139,77.2090" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">New Delhi, Delhi NCR, India</a> • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
         <p class="text-slate-500 text-[11px]">Independent medical tourism facilitation. Hospital opinions, visa invitation letters, and quotation services provided at zero service fees.</p>
       </div>
     </footer>
@@ -657,7 +657,7 @@ function getCriticalTreatmentsHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
           <span>Serving International Patients Worldwide</span>
         </div>
         <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
-        <p class="text-slate-400">New Delhi, Delhi NCR, India • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-400"><a href="https://maps.google.com/?q=28.6139,77.2090" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">New Delhi, Delhi NCR, India</a> • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
         <p class="text-slate-500 text-[11px]">Comprehensive clinical procedures across JCI/NABH hospitals with 100% free second opinions and visa assistance.</p>
       </div>
     </footer>
@@ -792,6 +792,161 @@ function getCriticalAboutHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
         </section>
       </div>
     </main>
+  </div>`;
+}
+
+function getCriticalContactHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
+  const isAr = lang === 'ar';
+  const isFr = lang === 'fr';
+  const isRu = lang === 'ru';
+  const prefix = isAr ? '/ar' : isFr ? '/fr' : isRu ? '/ru' : '';
+
+  const deskTitle = isAr ? 'مكتب السياحة العلاجية' : isFr ? 'Bureau tourisme médical' : isRu ? 'Международный отдел' : 'Medical Tourism Desk';
+  const emergencyText = isAr ? 'مكتب الطوارئ 24/7: <bdi dir="ltr">+91 96485 78320</bdi>' : isFr ? 'Urgences 24/7 : +91 96485 78320' : isRu ? 'Экстренно 24/7: +91 96485 78320' : 'Emergency 24/7: +91 96485 78320';
+  const ctaConsult = isAr ? 'استشارة مجانية' : isFr ? 'Consultation' : isRu ? 'Консультация' : 'Get Free Consultation';
+
+  const badgeText = isAr ? 'مكتب التنسيق الدولي 24/7' : isFr ? 'Desk International 24/7' : isRu ? 'Международный отдел 24/7' : '24/7 International Coordination Desk';
+  const contactTitle = isAr
+    ? `اتصل <span class="text-teal-400">بندوة للرعاية الصحية</span>`
+    : isFr
+    ? `Contactez <span class="text-teal-400">NadwaHealthcare</span>`
+    : isRu
+    ? `Контакты <span class="text-teal-400">NadwaHealthcare</span>`
+    : `Contact <span class="text-teal-400">NadwaHealthcare</span>`;
+
+  const contactDesc = isAr
+    ? 'نساعد المرضى الدوليين الراغبين في العلاج في مستشفيات دلهي إن سي آر، الهند. تواصل معنا عبر واتساب أو البريد الإلكتروني.'
+    : isFr
+    ? 'Nous accompagnons les patients internationaux pour leurs soins à Delhi NCR, Inde. Contactez-nous par WhatsApp ou email.'
+    : isRu
+    ? 'Организуем лечение иностранных пациентов в лучших клиниках Дели NCR, Индия. Свяжитесь с нами через WhatsApp или email.'
+    : 'We assist international patients seeking medical treatment across Delhi NCR, India. Reach us via WhatsApp, email, or by submitting your medical reports.';
+
+  const mapHeading = isAr
+    ? 'خريطة الموقع الجغرافي – ندوة للرعاية الصحية'
+    : isFr
+    ? 'Localisation géographique – Nadwa Healthcare'
+    : isRu
+    ? 'Географическое расположение – Nadwa Healthcare'
+    : 'Office Location & Regional Map – New Delhi, Delhi NCR, India';
+
+  return `
+  <div class="min-h-screen flex flex-col bg-white">
+    <!-- Top Micro Bar -->
+    <div class="relative z-50 bg-[#051714] text-slate-300 text-[10px] sm:text-[11px] py-1.5 px-3 sm:px-4 border-b border-teal-950/80">
+      <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-x-2 gap-y-1">
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="inline-flex items-center gap-1.5 text-teal-300 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ${deskTitle}
+          </span>
+          <span class="hidden md:inline text-slate-400">|</span>
+          <a href="tel:+919648578320" class="hover:text-teal-300 transition-colors">${emergencyText}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-[#08221E] border-b border-teal-900/60 shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20">
+          <a href="${prefix || '/'}" class="flex items-center gap-2 sm:gap-2.5">
+            <span class="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30 font-black text-xs">NHC</span>
+            <span class="text-base sm:text-xl font-black text-white tracking-tight">Nadwa <span class="text-teal-400">Healthcare</span></span>
+          </a>
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a href="${prefix}/contact" class="px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-colors">
+              ${ctaConsult}
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <!-- Header Banner -->
+      <header class="bg-[#08221E] text-white py-12 lg:py-16 bg-dark-dots border-b border-teal-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30 mb-3">
+              ${badgeText}
+            </span>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              ${contactTitle}
+            </h1>
+            <p class="mt-3 text-xs sm:text-base text-slate-300 leading-relaxed">
+              ${contactDesc}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Contact & Map Section -->
+      <section class="py-14 lg:py-20 bg-slate-50/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-4">
+              <h2 class="text-lg font-bold text-slate-900">Delhi NCR Central Coordination Office</h2>
+              <p class="text-sm text-slate-600">
+                <a href="https://maps.google.com/?q=28.6139,77.2090" target="_blank" rel="noopener noreferrer" class="hover:text-teal-700 underline transition-colors">
+                  Level 4, Jasola District Centre, Shaheen Bagh, New Delhi, Delhi NCR, India. PIN 110001
+                </a>
+              </p>
+              <div class="pt-2 space-y-2 text-xs sm:text-sm text-slate-600">
+                <p><strong>24/7 Helpline:</strong> <a href="tel:+919648578320" class="text-teal-700 font-semibold">+91 96485 78320</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@nadwahealthcare.com" class="text-teal-700 font-semibold">info@nadwahealthcare.com</a></p>
+                <p><strong>Geo Coordinates:</strong> 28.6139° N, 77.2090° E</p>
+              </div>
+            </div>
+            <div class="bg-emerald-600 text-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-emerald-700/20 space-y-3">
+              <h2 class="text-lg font-bold">Fast-Track WhatsApp Desk</h2>
+              <p class="text-xs sm:text-sm text-emerald-50">Chat directly with senior coordinators for urgent medical opinions, visa letters, and quotations.</p>
+              <a href="https://wa.me/919648578320" target="_blank" rel="noopener noreferrer" class="inline-block py-3 px-5 rounded-xl bg-white text-emerald-900 font-extrabold text-xs sm:text-sm shadow-md">
+                WhatsApp: +91 96485 78320
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Maps Location Embed -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">${mapHeading}</h3>
+                <p class="text-xs text-slate-500">New Delhi, Delhi NCR, India • Coordinates: 28.6139° N, 77.2090° E</p>
+              </div>
+              <a href="https://maps.google.com/?q=28.6139,77.2090" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-colors">
+                Open in Google Maps
+              </a>
+            </div>
+            <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-slate-200">
+              <iframe
+                title="Nadwa Healthcare Office Location - New Delhi"
+                src="https://maps.google.com/maps?q=28.6139,77.2090&z=14&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Semantic Footer -->
+    <footer class="bg-[#051714] text-slate-300 py-12 border-t border-teal-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/40 border border-teal-500/30 text-teal-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Serving International Patients Worldwide</span>
+        </div>
+        <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
+        <p class="text-slate-400"><a href="https://maps.google.com/?q=28.6139,77.2090" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">New Delhi, Delhi NCR, India</a> • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-500 text-[11px]">Independent medical tourism facilitation. Hospital opinions, visa invitation letters, and quotation services provided at zero service fees.</p>
+      </div>
+    </footer>
   </div>`;
 }
 
@@ -2191,6 +2346,9 @@ function renderHtml(templateHtml: string, meta: PageMetadata): string {
   } else if (cleanRoutePrefix === '/about') {
     const criticalAboutHtml = getCriticalAboutHtml(lang as 'en' | 'ar' | 'fr' | 'ru');
     html = html.replace('<div id="root"></div>', `<div id="root">${criticalAboutHtml}</div>`);
+  } else if (cleanRoutePrefix === '/contact') {
+    const criticalContactHtml = getCriticalContactHtml(lang as 'en' | 'ar' | 'fr' | 'ru');
+    html = html.replace('<div id="root"></div>', `<div id="root">${criticalContactHtml}</div>`);
   } else if (cleanRoutePrefix === '/doctors') {
     const bLabel = lang === 'ar' ? 'الأطباء' : lang === 'fr' ? 'Médecins' : lang === 'ru' ? 'Врачи' : 'Doctors';
     const bBadge = lang === 'ar' ? 'نخبة من كبار الأطباء الجراحين' : lang === 'fr' ? 'Médecins experts vérifiés' : lang === 'ru' ? 'Ведущие врачи и профессора' : 'Verified Medical Leaders';

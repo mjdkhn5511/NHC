@@ -100,9 +100,14 @@ export const Footer: React.FC = () => {
             <div className="pt-2 space-y-2 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                <span>
+                <a
+                  href="https://maps.google.com/?q=28.6139,77.2090"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-400 transition-colors"
+                >
                   New Delhi, Delhi NCR, India (Level 4, Jasola District Centre, Shaheen Bagh, 110001)
-                </span>
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-teal-400 shrink-0" />
