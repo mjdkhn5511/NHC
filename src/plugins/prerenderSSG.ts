@@ -155,6 +155,10 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
               </a>
             </div>
             <div class="mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm">
+              <span class="inline-flex items-center gap-1.5 text-teal-900 bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-300 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Serving International Patients Worldwide</span>
+              </span>
               <span class="inline-flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-300 font-bold">
                 ${badgeVisa}
               </span>
@@ -458,8 +462,12 @@ function getCriticalHomeHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
     <!-- Semantic Footer -->
     <footer class="bg-[#051714] text-slate-300 py-12 border-t border-teal-950">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/40 border border-teal-500/30 text-teal-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Serving International Patients Worldwide</span>
+        </div>
         <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
-        <p class="text-slate-400">Delhi NCR: New Delhi, Gurugram, Noida, Faridabad • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-400">New Delhi, Delhi NCR, India • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
         <p class="text-slate-500 text-[11px]">Independent medical tourism facilitation. Hospital opinions, visa invitation letters, and quotation services provided at zero service fees.</p>
       </div>
     </footer>
@@ -644,8 +652,12 @@ function getCriticalTreatmentsHtml(lang: 'en' | 'ar' | 'fr' | 'ru'): string {
     <!-- Semantic Footer -->
     <footer class="bg-[#051714] text-slate-300 py-12 border-t border-teal-950">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/40 border border-teal-500/30 text-teal-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Serving International Patients Worldwide</span>
+        </div>
         <p class="font-semibold text-slate-200">Nadwa Healthcare (NHC) • Official International Patient Coordination Desk</p>
-        <p class="text-slate-400">Delhi NCR: New Delhi, Gurugram, Noida, Faridabad • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
+        <p class="text-slate-400">New Delhi, Delhi NCR, India • 24/7 Helpline: +91 96485 78320 • info@nadwahealthcare.com</p>
         <p class="text-slate-500 text-[11px]">Comprehensive clinical procedures across JCI/NABH hospitals with 100% free second opinions and visa assistance.</p>
       </div>
     </footer>

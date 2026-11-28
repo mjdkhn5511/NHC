@@ -59,6 +59,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenConsultation }) 
 
           {/* High-Impact Free Medical Visa Trust Badges */}
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm">
+            <span className="inline-flex items-center gap-1.5 text-teal-900 bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-300 font-bold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Serving International Patients Worldwide</span>
+            </span>
             <span className="inline-flex items-center gap-1.5 text-emerald-800 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-300 font-bold shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               {t("hero.badgeVisa", "100% Free Medical Visa for India Assistance")}

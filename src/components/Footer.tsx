@@ -86,6 +86,13 @@ export const Footer: React.FC = () => {
           {/* Col 1: Brand & Identity */}
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo variant="light" />
+
+            {/* Global Coverage Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-950/90 border border-teal-500/40 text-teal-300 text-xs font-semibold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Serving International Patients Worldwide</span>
+            </div>
+
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm">
               {t("footer.brandDesc", "NadwaHealthcare (NHC) is a premier medical tourism facilitator guiding international patients to accredited hospitals and world-renowned specialists across Delhi NCR, India.")}
             </p>
@@ -94,19 +101,19 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                 <span>
-                  {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}, {siteConfig.address.country}
+                  New Delhi, Delhi NCR, India (Level 4, Jasola District Centre, Shaheen Bagh, 110001)
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-teal-400 shrink-0" />
-                <span>{t("nav.desk", "Desk:")}</span>
-                <a href={`tel:${siteConfig.phone}`} dir="ltr" className="hover:text-teal-400 transition-colors">
-                  <bdi dir="ltr">{siteConfig.phoneDisplay}</bdi>
+                <span>{t("nav.desk", "24/7 Helpline:")}</span>
+                <a href={`tel:${siteConfig.phone}`} dir="ltr" className="hover:text-teal-400 transition-colors font-semibold">
+                  <bdi dir="ltr">+91 96485 78320</bdi>
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-teal-400 shrink-0" />
-                <span>Email: {siteConfig.email}</span>
+                <span>Email: <a href="mailto:info@nadwahealthcare.com" className="hover:text-teal-400 transition-colors">info@nadwahealthcare.com</a></span>
               </div>
             </div>
 

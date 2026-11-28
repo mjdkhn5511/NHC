@@ -42,33 +42,62 @@
 
     <!-- Native System Font Stack (Instant 0ms Paint, Zero Render-Blocking, Zero Late Swaps) -->
 
-    <!-- Schema.org MedicalOrganization Structured Data -->
+    <!-- Schema.org MedicalBusiness & LocalBusiness Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MedicalOrganization",
-      "name": "NadwaHealthcare",
-      "alternateName": "NHC",
+      "@type": ["MedicalBusiness", "LocalBusiness"],
+      "@id": "https://www.nadwahealthcare.com/#organization",
+      "name": "Nadwa Healthcare",
+      "alternateName": ["NadwaHealthCare", "NHC"],
       "url": "https://www.nadwahealthcare.com",
-      "logo": "https://www.nadwahealthcare.com/images/brand-logo-square.png",
-      "image": "https://www.nadwahealthcare.com/images/brand-logo-square.png",
-      "sameAs": [
-        "https://www.instagram.com/nadwahealthcare/",
-        "https://www.facebook.com/profile.php?id=61595963652378"
-      ],
-      "description": "NadwaHealthcare (NHC) facilitates medical tourism and personalized patient assistance for international patients seeking medical treatment in India.",
-      "areaServed": "Worldwide",
+      "logo": "https://www.nadwahealthcare.com/logo.png",
+      "description": "Delhi NCR-based international medical tourism facilitator connecting global patients worldwide with JCI and NABH-accredited hospitals and top specialist doctors in India.",
+      "telephone": "+91-96485-78320",
+      "email": "info@nadwahealthcare.com",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "New Delhi",
-        "addressRegion": "Delhi NCR",
-        "addressCountry": "India"
+        "addressRegion": "Delhi",
+        "postalCode": "110001",
+        "addressCountry": "IN"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "International Patient Services",
-        "availableLanguage": ["English", "Arabic", "French", "Russian", "Hindi"]
-      }
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.6139,
+        "longitude": 77.2090
+      },
+      "areaServed": [
+        "Worldwide",
+        "Middle East",
+        "Central Asia",
+        "Africa",
+        "South Asia",
+        "Europe",
+        "North America"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "sameAs": [
+        "https://www.crunchbase.com/organization/nadwa-healthcare",
+        "https://www.facebook.com/nadwahealthcare",
+        "https://www.instagram.com/nadwahealthcare"
+      ]
     }
     </script>
   </head>
